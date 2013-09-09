@@ -30,4 +30,10 @@ void fwk::Window::initializeGLEW() {
   } else {
     std::cout << "GLEW initialized" << std::endl;
   }
+
+  int major, minor, revision;
+  const GLubyte* sVersion = glGetString(GL_SHADING_LANGUAGE_VERSION_ARB);
+  std::string version((char*)sVersion);
+  std::cout << "Using shading language version " << version.c_str() << std::endl;
 }
+
