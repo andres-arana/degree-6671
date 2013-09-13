@@ -5,9 +5,9 @@
 
 namespace app {
 
-  class Dispatcher : public sys::Dispatcher {
+  class Dispatcher : public sys::input::Dispatcher {
     public:
-      virtual void onKeyUp(unsigned char key, int x, int y);
+      virtual void onKeyUp(const sys::input::KeyUpEvent &event);
   };
 
 };

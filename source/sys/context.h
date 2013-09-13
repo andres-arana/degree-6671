@@ -4,7 +4,7 @@
 #include "sys/application.h"
 #include "sys/window.h"
 #include "sys/glew.h"
-#include "sys/input.h"
+#include "sys/input/input.h"
 
 namespace sys {
   class System;
@@ -13,19 +13,21 @@ namespace sys {
     public:
       void runEventLoop();
 
+      void exitEventLoop();
+
       Application &getApplication();
 
       Window &getWindow();
 
       Glew &getGlew();
 
-      Input &getInput();
+      input::Input &getInput();
 
     private:
       Application &application;
       Window window;
       Glew glew;
-      Input input;
+      input::Input input;
 
       friend class System;
 

@@ -21,11 +21,15 @@ sys::Glew &sys::Context::getGlew() {
   return glew;
 }
 
-sys::Input &sys::Context::getInput() {
+sys::input::Input &sys::Context::getInput() {
   return input;
 }
 
 void sys::Context::runEventLoop() {
   glutMainLoop();
+}
+
+void sys::Context::exitEventLoop() {
+  glutLeaveMainLoop();
 }
 

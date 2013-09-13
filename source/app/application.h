@@ -23,7 +23,7 @@ namespace app {
 
       virtual sys::Renderer &getRenderer();
 
-      virtual sys::Dispatcher &getDispatcher();
+      virtual sys::input::Dispatcher &getDispatcher();
 
       virtual ~Application();
 

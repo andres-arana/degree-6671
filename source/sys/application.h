@@ -1,37 +1,14 @@
 #ifndef __SYS_APPLICATION_H_INCLUDED__
 #define __SYS_APPLICATION_H_INCLUDED__
 
+#include "sys/input/dispatcher.h"
+
 namespace sys {
   class Renderer {
     public:
       virtual void render() = 0;
 
       virtual ~Renderer() {};
-  };
-
-  class Dispatcher {
-    public:
-      virtual ~Dispatcher() {};
-
-      virtual void onClose() {};
-
-      virtual void onReshape(int width, int height) {};
-
-      virtual void onMouse(int button, int updown, int x, int y) {};
-
-      virtual void onMouseWheel(int whellNumber, int direction, int x, int y) {};
-
-      virtual void onMouseMotion(int x, int y) {};
-
-      virtual void onSpecialKeyUp(int key, int x, int y) {};
-
-      virtual void onKeyUp(unsigned char key, int x, int y) {};
-
-      virtual void onSpecialKeyDown(int key, int x, int y) {};
-
-      virtual void onKeyDown(unsigned char key, int x, int y) {};
-
-      virtual void onIdle() {};
   };
 
   class Application {
@@ -48,7 +25,7 @@ namespace sys {
 
       virtual Renderer &getRenderer() = 0;
 
-      virtual Dispatcher &getDispatcher() = 0;
+      virtual sys::input::Dispatcher &getDispatcher() = 0;
 
       virtual ~Application() {};
 

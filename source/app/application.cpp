@@ -33,7 +33,7 @@ sys::Renderer &app::Application::getRenderer(){
   return *renderer;
 }
 
-sys::Dispatcher &app::Application::getDispatcher(){
+sys::input::Dispatcher &app::Application::getDispatcher(){
   if (!dispatcher) {
     dispatcher = new app::Dispatcher();
   }

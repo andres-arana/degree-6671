@@ -16,3 +16,6 @@ bool sys::Window::isIdentifiedBy(unsigned int windowId) const {
   return windowId == id;
 }
 
+void sys::Window::toggleFullScreen() {
+  glutFullScreenToggle();
+}

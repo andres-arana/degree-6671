@@ -10,6 +10,8 @@ namespace sys {
     public:
       bool isIdentifiedBy(unsigned int windowId) const;
 
+      void toggleFullScreen();
+
     private:
       friend class Context;
 
