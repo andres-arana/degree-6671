@@ -15,6 +15,8 @@ namespace app {
 
       virtual void render(sys::Context &context);
 
+      virtual void resize(int width, int height);
+
     private:
       Shader vertexShader;
       Shader fragmentShader;

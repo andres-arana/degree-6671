@@ -35,6 +35,10 @@ void app::Renderer::render(sys::Context &context) {
   context.getWindow().swapBuffers();
 }
 
+void app::Renderer::resize(int width, int height) {
+  glViewport (0, 0, (GLsizei) width, (GLsizei) height);
+}
+
 void app::Renderer::setupView() {
   // Setup view matrix
   glm::mat4 viewMatrix = glm::lookAt (

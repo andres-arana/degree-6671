@@ -38,6 +38,8 @@ void sys::input::Input::onClose() {
 void sys::input::Input::onReshape(int width, int height) {
   sys::input::ReshapeEvent event = { instance->context, width, height };
   instance->getApplication().getDispatcher().onReshape(event);
+
+  instance->getApplication().getRenderer().resize(width, height);
 }
 
 void sys::input::Input::onMouse(int button, int updown, int x, int y) {

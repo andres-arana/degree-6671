@@ -10,3 +10,4 @@ void app::Dispatcher::onKeyUp(const sys::input::KeyUpEvent &event) {
     event.context.exitEventLoop();
   }
 }
+

@@ -10,6 +10,8 @@ namespace sys {
     public:
       virtual void render(Context &context) = 0;
 
+      virtual void resize(int width, int height) = 0;
+
       virtual ~Renderer() {};
   };
 

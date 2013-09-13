@@ -29,7 +29,6 @@ void sys::Window::toggleFullScreen() {
 
 void sys::Window::swapBuffers() {
   glutSwapBuffers();
-  /* glutPostRedisplay(); */
 }
 
 float sys::Window::getAspectRatio() const {
