@@ -5,6 +5,14 @@ Gráficos en la FIUBA. El mismo consiste de una aplicación de escritorio que
 permite explorar una escena renderizada utilizando OpenGL, en su versión 3.0,
 GLSL 1.30.
 
+## Prerequisitos
+
+Para ubuntu, instalar las siguientes dependencias:
+
+```
+sudo apt-get install freeglut3-dev libxmu-dev libxi-dev libxrandr-dev libglew-dev libglfw-dev build-essential libglm-dev
+```
+
 ## Estructura del repositorio
 
 El repositorio está subdividio en los siguientes directorios:
