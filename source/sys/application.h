@@ -4,9 +4,11 @@
 #include "sys/input/dispatcher.h"
 
 namespace sys {
+  class Context;
+
   class Renderer {
     public:
-      virtual void render() = 0;
+      virtual void render(Context &context) = 0;
 
       virtual ~Renderer() {};
   };

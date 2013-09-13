@@ -2,6 +2,7 @@
 #define __APP_SHADERPROGRAM_H_INCLUDED__
 
 #include "app/shader.h"
+#include "app/shaderParam.h"
 
 namespace app {
 
@@ -12,6 +13,8 @@ namespace app {
           const Shader &fragmentShader);
 
       void use() const;
+
+      ShaderParam getUniformParam(const char* name) const;
 
       virtual ~ShaderProgram() {};
 

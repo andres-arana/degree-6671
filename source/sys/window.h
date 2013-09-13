@@ -12,6 +12,10 @@ namespace sys {
 
       void toggleFullScreen();
 
+      void swapBuffers();
+
+      float getAspectRatio() const;
+
     private:
       friend class Context;
 

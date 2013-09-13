@@ -27,7 +27,7 @@ sys::Application &sys::input::Input::getApplication() {
 }
 
 void sys::input::Input::onDisplay() {
-  instance->getApplication().getRenderer().render();
+  instance->getApplication().getRenderer().render(instance->context);
 }
 
 void sys::input::Input::onClose() {

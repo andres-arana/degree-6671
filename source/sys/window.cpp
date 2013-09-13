@@ -26,3 +26,15 @@ bool sys::Window::isIdentifiedBy(unsigned int windowId) const {
 void sys::Window::toggleFullScreen() {
   glutFullScreenToggle();
 }
+
+void sys::Window::swapBuffers() {
+  glutSwapBuffers();
+  /* glutPostRedisplay(); */
+}
+
+float sys::Window::getAspectRatio() const {
+  float width = glutGet(GLUT_WINDOW_WIDTH);
+  float height = glutGet(GLUT_WINDOW_HEIGHT);
+
+  return width / height;
+}

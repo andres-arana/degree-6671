@@ -38,3 +38,8 @@ app::ShaderProgram::ShaderProgram(
 void app::ShaderProgram::use() const {
   glUseProgram(handle);
 }
+
+app::ShaderParam app::ShaderProgram::getUniformParam(const char* name) const {
+  GLuint paramHandle = glGetUniformLocation(handle, name);
+  return app::ShaderParam(paramHandle);
+}
