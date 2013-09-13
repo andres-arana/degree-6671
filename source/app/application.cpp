@@ -1,8 +1,6 @@
 #include "app/application.h"
 
-app::Application::Application() :
-  renderer(0),
-  dispatcher(0) {
+app::Application::Application() {
 
 }
 
@@ -27,25 +25,18 @@ const char* app::Application::getTitle(){
 }
 
 sys::Renderer &app::Application::getRenderer(){
-  if (!renderer) {
-    renderer = new app::Renderer();
+  if (!renderer.get()) {
+    std::auto_ptr<app::Renderer> newRenderer(new app::Renderer());
+    renderer = newRenderer;
   }
   return *renderer;
 }
 
 sys::input::Dispatcher &app::Application::getDispatcher(){
-  if (!dispatcher) {
-    dispatcher = new app::Dispatcher();
+  if (!dispatcher.get()) {
+    std::auto_ptr<app::Dispatcher> newDispatcher(new app::Dispatcher());
+    dispatcher = newDispatcher;
   }
   return *dispatcher;
 }
 
-app::Application::~Application() {
-  if (dispatcher) {
-    delete dispatcher;
-  }
-
-  if (renderer) {
-    delete renderer;
-  }
-}

@@ -4,6 +4,9 @@
 
 sys::System::System(int argc, char** argv) : context(0) {
   glutInit(&argc, argv);
+  glutSetOption(
+      GLUT_ACTION_ON_WINDOW_CLOSE,
+      GLUT_ACTION_GLUTMAINLOOP_RETURNS);
 }
 
 sys::Context &sys::System::createContext(sys::Application &application) {

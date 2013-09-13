@@ -1,12 +1,19 @@
 #include "sys/context.h"
 #include <GL/glew.h>
 #include <GL/freeglut.h>
+#include <iostream>
 
 sys::Context::Context(Application &application) : 
   application(application),
   window(*this),
   input(*this) {
+    const GLubyte* rawGLVersion = glGetString(GL_SHADING_LANGUAGE_VERSION_ARB);
+    std::string glVersion((char*)rawGLVersion);
+    std::cout << "Using shading language version " << glVersion.c_str() << std::endl;
 
+    const GLubyte* rawShaderVersion = glGetString(GL_SHADING_LANGUAGE_VERSION_ARB);
+    std::string shaderVersion((char*)rawShaderVersion);
+    std::cout << "Using shading language version " << shaderVersion.c_str() << std::endl;
   }
 
 sys::Application &sys::Context::getApplication() {

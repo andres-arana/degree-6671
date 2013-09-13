@@ -4,6 +4,7 @@
 #include "sys/application.h"
 #include "app/renderer.h"
 #include "app/dispatcher.h"
+#include <memory>
 
 namespace app {
 
@@ -25,11 +26,12 @@ namespace app {
 
       virtual sys::input::Dispatcher &getDispatcher();
 
-      virtual ~Application();
-
     private:
-      Renderer *renderer;
-      Dispatcher *dispatcher;
+      std::auto_ptr<Renderer>   renderer;
+      std::auto_ptr<Dispatcher> dispatcher;
+
+      Application(const Application &other);
+      Application &operator=(const Application &other);
   };
 
 };
