@@ -1,10 +1,10 @@
-#include "app/shader.h"
+#include "sys/shaders/shader.h"
 #include <stdexcept>
 #include <iostream>
 #include <fstream>
 #include <vector>
 
-app::Shader::Shader(GLuint type, const std::string &file) {
+sys::shaders::Shader::Shader(GLuint type, const std::string &file) {
   // Create shader handle
   handle = glCreateShader(type);
   if (0 == handle) throw std::runtime_error("Unable to create shader handle");
@@ -39,6 +39,6 @@ app::Shader::Shader(GLuint type, const std::string &file) {
   }
 }
 
-GLuint app::Shader::getHandle() const {
+GLuint sys::shaders::Shader::getHandle() const {
   return handle;
 }

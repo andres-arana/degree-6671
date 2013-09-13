@@ -1,12 +1,12 @@
-#include "app/shaderProgram.h"
+#include "sys/shaders/shaderProgram.h"
 #include <GL/glew.h>
 #include <vector>
 #include <iostream>
 #include <stdexcept>
 
-app::ShaderProgram::ShaderProgram(
-    const app::Shader &vertexShader,
-    const app::Shader &fragmentShader) {
+sys::shaders::ShaderProgram::ShaderProgram(
+    const sys::shaders::Shader &vertexShader,
+    const sys::shaders::Shader &fragmentShader) {
 
   handle = glCreateProgram();
   if (0 == handle) 
@@ -35,11 +35,11 @@ app::ShaderProgram::ShaderProgram(
   }
 }
 
-void app::ShaderProgram::use() const {
+void sys::shaders::ShaderProgram::use() const {
   glUseProgram(handle);
 }
 
-app::ShaderParam app::ShaderProgram::getUniformParam(const char* name) const {
+sys::shaders::ShaderParam sys::shaders::ShaderProgram::getUniformParam(const char* name) const {
   GLuint paramHandle = glGetUniformLocation(handle, name);
-  return app::ShaderParam(paramHandle);
+  return sys::shaders::ShaderParam(paramHandle);
 }

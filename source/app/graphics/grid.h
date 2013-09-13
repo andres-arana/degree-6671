@@ -7,7 +7,7 @@
 #include <glm/gtx/transform2.hpp> 
 #include <glm/gtx/projection.hpp>
 #include <vector>
-#include "app/shaderProgram.h"
+#include "sys/shaders/shaderProgram.h"
 
 namespace app {
   namespace graphics {
@@ -18,7 +18,7 @@ namespace app {
 
         void render(
             const glm::mat4 &modelMatrix, 
-            const ShaderProgram &program);
+            const sys::shaders::ShaderProgram &program);
 
       private:
         std::vector<GLfloat> vertexBuffer;

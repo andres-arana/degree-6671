@@ -30,16 +30,16 @@ app::graphics::Grid::Grid(int size) :
 
 void app::graphics::Grid::render(
     const glm::mat4 &modelMatrix, 
-    const app::ShaderProgram &program) {
+    const sys::shaders::ShaderProgram &program) {
 
   glm::mat3 normalMatrix = glm::mat3(1.0f);
 
-  app::ShaderParam normalMatrixParam = program.getUniformParam("NormalMatrix");
+  sys::shaders::ShaderParam normalMatrixParam = program.getUniformParam("NormalMatrix");
   if (normalMatrixParam.isAvailable()) {
     glUniformMatrix3fv( normalMatrixParam.getHandle(), 1, GL_FALSE, &normalMatrix[0][0]);
   }
 
-  app::ShaderParam modelMatrixParam = program.getUniformParam("ModelMatrix");
+  sys::shaders::ShaderParam modelMatrixParam = program.getUniformParam("ModelMatrix");
   if (modelMatrixParam.isAvailable()) {
     glUniformMatrix4fv( modelMatrixParam.getHandle(), 1, GL_FALSE, &modelMatrix[0][0]); 
   }
