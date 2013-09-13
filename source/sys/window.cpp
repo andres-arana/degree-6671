@@ -2,9 +2,16 @@
 #include "sys/context.h"
 #include <GL/glew.h>
 #include <GL/freeglut.h>
+#include <iostream>
 
 sys::Window::Window(Context &context) {
   sys::Application &application = context.getApplication();
+
+  std::cout 
+    << "Creating application window " 
+    << application.getTitle() 
+    << " (" << application.getWidth() << "x" << application.getHeight() << ")" 
+    << std::endl;
 
   glutInitWindowSize(application.getWidth(), application.getHeight());
   glutInitWindowPosition(application.getPositionX(), application.getPositionY());

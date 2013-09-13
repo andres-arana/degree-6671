@@ -2,6 +2,8 @@
 #define __APP_RENDERER_H_INCLUDED__
 
 #include "sys/application.h"
+#include "app/shader.h"
+#include "app/shaderProgram.h"
 
 namespace app {
 
@@ -10,6 +12,11 @@ namespace app {
       Renderer();
 
       virtual void render();
+
+    private:
+      Shader vertexShader;
+      Shader fragmentShader;
+      ShaderProgram program;
   };
 
 };
