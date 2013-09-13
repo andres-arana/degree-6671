@@ -1,17 +1,9 @@
-#include "system.h"
+#include "sys/system.h"
 #include <GL/glew.h>
 #include <GL/freeglut.h>
 
-fwk::System::Windows fwk::System::windows;
-
-fwk::System::System(int argc, char** argv) {
+sys::System::System(int argc, char** argv) {
   glutInit(&argc, argv);
-}
-
-fwk::System::~System() {
-  for (Windows::iterator it = windows.begin(); it != windows.end(); it++) {
-    delete *it;
-  }
 }
 
 fwk::Window &fwk::System::createWindow(Dispatcher &dispatcher, const char *title, int width, int height) {
