@@ -1,5 +1,5 @@
-#ifndef __FWK__SYSTEM_H_INCLUDED__
-#define __FWK__SYSTEM_H_INCLUDED__
+#ifndef __SYS_SYSTEM_H_INCLUDED__
+#define __SYS_SYSTEM_H_INCLUDED__
 
 #include "sys/context.h"
 #include "sys/application.h"
@@ -10,7 +10,12 @@ namespace sys {
     public:
       System(int argc, char **argv);
 
-      Context createContext(sys::Application &application);
+      Context &createContext(sys::Application &application);
+
+      ~System();
+
+    private:
+      Context *context;
   };
 
 };

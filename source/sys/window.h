@@ -1,23 +1,23 @@
-#ifndef __FWK__WINDOW_H_INCLUDED__
-#define __FWK__WINDOW_H_INCLUDED__
+#ifndef __SYS_WINDOW_H_INCLUDED__
+#define __SYS_WINDOW_H_INCLUDED__
 
-#include "fwk/dispatcher.h"
+#include "sys/application.h"
 
-namespace fwk {
+namespace sys {
+  class Context;
 
   class Window {
     public:
-      Window(Dispatcher &dispatcher, const char* title, int width, int height);
-
-      bool is(int id) const;
-
-      Dispatcher &dispatch();
+      bool isIdentifiedBy(unsigned int windowId) const;
 
     private:
-      Dispatcher &dispatcher;
-      int id;
+      friend class Context;
 
-      void initializeGLEW();
+      Window(Context &context);
+      Window(const Window &other);
+      Window &operator=(const Window &other);
+
+      unsigned int id;
   };
 
 };
