@@ -7,6 +7,7 @@
 #include "sys/shaders/shaderProgram.h"
 #include "app/graphics/grid.h"
 #include "app/graphics/cube.h"
+#include "app/graphics/sphere.h"
 
 namespace app {
 
@@ -25,6 +26,7 @@ namespace app {
 
       graphics::Grid grid;
       graphics::Cube cube;
+      graphics::Sphere sphere;
 
       void setupView();
       void setupProjection(float aspectRatio);

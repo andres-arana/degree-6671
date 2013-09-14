@@ -10,7 +10,8 @@ app::Renderer::Renderer() :
   vertexShader(GL_VERTEX_SHADER, "source/app/shaders/diffuseShader.vert"),
   fragmentShader(GL_FRAGMENT_SHADER, "source/app/shaders/diffuseShader.frag"),
   program(vertexShader, fragmentShader),
-  grid(10) {
+  grid(10),
+  sphere(1.0f, 32, 32) {
 
     glClearColor(0.1f, 0.1f, 0.2f, 0.0f);
     glShadeModel(GL_SMOOTH);
@@ -34,8 +35,13 @@ void app::Renderer::render(sys::Context &context) {
 
   // Render cube
   setupLightColors(1.0f, 1.0f, 0.4f);
-  modelMatrix = glm::translate(modelMatrix, glm::vec3(0.0f, 0.0f, 0.5f));
-  cube.render(modelMatrix, program);
+  glm::mat4 cubeMatrix = glm::translate(modelMatrix, glm::vec3(0.0f, 0.0f, 0.5f));
+  cube.render(cubeMatrix, program);
+
+  // Render sphere
+  setupLightColors(0.4f, 1.0f, 1.0f);
+  glm::mat4 sphereMatrix = glm::translate(modelMatrix, glm::vec3(0.0f, 0.0f, 2.0f));
+  sphere.render(sphereMatrix, program);
 
   context.getWindow().swapBuffers();
 }
