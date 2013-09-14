@@ -1,5 +1,5 @@
-#ifndef __APP_GRAPHICS_GRID_H_INCLUDED__
-#define __APP_GRAPHICS_GRID_H_INCLUDED__
+#ifndef __APP_GRAPHICS_CUBE_H_INCLUDED__
+#define __APP_GRAPHICS_CUBE_H_INCLUDED__
 
 #include <GL/glew.h>
 #include <glm/glm.hpp> 
@@ -12,19 +12,17 @@
 namespace app {
   namespace graphics {
 
-    class Grid {
+    class Cube {
       public:
-        Grid(int size);
-
         void render(
             const glm::mat4 &modelMatrix, 
-            const sys::shaders::ShaderProgram &program) const;
+            const sys::shaders::ShaderProgram &program);
 
       private:
-        std::vector<GLfloat> vertexBuffer;
-        std::vector<GLuint> indexBuffer;
-
-        unsigned int assignVertex(unsigned int offset, GLfloat x, GLfloat y, GLfloat z);
+        static const GLfloat vertexBuffer[];
+        static const GLfloat normalBuffer[];
+        static const GLuint indexBuffer[];
+        static const unsigned int indexBufferSize;
     };
 
   };

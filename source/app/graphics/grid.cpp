@@ -30,7 +30,7 @@ app::graphics::Grid::Grid(int size) :
 
 void app::graphics::Grid::render(
     const glm::mat4 &modelMatrix, 
-    const sys::shaders::ShaderProgram &program) {
+    const sys::shaders::ShaderProgram &program) const {
 
   glm::mat3 normalMatrix = glm::mat3(1.0f);
 

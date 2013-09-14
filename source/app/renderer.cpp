@@ -28,9 +28,14 @@ void app::Renderer::render(sys::Context &context) {
   setupProjection(context.getWindow().getAspectRatio());
 
   // Render grid
-  setupLightColors(0.5f, 0.5f, 0.5f);
+  setupLightColors(0.2f, 0.2f, 0.2f);
   glm::mat4 modelMatrix = glm::mat4(1.0f);
   grid.render(modelMatrix, program);
+
+  // Render cube
+  setupLightColors(1.0f, 1.0f, 0.4f);
+  modelMatrix = glm::translate(modelMatrix, glm::vec3(0.0f, 0.0f, 0.5f));
+  cube.render(modelMatrix, program);
 
   context.getWindow().swapBuffers();
 }
@@ -65,14 +70,14 @@ void app::Renderer::setupProjection(float aspectRatio) {
 
 void app::Renderer::setupLights() {
   // Setup light settings
-  glm::vec4 lightPos = glm::vec4(0.0f, 0.0f, 2.0f, 1.0f);
+  glm::vec4 lightPos = glm::vec4(8.0f, 0.0f, 3.0f, 1.0f);
   sys::shaders::ShaderParam lightPosParam = program.getUniformParam("LightPosition");
   if (lightPosParam.isAvailable()) {
     glUniform4fv(lightPosParam.getHandle(), 1, &lightPos[0]); 
   }
 
   // Setup light color
-  glm::vec3 lightInt = glm::vec3(1.0f, 1.0f, 1.0f);
+  glm::vec3 lightInt = glm::vec3(2.0f, 2.0f, 2.0f);
   sys::shaders::ShaderParam lightIntParam = program.getUniformParam("Ld");
   if (lightIntParam.isAvailable()) {
     glUniform3fv( lightIntParam.getHandle(), 1, &lightInt[0]); 
