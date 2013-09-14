@@ -32,6 +32,9 @@ namespace app {
       void setupProjection(float aspectRatio);
       void setupLights();
       void setupLightColors(float red, float green, float blue);
+
+      void renderGrid(const glm::mat4 &modelMatrix);
+      void renderArmSection(const glm::mat4 &modelMatrix);
   };
 
 };

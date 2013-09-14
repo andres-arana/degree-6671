@@ -28,20 +28,10 @@ void app::Renderer::render(sys::Context &context) {
 
   setupProjection(context.getWindow().getAspectRatio());
 
-  // Render grid
-  setupLightColors(0.2f, 0.2f, 0.2f);
   glm::mat4 modelMatrix = glm::mat4(1.0f);
-  grid.render(modelMatrix, program);
 
-  // Render cube
-  setupLightColors(1.0f, 1.0f, 0.4f);
-  glm::mat4 cubeMatrix = glm::translate(modelMatrix, glm::vec3(0.0f, 0.0f, 0.5f));
-  cube.render(cubeMatrix, program);
-
-  // Render sphere
-  setupLightColors(0.4f, 1.0f, 1.0f);
-  glm::mat4 sphereMatrix = glm::translate(modelMatrix, glm::vec3(0.0f, 0.0f, 2.0f));
-  sphere.render(sphereMatrix, program);
+  renderGrid(modelMatrix);
+  renderArmSection(modelMatrix);
 
   context.getWindow().swapBuffers();
 }
@@ -97,6 +87,18 @@ void app::Renderer::setupLightColors(float red, float green, float blue) {
   if (lightIntParam.isAvailable()) {
     glUniform3fv( lightIntParam.getHandle(), 1, &lightInt[0]); 
   }
-
 }
 
+void app::Renderer::renderArmSection(const glm::mat4 &modelMatrix) {
+  setupLightColors(1.0f, 1.0f, 0.4f);
+  sphere.render(modelMatrix, program);
+
+  glm::mat4 cubeMatrix = glm::scale(modelMatrix, glm::vec3(0.6f, 0.6f, 3.0f));
+  cubeMatrix = glm::translate(cubeMatrix, glm::vec3(0.0f, 0.0f, 0.5f));
+  cube.render(cubeMatrix, program);
+}
+
+void app::Renderer::renderGrid(const glm::mat4 &modelMatrix) {
+  setupLightColors(0.2f, 0.2f, 0.2f);
+  grid.render(modelMatrix, program);
+}
