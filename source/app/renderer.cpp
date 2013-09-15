@@ -31,7 +31,7 @@ void app::Renderer::render(sys::Context &context) {
   glm::mat4 modelMatrix = glm::mat4(1.0f);
 
   renderGrid(modelMatrix);
-  renderArmSection(modelMatrix);
+  renderArm(modelMatrix);
 
   context.getWindow().swapBuffers();
 }
@@ -42,10 +42,10 @@ void app::Renderer::resize(int width, int height) {
 
 void app::Renderer::setupView() {
   // Setup view matrix
-  glm::mat4 viewMatrix = glm::lookAt (
-      glm::vec3 ( 8.0, 0.0, 3.0 ),
-      glm::vec3 ( 0.0, 0.0, 0.0 ),
-      glm::vec3 ( 0.0, 0.0, 1.0 ));
+  glm::mat4 viewMatrix = glm::lookAt(
+      glm::vec3(10.0, 0.0, 3.0),
+      glm::vec3(0.0, 0.0, 0.0),
+      glm::vec3(0.0, 0.0, 1.0));
 
   sys::shaders::ShaderParam viewMatrixParam = program.getUniformParam("ViewMatrix");
   if (viewMatrixParam.isAvailable()) {
@@ -90,15 +90,41 @@ void app::Renderer::setupLightColors(float red, float green, float blue) {
 }
 
 void app::Renderer::renderArmSection(const glm::mat4 &modelMatrix) {
-  setupLightColors(1.0f, 1.0f, 0.4f);
-  sphere.render(modelMatrix, program);
+  glm::mat4 m = glm::translate(modelMatrix, glm::vec3(0.0f, 0.0f, 3.0f));
+  sphere.render(m, program);
 
-  glm::mat4 cubeMatrix = glm::scale(modelMatrix, glm::vec3(0.6f, 0.6f, 3.0f));
-  cubeMatrix = glm::translate(cubeMatrix, glm::vec3(0.0f, 0.0f, 0.5f));
-  cube.render(cubeMatrix, program);
+  m = glm::scale(modelMatrix, glm::vec3(0.6f, 0.6f, 3.0f));
+  m = glm::translate(m, glm::vec3(0.0f, 0.0f, 0.5f));
+  cube.render(m, program);
 }
 
 void app::Renderer::renderGrid(const glm::mat4 &modelMatrix) {
   setupLightColors(0.2f, 0.2f, 0.2f);
   grid.render(modelMatrix, program);
+}
+
+void app::Renderer::renderArm(const glm::mat4 &modelMatrix) {
+  setupLightColors(1.0f, 1.0f, 0.4f);
+  glm::mat4 m = glm::scale(modelMatrix, glm::vec3(0.5f, 0.5f, 0.5f));
+
+  // First arm section
+  m = glm::rotate(m, 20.0f, glm::vec3(1.0f, 0.0f, 0.0f));
+  renderArmSection(m);
+
+  // Second arm section
+  m = glm::translate(m, glm::vec3(0.0f, 0.0f, 3.0f));
+  m = glm::rotate(m, 20.0f, glm::vec3(1.0f, 0.0f, 0.0f));
+  renderArmSection(m);
+
+  // Hand matrix definition
+  glm::mat4 handMatrix = glm::translate(m, glm::vec3(0.0f, 0.0f, 3.0f));
+
+  // Upper hand section
+  m = glm::rotate(handMatrix, -45.0f, glm::vec3(1.0f, 0.0f, 0.0f));
+  renderArmSection(m);
+
+  // Lower hand section
+  m = glm::rotate(handMatrix, 45.0f, glm::vec3(1.0f, 0.0f, 0.0f));
+  renderArmSection(m);
+
 }

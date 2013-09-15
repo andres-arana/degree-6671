@@ -35,6 +35,7 @@ namespace app {
 
       void renderGrid(const glm::mat4 &modelMatrix);
       void renderArmSection(const glm::mat4 &modelMatrix);
+      void renderArm(const glm::mat4 &modelMatrix);
   };
 
 };
