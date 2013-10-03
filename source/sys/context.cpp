@@ -7,9 +7,9 @@ sys::Context::Context(Application &application) :
   application(application),
   window(*this),
   input(*this) {
-    const GLubyte* rawGLVersion = glGetString(GL_SHADING_LANGUAGE_VERSION_ARB);
+    const GLubyte* rawGLVersion = glGetString(GL_VERSION);
     std::string glVersion((char*)rawGLVersion);
-    std::cout << "Using shading language version " << glVersion.c_str() << std::endl;
+    std::cout << "Using OpenGL version " << glVersion.c_str() << std::endl;
 
     const GLubyte* rawShaderVersion = glGetString(GL_SHADING_LANGUAGE_VERSION_ARB);
     std::string shaderVersion((char*)rawShaderVersion);
