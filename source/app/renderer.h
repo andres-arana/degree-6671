@@ -3,7 +3,8 @@
 
 #include "sys/application.h"
 #include "sys/context.h"
-#include "sys/shaders/shader.h"
+#include "sys/shaders/fragmentShader.h"
+#include "sys/shaders/vertexShader.h"
 #include "sys/shaders/shaderProgram.h"
 #include "app/graphics/grid.h"
 #include "app/graphics/cube.h"
@@ -20,8 +21,8 @@ namespace app {
       virtual void resize(int width, int height);
 
     private:
-      sys::shaders::Shader vertexShader;
-      sys::shaders::Shader fragmentShader;
+      sys::shaders::VertexShader vertexShader;
+      sys::shaders::FragmentShader fragmentShader;
       sys::shaders::ShaderProgram program;
 
       graphics::Grid grid;

@@ -13,6 +13,8 @@ namespace sys {
 
         GLuint getHandle() const;
 
+        virtual ~Shader();
+
       private:
         GLuint handle;
     };

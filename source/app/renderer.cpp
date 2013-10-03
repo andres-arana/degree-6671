@@ -7,8 +7,8 @@
 #include <glm/gtx/projection.hpp>
 
 app::Renderer::Renderer() :
-  vertexShader(GL_VERTEX_SHADER, "source/app/shaders/diffuseShader.vert"),
-  fragmentShader(GL_FRAGMENT_SHADER, "source/app/shaders/diffuseShader.frag"),
+  vertexShader("source/app/shaders/diffuseShader.vert"),
+  fragmentShader("source/app/shaders/diffuseShader.frag"),
   program(vertexShader, fragmentShader),
   grid(10),
   sphere(1.0f, 32, 32) {

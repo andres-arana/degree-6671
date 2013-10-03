@@ -42,3 +42,7 @@ sys::shaders::Shader::Shader(GLuint type, const std::string &file) {
 GLuint sys::shaders::Shader::getHandle() const {
   return handle;
 }
+
+sys::shaders::Shader::~Shader() {
+
+}
