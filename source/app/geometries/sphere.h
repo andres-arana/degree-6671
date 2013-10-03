@@ -3,9 +3,6 @@
 
 #include <GL/glew.h>
 #include <glm/glm.hpp> 
-#include <glm/gtc/matrix_transform.hpp> 
-#include <glm/gtx/transform2.hpp> 
-#include <glm/gtx/projection.hpp>
 #include <vector>
 #include "sys/shaders/shaderProgram.h"
 

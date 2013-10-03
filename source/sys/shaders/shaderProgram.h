@@ -4,6 +4,7 @@
 #include "sys/shaders/vertexShader.h"
 #include "sys/shaders/fragmentShader.h"
 #include "sys/shaders/shaderParam.h"
+#include <GL/glew.h>
 #include <glm/glm.hpp> 
 #include <memory>
 

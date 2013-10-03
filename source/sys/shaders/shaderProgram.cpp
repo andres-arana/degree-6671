@@ -1,5 +1,4 @@
 #include "sys/shaders/shaderProgram.h"
-#include <GL/glew.h>
 #include <vector>
 #include <iostream>
 #include <stdexcept>

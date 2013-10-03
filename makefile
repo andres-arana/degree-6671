@@ -1,6 +1,5 @@
 # Escaneo de archivos de fuentes y dependencias
 ALL_SOURCES := $(shell find source/ -regex .*\.cpp$$)
-ALL_DEPENDENCIES := $(shell find build/obj/ -regex .*\.d$$)
 ALL_DIRECTORIES := $(shell find source/ -type d)
 ALL_TARGET_DIRECTORIES := $(subst source/,build/obj/, $(ALL_DIRECTORIES))
 
@@ -8,7 +7,7 @@ ALL_TARGET_DIRECTORIES := $(subst source/,build/obj/, $(ALL_DIRECTORIES))
 ALL_OBJS := $(subst source/,build/obj/,$(ALL_SOURCES:.cpp=.o))
 
 # Definición de target default que buildea todo el programa
-all : build/6671
+all : clean build/6671
 
 # Ejecuta el programa buildeado
 run : build/6671
@@ -39,12 +38,10 @@ compile: prepare $(ALL_OBJS)
 define COMPILE_TEMPLATE 
 $(1) : $(subst .o,.cpp, $(subst build/obj/,source/,$(1)))
 	@echo 'Building file: $$<'
-	g++ -O3 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"$$*.d" -MT"$$*.d" -o"$$@" "$$<" -Isource
+	g++ -O3 -g3 -Wall -c -fmessage-length=0 -o"$$@" "$$<" -Isource
 	@echo ' '
 endef
 
 # Generamos las reglas para buildear los .o
 $(foreach obj,$(ALL_OBJS),$(eval $(call COMPILE_TEMPLATE,$(obj))))
 
-# Inclusión de los archivos de manejo de dependencias
--include $(ALL_DEPENDENCIES)

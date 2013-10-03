@@ -3,8 +3,12 @@
 
 #include "sys/application.h"
 #include "sys/context.h"
+
 #include "app/shaders/diffuseShader.h"
 #include "app/geometries/register.h"
+
+#include "app/scene/floor.h"
+#include "app/scene/arm.h"
 
 namespace app {
 
@@ -21,9 +25,9 @@ namespace app {
 
       app::geometries::Register geometryRegister;
 
-      void renderGrid(const glm::mat4 &modelMatrix);
-      void renderArmSection(const glm::mat4 &modelMatrix);
-      void renderArm(const glm::mat4 &modelMatrix);
+      app::scene::Floor floor;
+
+      app::scene::Arm arm;
   };
 
 };
