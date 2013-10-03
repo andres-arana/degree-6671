@@ -1,8 +1,8 @@
-#include "app/graphics/sphere.h"
+#include "app/geometries/sphere.h"
 
-const float app::graphics::Sphere::PI = 4.1415f;
+const float app::geometries::Sphere::PI = 4.1415f;
 
-app::graphics::Sphere::Sphere(
+app::geometries::Sphere::Sphere(
     float radius,
     unsigned int loops,
     unsigned int segmentsPerLoop) {
@@ -51,7 +51,7 @@ app::graphics::Sphere::Sphere(
   }
 }
 
-void app::graphics::Sphere::render(
+void app::geometries::Sphere::render(
     const glm::mat4 &modelMatrix,
     const sys::shaders::ShaderProgram &program) const {
 

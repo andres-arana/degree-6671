@@ -1,5 +1,5 @@
-#ifndef __APP_GRAPHICS_SPHERE_H_INCLUDED__
-#define __APP_GRAPHICS_SPHERE_H_INCLUDED__
+#ifndef __APP_GEOMETRIES_GRID_H_INCLUDED__
+#define __APP_GEOMETRIES_GRID_H_INCLUDED__
 
 #include <GL/glew.h>
 #include <glm/glm.hpp> 
@@ -10,14 +10,11 @@
 #include "sys/shaders/shaderProgram.h"
 
 namespace app {
-  namespace graphics {
+  namespace geometries {
 
-    class Sphere {
+    class Grid {
       public:
-        Sphere(
-            float radius,
-            unsigned int loops,
-            unsigned int segmentsPerLoop);
+        Grid(int size);
 
         void render(
             const glm::mat4 &modelMatrix, 
@@ -27,7 +24,7 @@ namespace app {
         std::vector<GLfloat> vertexBuffer;
         std::vector<GLuint> indexBuffer;
 
-        static const float PI;
+        unsigned int assignVertex(unsigned int offset, GLfloat x, GLfloat y, GLfloat z);
     };
 
   };

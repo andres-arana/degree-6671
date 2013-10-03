@@ -1,6 +1,6 @@
-#include "app/graphics/cube.h"
+#include "app/geometries/cube.h"
 
-const GLfloat app::graphics::Cube::vertexBuffer[] = {
+const GLfloat app::geometries::Cube::vertexBuffer[] = {
   0.5f, 0.5f, -0.5f,
   0.5f, -0.5f, -0.5f,
   -0.5f, -0.5f, -0.5f,
@@ -11,7 +11,7 @@ const GLfloat app::graphics::Cube::vertexBuffer[] = {
   -0.5f, 0.5f, 0.5f
 };
 
-const GLfloat app::graphics::Cube::normalBuffer[] = {
+const GLfloat app::geometries::Cube::normalBuffer[] = {
   0.5f, 0.5f, 0.0f,
   0.5f, -0.5f, 0.0f,
   -0.5f, -0.5f, 0.0f,
@@ -22,7 +22,7 @@ const GLfloat app::graphics::Cube::normalBuffer[] = {
   -0.5f, 0.5f, 0.0f
 };
 
-const GLuint app::graphics::Cube::indexBuffer[] = {
+const GLuint app::geometries::Cube::indexBuffer[] = {
   0, 1, 2, 3,
   4, 5, 6, 7,
   0, 4, 5, 1,
@@ -31,9 +31,9 @@ const GLuint app::graphics::Cube::indexBuffer[] = {
   3, 7, 4, 0
 };
 
-const unsigned int app::graphics::Cube::indexBufferSize = 24;
+const unsigned int app::geometries::Cube::indexBufferSize = 24;
 
-void app::graphics::Cube::render(
+void app::geometries::Cube::render(
     const glm::mat4 &modelMatrix,
     const sys::shaders::ShaderProgram &program) {
 

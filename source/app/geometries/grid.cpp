@@ -1,6 +1,6 @@
-#include "app/graphics/grid.h"
+#include "app/geometries/grid.h"
 
-app::graphics::Grid::Grid(int size) :
+app::geometries::Grid::Grid(int size) :
   vertexBuffer(12 * (2 * size + 1)),
   indexBuffer(4 * (2 * size + 1)) {
     // Compute vertex positions and fill vertex buffer
@@ -28,7 +28,7 @@ app::graphics::Grid::Grid(int size) :
     }
   }
 
-void app::graphics::Grid::render(
+void app::geometries::Grid::render(
     const glm::mat4 &modelMatrix, 
     const sys::shaders::ShaderProgram &program) const {
 
@@ -51,7 +51,7 @@ void app::graphics::Grid::render(
 }
 
 
-unsigned int app::graphics::Grid::assignVertex(unsigned int offset, GLfloat x, GLfloat y, GLfloat z) {
+unsigned int app::geometries::Grid::assignVertex(unsigned int offset, GLfloat x, GLfloat y, GLfloat z) {
   vertexBuffer[offset++] = x;
   vertexBuffer[offset++] = y;
   vertexBuffer[offset++] = z;

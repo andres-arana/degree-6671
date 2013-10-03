@@ -1,5 +1,5 @@
-#ifndef __APP_GRAPHICS_CUBE_H_INCLUDED__
-#define __APP_GRAPHICS_CUBE_H_INCLUDED__
+#ifndef __APP_GEOMETRIES_CUBE_H_INCLUDED__
+#define __APP_GEOMETRIES_CUBE_H_INCLUDED__
 
 #include <GL/glew.h>
 #include <glm/glm.hpp> 
@@ -10,7 +10,7 @@
 #include "sys/shaders/shaderProgram.h"
 
 namespace app {
-  namespace graphics {
+  namespace geometries {
 
     class Cube {
       public:
