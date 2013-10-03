@@ -2,9 +2,9 @@
 
 app::scene::Scene::Scene(
     const app::geometries::Register &geometries, 
-    const app::shaders::DiffuseShader &shader) :
-  floor(geometries, shader),
-  arm(geometries, shader) {
+    const app::shaders::Register &shaders) :
+  floor(geometries, shaders),
+  arm(geometries, shaders) {
 
   }
 

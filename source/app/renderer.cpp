@@ -6,16 +6,17 @@
 #include <glm/gtx/projection.hpp>
 
 app::Renderer::Renderer() :
-  scene(geometryRegister, diffuseShader) {
+  scene(geometryRegister, shaderRegister) {
     glClearColor(0.1f, 0.1f, 0.2f, 0.0f);
     glShadeModel(GL_SMOOTH);
     glEnable(GL_DEPTH_TEST);
-
-    diffuseShader.use();
   }
 
 void app::Renderer::render(sys::Context &context) {
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+  const app::shaders::DiffuseShader &diffuseShader =
+    shaderRegister.getDiffuseShader();
 
   diffuseShader.bindViewMatrix(glm::lookAt(
         glm::vec3(10.0, 0.0, 3.0),

@@ -2,7 +2,7 @@
 #define __APP_SCENE_ARM_SECTION_H_INCLUDED__
 
 #include "app/geometries/register.h"
-#include "app/shaders/diffuseShader.h"
+#include "app/shaders/register.h"
 #include <glm/glm.hpp> 
 
 namespace app {
@@ -10,7 +10,7 @@ namespace app {
     class ArmSection {
       public:
         ArmSection(const app::geometries::Register &geometries, 
-            const app::shaders::DiffuseShader &shader);
+            const app::shaders::Register &shaders);
 
         void render(const glm::mat4 &modelMatrix);
 

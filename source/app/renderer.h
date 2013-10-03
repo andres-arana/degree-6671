@@ -4,8 +4,8 @@
 #include "sys/application.h"
 #include "sys/context.h"
 
-#include "app/shaders/diffuseShader.h"
 #include "app/geometries/register.h"
+#include "app/shaders/register.h"
 
 #include "app/scene/scene.h"
 
@@ -20,7 +20,7 @@ namespace app {
       virtual void resize(int width, int height);
 
     private:
-      app::shaders::DiffuseShader diffuseShader;
+      app::shaders::Register shaderRegister;
 
       app::geometries::Register geometryRegister;
 

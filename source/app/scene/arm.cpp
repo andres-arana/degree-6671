@@ -3,14 +3,15 @@
 
 app::scene::Arm::Arm(
     const app::geometries::Register &geometries, 
-    const app::shaders::DiffuseShader &shader) :
+    const app::shaders::Register &shaders) :
   geometries(geometries),
-  shader(shader),
-  armSection(geometries, shader) {
+  shader(shaders.getDiffuseShader()),
+  armSection(geometries, shaders) {
 
   }
 
 void app::scene::Arm::render(const glm::mat4 &modelMatrix) {
+  shader.use();
   shader.bindLightReflectivity(glm::vec3(1.0f, 1.0f, 0.4f));
   glm::mat4 m = glm::scale(modelMatrix, glm::vec3(0.5f, 0.5f, 0.5f));
 

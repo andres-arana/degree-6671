@@ -3,9 +3,9 @@
 
 app::scene::ArmSection::ArmSection(
     const app::geometries::Register &geometries, 
-    const app::shaders::DiffuseShader &shader) :
+    const app::shaders::Register &shaders) :
   geometries(geometries),
-  shader(shader) {
+  shader(shaders.getDiffuseShader()) {
 
   }
 
