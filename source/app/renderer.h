@@ -20,9 +20,9 @@ namespace app {
       virtual void resize(int width, int height);
 
     private:
-      app::shaders::Register shaderRegister;
+      app::shaders::Register shaders;
 
-      app::geometries::Register geometryRegister;
+      app::geometries::Register geometries;
 
       app::scene::Scene scene;
 
