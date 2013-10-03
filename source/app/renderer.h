@@ -7,8 +7,7 @@
 #include "app/shaders/diffuseShader.h"
 #include "app/geometries/register.h"
 
-#include "app/scene/floor.h"
-#include "app/scene/arm.h"
+#include "app/scene/scene.h"
 
 namespace app {
 
@@ -25,9 +24,8 @@ namespace app {
 
       app::geometries::Register geometryRegister;
 
-      app::scene::Floor floor;
+      app::scene::Scene scene;
 
-      app::scene::Arm arm;
   };
 
 };

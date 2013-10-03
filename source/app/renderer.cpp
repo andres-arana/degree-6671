@@ -6,8 +6,7 @@
 #include <glm/gtx/projection.hpp>
 
 app::Renderer::Renderer() :
-  floor(geometryRegister, diffuseShader),
-  arm(geometryRegister, diffuseShader) {
+  scene(geometryRegister, diffuseShader) {
     glClearColor(0.1f, 0.1f, 0.2f, 0.0f);
     glShadeModel(GL_SMOOTH);
     glEnable(GL_DEPTH_TEST);
@@ -31,9 +30,7 @@ void app::Renderer::render(sys::Context &context) {
   diffuseShader.bindLightColor(glm::vec3(2.0f, 2.0f, 2.0f));
 
   glm::mat4 modelMatrix = glm::mat4(1.0f);
-
-  floor.render(modelMatrix);
-  arm.render(modelMatrix);
+  scene.render(modelMatrix);
 
   context.getWindow().swapBuffers();
 }
