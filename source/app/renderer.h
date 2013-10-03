@@ -6,9 +6,7 @@
 #include "sys/shaders/fragmentShader.h"
 #include "sys/shaders/vertexShader.h"
 #include "sys/shaders/shaderProgram.h"
-#include "app/geometries/grid.h"
-#include "app/geometries/cube.h"
-#include "app/geometries/sphere.h"
+#include "app/geometries/register.h"
 
 namespace app {
 
@@ -25,9 +23,8 @@ namespace app {
       sys::shaders::FragmentShader fragmentShader;
       sys::shaders::ShaderProgram program;
 
-      geometries::Grid grid;
-      geometries::Cube cube;
-      geometries::Sphere sphere;
+      app::geometries::Register geometryRegister;
+
 
       void setupView();
       void setupProjection(float aspectRatio);

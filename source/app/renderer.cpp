@@ -9,9 +9,7 @@
 app::Renderer::Renderer() :
   vertexShader("source/app/shaders/diffuseShader.vert"),
   fragmentShader("source/app/shaders/diffuseShader.frag"),
-  program(vertexShader, fragmentShader),
-  grid(10),
-  sphere(1.0f, 32, 32) {
+  program(vertexShader, fragmentShader) {
 
     glClearColor(0.1f, 0.1f, 0.2f, 0.0f);
     glShadeModel(GL_SMOOTH);
@@ -91,16 +89,16 @@ void app::Renderer::setupLightColors(float red, float green, float blue) {
 
 void app::Renderer::renderArmSection(const glm::mat4 &modelMatrix) {
   glm::mat4 m = glm::translate(modelMatrix, glm::vec3(0.0f, 0.0f, 3.0f));
-  sphere.render(m, program);
+  geometryRegister.getSphere().render(m, program);
 
   m = glm::scale(modelMatrix, glm::vec3(0.6f, 0.6f, 3.0f));
   m = glm::translate(m, glm::vec3(0.0f, 0.0f, 0.5f));
-  cube.render(m, program);
+  geometryRegister.getCube().render(m, program);
 }
 
 void app::Renderer::renderGrid(const glm::mat4 &modelMatrix) {
   setupLightColors(0.2f, 0.2f, 0.2f);
-  grid.render(modelMatrix, program);
+  geometryRegister.getGrid().render(modelMatrix, program);
 }
 
 void app::Renderer::renderArm(const glm::mat4 &modelMatrix) {

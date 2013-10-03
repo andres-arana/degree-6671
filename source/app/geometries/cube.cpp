@@ -35,7 +35,7 @@ const unsigned int app::geometries::Cube::indexBufferSize = 24;
 
 void app::geometries::Cube::render(
     const glm::mat4 &modelMatrix,
-    const sys::shaders::ShaderProgram &program) {
+    const sys::shaders::ShaderProgram &program) const {
 
   // Bind Normal MAtrix
   glm::mat3 normalMatrix = glm::mat3 ( 1.0f );

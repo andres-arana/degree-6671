@@ -16,7 +16,7 @@ namespace app {
       public:
         void render(
             const glm::mat4 &modelMatrix, 
-            const sys::shaders::ShaderProgram &program);
+            const sys::shaders::ShaderProgram &program) const;
 
       private:
         static const GLfloat vertexBuffer[];
