@@ -18,7 +18,7 @@ namespace app {
 
         void render(
             const glm::mat4 &modelMatrix, 
-            const sys::shaders::ShaderProgram &program) const;
+            const sys::shaders::ShaderProgram &shader) const;
 
       private:
         std::vector<GLfloat> vertexBuffer;

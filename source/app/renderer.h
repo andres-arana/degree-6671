@@ -3,9 +3,7 @@
 
 #include "sys/application.h"
 #include "sys/context.h"
-#include "sys/shaders/fragmentShader.h"
-#include "sys/shaders/vertexShader.h"
-#include "sys/shaders/shaderProgram.h"
+#include "app/shaders/diffuseShader.h"
 #include "app/geometries/register.h"
 
 namespace app {
@@ -19,12 +17,9 @@ namespace app {
       virtual void resize(int width, int height);
 
     private:
-      sys::shaders::VertexShader vertexShader;
-      sys::shaders::FragmentShader fragmentShader;
-      sys::shaders::ShaderProgram program;
+      app::shaders::DiffuseShader diffuseShader;
 
       app::geometries::Register geometryRegister;
-
 
       void setupView();
       void setupProjection(float aspectRatio);

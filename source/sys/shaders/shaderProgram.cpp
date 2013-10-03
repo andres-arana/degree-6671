@@ -5,15 +5,18 @@
 #include <stdexcept>
 
 sys::shaders::ShaderProgram::ShaderProgram(
-    const sys::shaders::Shader &vertexShader,
-    const sys::shaders::Shader &fragmentShader) {
+    sys::shaders::VertexShader *vertexShader,
+    sys::shaders::FragmentShader *fragmentShader) :
+  vertexShader(vertexShader),
+  fragmentShader(fragmentShader)
+{
 
   handle = glCreateProgram();
   if (0 == handle) 
     throw std::runtime_error("Unable to create shader program handle");
 
-  glAttachShader(handle, vertexShader.getHandle());
-  glAttachShader(handle, fragmentShader.getHandle());
+  glAttachShader(handle, vertexShader->getHandle());
+  glAttachShader(handle, fragmentShader->getHandle());
   glLinkProgram(handle);
 
   GLint status;
@@ -42,4 +45,8 @@ void sys::shaders::ShaderProgram::use() const {
 sys::shaders::ShaderParam sys::shaders::ShaderProgram::getUniformParam(const char* name) const {
   GLuint paramHandle = glGetUniformLocation(handle, name);
   return sys::shaders::ShaderParam(paramHandle);
+}
+
+sys::shaders::ShaderProgram::~ShaderProgram() {
+
 }

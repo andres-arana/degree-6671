@@ -35,20 +35,14 @@ const unsigned int app::geometries::Cube::indexBufferSize = 24;
 
 void app::geometries::Cube::render(
     const glm::mat4 &modelMatrix,
-    const sys::shaders::ShaderProgram &program) const {
+    const sys::shaders::ShaderProgram &shader) const {
 
   // Bind Normal MAtrix
   glm::mat3 normalMatrix = glm::mat3 ( 1.0f );
-  sys::shaders::ShaderParam normalMatrixParam = program.getUniformParam("NormalMatrix");
-  if (normalMatrixParam.isAvailable()) {
-    glUniformMatrix3fv(normalMatrixParam.getHandle(), 1, GL_FALSE, &normalMatrix[0][0]);
-  }
+  shader.bindNormalMatrix(normalMatrix);
 
   // Bind Model Matrix
-  sys::shaders::ShaderParam modelMatrixParam = program.getUniformParam("ModelMatrix");
-  if (modelMatrixParam.isAvailable()) {
-    glUniformMatrix4fv(modelMatrixParam.getHandle(), 1, GL_FALSE, &modelMatrix[0][0]);
-  }
+  shader.bindModelMatrix(modelMatrix);
 
   // Render
   glEnableClientState(GL_VERTEX_ARRAY);
