@@ -8,14 +8,14 @@ namespace sys {
 
     class ShaderParam {
       public:
-        ShaderParam(GLuint handle);
+        ShaderParam(GLint handle);
 
         bool isAvailable() const;
 
         GLuint getHandle() const;
 
       private:
-        GLuint handle;
+        GLint handle;
     };
 
   };

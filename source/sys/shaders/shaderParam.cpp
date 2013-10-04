@@ -1,6 +1,6 @@
 #include "sys/shaders/shaderParam.h"
 
-sys::shaders::ShaderParam::ShaderParam(GLuint handle) :
+sys::shaders::ShaderParam::ShaderParam(GLint handle) :
   handle(handle) {
 
 }

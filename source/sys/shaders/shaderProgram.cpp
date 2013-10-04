@@ -42,7 +42,7 @@ void sys::shaders::ShaderProgram::use() const {
 }
 
 sys::shaders::ShaderParam sys::shaders::ShaderProgram::getUniformParam(const char* name) const {
-  GLuint paramHandle = glGetUniformLocation(handle, name);
+  GLint paramHandle = glGetUniformLocation(handle, name);
   return sys::shaders::ShaderParam(paramHandle);
 }
 
