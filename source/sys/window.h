@@ -12,10 +12,19 @@ namespace sys {
 
       void toggleFullScreen();
 
+      void hideCursor();
+
+      void showCursor();
+
       void swapBuffers();
 
       float getAspectRatio() const;
 
+      unsigned int getWidth() const;
+
+      unsigned int getHeight() const;
+
+      void setCursorPosition(unsigned int x, unsigned int y);
     private:
       friend class Context;
 

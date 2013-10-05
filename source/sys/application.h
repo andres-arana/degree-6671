@@ -5,6 +5,7 @@
 
 namespace sys {
   class Context;
+  class Window;
 
   class Renderer {
     public:
@@ -26,6 +27,8 @@ namespace sys {
       virtual unsigned int getPositionY() = 0;
 
       virtual const char* getTitle() = 0;
+
+      virtual void configureWindow(Window& window) = 0;
 
       virtual Renderer &getRenderer() = 0;
 

@@ -17,6 +17,7 @@ sys::Window::Window(Context &context) {
   glutInitWindowPosition(application.getPositionX(), application.getPositionY());
   glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
   id = glutCreateWindow(application.getTitle());
+  application.configureWindow(*this);
 }
 
 bool sys::Window::isIdentifiedBy(unsigned int windowId) const {
@@ -27,13 +28,33 @@ void sys::Window::toggleFullScreen() {
   glutFullScreenToggle();
 }
 
+void sys::Window::hideCursor() {
+  glutSetCursor(GLUT_CURSOR_NONE);
+}
+
+void sys::Window::showCursor() {
+  glutSetCursor(GLUT_CURSOR_INHERIT);
+}
+
 void sys::Window::swapBuffers() {
   glutSwapBuffers();
 }
 
 float sys::Window::getAspectRatio() const {
-  float width = glutGet(GLUT_WINDOW_WIDTH);
-  float height = glutGet(GLUT_WINDOW_HEIGHT);
+  float width = getWidth();
+  float height = getHeight();
 
   return width / height;
+}
+
+unsigned int sys::Window::getWidth() const {
+  return glutGet(GLUT_WINDOW_WIDTH);
+}
+
+unsigned int sys::Window::getHeight() const {
+  return glutGet(GLUT_WINDOW_HEIGHT);
+}
+
+void sys::Window::setCursorPosition(unsigned int x, unsigned int y) {
+  glutWarpPointer(x, y);
 }

@@ -12,7 +12,7 @@ sys::input::Input::Input(sys::Context &context) :
     glutDisplayFunc(onDisplay);
     glutReshapeFunc(onReshape);
     glutMouseFunc(onMouse);
-    glutMotionFunc(onMouseMotion);
+    glutPassiveMotionFunc(onMouseMotion);
     glutMouseWheelFunc(onMouseWheel);
     glutCloseFunc(onClose);
     glutKeyboardFunc(onKeyDown);
@@ -80,5 +80,6 @@ void sys::input::Input::onKeyDown(unsigned char key, int x, int y) {
 void sys::input::Input::onIdle() {
   sys::input::IdleEvent event = { instance->context };
   instance->getApplication().getDispatcher().onIdle(event);
+  glutPostRedisplay();
 }
 

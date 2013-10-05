@@ -8,6 +8,8 @@ namespace app {
   class Dispatcher : public sys::input::Dispatcher {
     public:
       virtual void onKeyUp(const sys::input::KeyUpEvent &event);
+
+      virtual void onMouseMotion(const sys::input::MouseMotionEvent &event);
   };
 
 };

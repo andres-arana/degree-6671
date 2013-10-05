@@ -1,4 +1,5 @@
 #include "app/application.h"
+#include "sys/window.h"
 
 app::Application::Application() {
 
@@ -22,6 +23,10 @@ unsigned int app::Application::getPositionY(){
 
 const char* app::Application::getTitle(){
   return "66.71 - Sistemas Graficos - FIUBA";
+}
+
+void app::Application::configureWindow(sys::Window &window) {
+  window.hideCursor();
 }
 
 sys::Renderer &app::Application::getRenderer(){

@@ -22,6 +22,8 @@ namespace app {
 
       virtual const char* getTitle();
 
+      virtual void configureWindow(sys::Window& window);
+
       virtual sys::Renderer &getRenderer();
 
       virtual sys::input::Dispatcher &getDispatcher();
