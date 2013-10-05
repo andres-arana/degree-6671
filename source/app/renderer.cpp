@@ -6,7 +6,8 @@
 #include <glm/gtx/projection.hpp>
 
 app::Renderer::Renderer() :
-  scene(geometries, shaders) {
+  scene(geometries, shaders),
+  rotatingCamera(glm::vec3(0, 0, 1.0f), 12.0f, shaders) {
     glClearColor(0.1f, 0.1f, 0.2f, 0.0f);
     glShadeModel(GL_SMOOTH);
     glEnable(GL_DEPTH_TEST);
@@ -15,13 +16,10 @@ app::Renderer::Renderer() :
 void app::Renderer::render(sys::Context &context) {
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+  rotatingCamera.use();
+
   const app::shaders::DiffuseShader &diffuseShader =
     shaders.getDiffuseShader();
-
-  diffuseShader.bindViewMatrix(glm::lookAt(
-        glm::vec3(10.0, 0.0, 3.0),
-        glm::vec3(0.0, 0.0, 0.0),
-        glm::vec3(0.0, 0.0, 1.0)));
 
   diffuseShader.bindProjectionMatrix(glm::infinitePerspective(
         52.0f, context.getWindow().getAspectRatio(), 0.1f));
@@ -38,5 +36,9 @@ void app::Renderer::render(sys::Context &context) {
 
 void app::Renderer::resize(int width, int height) {
   glViewport (0, 0, (GLsizei) width, (GLsizei) height);
+}
+
+void app::Renderer::moveCamera(int deltaX, int deltaY) {
+  rotatingCamera.move(deltaX, deltaY);
 }
 

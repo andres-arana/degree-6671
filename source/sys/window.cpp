@@ -47,14 +47,14 @@ float sys::Window::getAspectRatio() const {
   return width / height;
 }
 
-unsigned int sys::Window::getWidth() const {
+int sys::Window::getWidth() const {
   return glutGet(GLUT_WINDOW_WIDTH);
 }
 
-unsigned int sys::Window::getHeight() const {
+int sys::Window::getHeight() const {
   return glutGet(GLUT_WINDOW_HEIGHT);
 }
 
-void sys::Window::setCursorPosition(unsigned int x, unsigned int y) {
+void sys::Window::setCursorPosition(int x, int y) {
   glutWarpPointer(x, y);
 }

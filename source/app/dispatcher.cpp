@@ -1,6 +1,11 @@
 #include "app/dispatcher.h"
+#include "app/application.h"
 #include "sys/context.h"
-#include <iostream>
+
+app::Dispatcher::Dispatcher(app::Application &application) :
+  application(application) {
+
+  }
 
 void app::Dispatcher::onKeyUp(const sys::input::KeyUpEvent &event) {
   if (event.key == 'f') {
@@ -13,9 +18,24 @@ void app::Dispatcher::onKeyUp(const sys::input::KeyUpEvent &event) {
 void app::Dispatcher::onMouseMotion(const sys::input::MouseMotionEvent &event) {
   sys::Window &window = event.context.getWindow();
 
-  std::cout 
-    << "Mouse moved (" << event.x << ", " << event.y << ")"
-    << " Window size is " << window.getWidth() << "x" << window.getHeight()
-    << std::endl;
+  int middleX = window.getWidth() / 2;
+  int middleY = window.getHeight() / 2;
+
+  int deltaX = event.x - middleX;
+  int deltaY = event.y - middleY;
+
+  if (deltaX < 3 && deltaX > -3) {
+    deltaX = 0;
+  }
+   
+  if (deltaY < 3 && deltaY > -3) {
+    deltaY = 0;
+  }
+
+  if (deltaX || deltaY) {
+    application.moveCamera(deltaX, deltaY);
+    window.setCursorPosition(middleX, middleY);
+  }
+
 }
 

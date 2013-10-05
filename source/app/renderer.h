@@ -8,6 +8,7 @@
 #include "app/shaders/register.h"
 
 #include "app/scene/scene.h"
+#include "app/scene/rotatingCamera.h"
 
 namespace app {
 
@@ -19,12 +20,16 @@ namespace app {
 
       virtual void resize(int width, int height);
 
+      void moveCamera(int deltaX, int deltaY);
+
     private:
       app::shaders::Register shaders;
 
       app::geometries::Register geometries;
 
       app::scene::Scene scene;
+
+      app::scene::RotatingCamera rotatingCamera;
 
   };
 

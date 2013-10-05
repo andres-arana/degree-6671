@@ -39,9 +39,13 @@ sys::Renderer &app::Application::getRenderer(){
 
 sys::input::Dispatcher &app::Application::getDispatcher(){
   if (!dispatcher.get()) {
-    std::auto_ptr<app::Dispatcher> newDispatcher(new app::Dispatcher());
+    std::auto_ptr<app::Dispatcher> newDispatcher(new app::Dispatcher(*this));
     dispatcher = newDispatcher;
   }
   return *dispatcher;
+}
+
+void app::Application::moveCamera(int deltaX, int deltaY) {
+  renderer->moveCamera(deltaX, deltaY);
 }
 

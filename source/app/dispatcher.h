@@ -4,12 +4,20 @@
 #include "sys/application.h"
 
 namespace app {
+  class Application;
 
   class Dispatcher : public sys::input::Dispatcher {
     public:
+      Dispatcher(Application &application);
+
       virtual void onKeyUp(const sys::input::KeyUpEvent &event);
 
       virtual void onMouseMotion(const sys::input::MouseMotionEvent &event);
+    private:
+      Application &application;
+
+      int previousMousePositionX;
+      int previousMousePositionY;
   };
 
 };

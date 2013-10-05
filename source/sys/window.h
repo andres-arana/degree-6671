@@ -20,11 +20,11 @@ namespace sys {
 
       float getAspectRatio() const;
 
-      unsigned int getWidth() const;
+      int getWidth() const;
 
-      unsigned int getHeight() const;
+      int getHeight() const;
 
-      void setCursorPosition(unsigned int x, unsigned int y);
+      void setCursorPosition(int x, int y);
     private:
       friend class Context;
 
