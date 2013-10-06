@@ -10,9 +10,13 @@ app::Dispatcher::Dispatcher(app::Application &application) :
 void app::Dispatcher::onKeyUp(const sys::input::KeyUpEvent &event) {
   if (event.key == 'f') {
     event.context.getWindow().toggleFullScreen();
+  } else if (event.key == 'c') {
+    application.toggleCamera();
   } else if (event.key == 0x1b) {
     event.context.exitEventLoop();
   }
+
+  application.getCamera().onKeyUp(event.key);
 }
 
 void app::Dispatcher::onMouseMotion(const sys::input::MouseMotionEvent &event) {
@@ -33,7 +37,7 @@ void app::Dispatcher::onMouseMotion(const sys::input::MouseMotionEvent &event) {
   }
 
   if (deltaX || deltaY) {
-    application.moveCamera(deltaX, deltaY);
+    application.getCamera().onMouseMove(deltaX, deltaY);
     window.setCursorPosition(middleX, middleY);
   }
 

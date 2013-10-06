@@ -28,7 +28,9 @@ namespace app {
 
       virtual sys::input::Dispatcher &getDispatcher();
 
-      void moveCamera(int deltaX, int deltaY);
+      app::scene::Camera &getCamera();
+
+      void toggleCamera();
 
     private:
       std::auto_ptr<Renderer>   renderer;

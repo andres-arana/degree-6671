@@ -45,7 +45,10 @@ sys::input::Dispatcher &app::Application::getDispatcher(){
   return *dispatcher;
 }
 
-void app::Application::moveCamera(int deltaX, int deltaY) {
-  renderer->moveCamera(deltaX, deltaY);
+app::scene::Camera &app::Application::getCamera() {
+  return renderer->getCamera();
 }
 
+void app::Application::toggleCamera() {
+  renderer->toggleCamera();
+}

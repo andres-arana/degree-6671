@@ -7,16 +7,19 @@
 
 app::Renderer::Renderer() :
   scene(geometries, shaders),
-  rotatingCamera(glm::vec3(0, 0, 1.0f), 12.0f, shaders) {
+  rotatingCamera(glm::vec3(0, 0, 1.0f), 12.0f, shaders),
+  fpsCamera(glm::vec3(10.0f, 0, 2.0f), shaders) {
     glClearColor(0.1f, 0.1f, 0.2f, 0.0f);
     glShadeModel(GL_SMOOTH);
     glEnable(GL_DEPTH_TEST);
+
+    currentCamera = &rotatingCamera;
   }
 
 void app::Renderer::render(sys::Context &context) {
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-  rotatingCamera.use();
+  currentCamera->use();
 
   const app::shaders::DiffuseShader &diffuseShader =
     shaders.getDiffuseShader();
@@ -35,10 +38,18 @@ void app::Renderer::render(sys::Context &context) {
 }
 
 void app::Renderer::resize(int width, int height) {
-  glViewport (0, 0, (GLsizei) width, (GLsizei) height);
+  glViewport(0, 0, (GLsizei) width, (GLsizei) height);
 }
 
-void app::Renderer::moveCamera(int deltaX, int deltaY) {
-  rotatingCamera.move(deltaX, deltaY);
+void app::Renderer::toggleCamera() {
+  if (currentCamera == &rotatingCamera) {
+    currentCamera = &fpsCamera;
+  } else {
+    currentCamera = &rotatingCamera;
+  }
+}
+
+app::scene::Camera &app::Renderer::getCamera() {
+  return *currentCamera;
 }
 

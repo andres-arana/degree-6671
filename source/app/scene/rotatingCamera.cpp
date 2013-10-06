@@ -16,7 +16,7 @@ app::scene::RotatingCamera::RotatingCamera(
 
   }
 
-void app::scene::RotatingCamera::move(int deltaX, int deltaY) {
+void app::scene::RotatingCamera::onMouseMove(int deltaX, int deltaY) {
   if (deltaX == 0 && deltaY == 0) {
     return;
   }
@@ -40,11 +40,22 @@ void app::scene::RotatingCamera::move(int deltaX, int deltaY) {
   }
 }
 
+
+void app::scene::RotatingCamera::onKeyUp(unsigned char key) {
+  if (key == 'w' || key == 'W') {
+    distance -= 0.5f;
+  }
+  
+  if(key == 's' || key == 'S') {
+    distance += 0.5f;
+  }
+}
+
 void app::scene::RotatingCamera::use() {
   glm::vec3 position(
-      distance * sin(rho) * cos(theta),
-      distance * cos(rho) * cos(theta),
-      distance * sin(theta));
+      distance * sin(rho) * cos(theta) + center.x,
+      distance * cos(rho) * cos(theta) + center.y,
+      distance * sin(theta) + center.z);
 
   shaders.getDiffuseShader().bindViewMatrix(
       glm::lookAt(

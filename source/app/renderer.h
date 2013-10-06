@@ -9,6 +9,7 @@
 
 #include "app/scene/scene.h"
 #include "app/scene/rotatingCamera.h"
+#include "app/scene/FPSCamera.h"
 
 namespace app {
 
@@ -20,7 +21,9 @@ namespace app {
 
       virtual void resize(int width, int height);
 
-      void moveCamera(int deltaX, int deltaY);
+      void toggleCamera();
+
+      app::scene::Camera &getCamera();
 
     private:
       app::shaders::Register shaders;
@@ -31,6 +34,9 @@ namespace app {
 
       app::scene::RotatingCamera rotatingCamera;
 
+      app::scene::FPSCamera fpsCamera;
+
+      app::scene::Camera *currentCamera;
   };
 
 };

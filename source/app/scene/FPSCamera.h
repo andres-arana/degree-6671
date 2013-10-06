@@ -1,5 +1,5 @@
-#ifndef __APP_SCENE_ROTATION_CAMERA_H_INCLUDED__
-#define __APP_SCENE_ROTATION_CAMERA_H_INCLUDED__
+#ifndef __APP_SCENE_FPS_CAMERA_H_INCLUDED__
+#define __APP_SCENE_FPS_CAMERA_H_INCLUDED__
 
 #include "app/shaders/register.h"
 #include "app/scene/camera.h"
@@ -7,11 +7,10 @@
 
 namespace app {
   namespace scene {
-    class RotatingCamera : public Camera {
+    class FPSCamera : public Camera {
       public:
-        RotatingCamera(
-            const glm::vec3 &center,
-            float distance,
+        FPSCamera(
+            const glm::vec3 &position,
             const app::shaders::Register &shaders);
 
         virtual void onMouseMove(int deltaX, int deltaY);
@@ -22,8 +21,7 @@ namespace app {
 
       private:
         const app::shaders::Register &shaders;
-        const glm::vec3 center;
-        float distance;
+        glm::vec3 position;
         float rho;
         float theta;
     };
