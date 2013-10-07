@@ -65,40 +65,35 @@ void app::scene::FPSCamera::onKeyDown(unsigned char key) {
 }
 
 void app::scene::FPSCamera::tick(float delta) {
+  glm::vec3 forwardVector(
+      sin(rho) * cos(theta),
+      cos(rho) * cos(theta),
+      sin(theta));
+
+  // The cross product between the displacement vector (forward facing) and
+  // the up vector is the lateral stepping vector, which should be
+  // normalized to ensure proper scaling later
+  glm::vec3 lateralVector = glm::vec3(
+      forwardVector.y,
+      -forwardVector.x,
+      0);
+
   if (forwards || backwards || left || right) {
-    glm::vec3 displacement(
-        sin(rho) * cos(theta),
-        cos(rho) * cos(theta),
-        sin(theta));
+    glm::vec3 displacement;
 
     if (forwards) {
-
-      position += STEP * displacement * delta;
-
+      displacement += forwardVector;
     } else if (backwards) {
-
-      position -= STEP * displacement * delta;
-
-    } else if (left || right) {
-
-      // The cross product between the displacement vector (forward facing) and
-      // the up vector is the lateral stepping vector, which should be
-      // normalized to ensure proper scaling later
-      glm::vec3 lateral = glm::normalize(glm::vec3(
-            displacement.y,
-            -displacement.x,
-            0));
-
-      if (left) {
-
-        position -= STEP * lateral * delta;
-
-      } else if (right) {
-
-        position += STEP * lateral * delta;
-
-      }
+      displacement -= forwardVector;
     }
+
+    if (left) {
+      displacement -= lateralVector;
+    } else if (right) {
+      displacement += lateralVector;
+    }
+
+    position += STEP * delta * glm::normalize(displacement);
   }
 }
 
