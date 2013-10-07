@@ -18,7 +18,11 @@ namespace app {
 
         virtual void onKeyUp(unsigned char key);
 
-        void use();
+        virtual void onKeyDown(unsigned char key);
+
+        virtual void tick(float delta);
+
+        virtual void use();
 
       private:
         const app::shaders::Register &shaders;
@@ -26,6 +30,10 @@ namespace app {
         float distance;
         float rho;
         float theta;
+
+
+        bool forwards;
+        bool backwards;
     };
   };
 };

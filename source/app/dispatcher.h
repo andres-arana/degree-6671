@@ -12,12 +12,17 @@ namespace app {
 
       virtual void onKeyUp(const sys::input::KeyUpEvent &event);
 
+      virtual void onKeyDown(const sys::input::KeyDownEvent &event);
+
       virtual void onMouseMotion(const sys::input::MouseMotionEvent &event);
+
+      virtual void onIdle(const sys::input::IdleEvent &event);
     private:
       Application &application;
 
       int previousMousePositionX;
       int previousMousePositionY;
+      unsigned int previousTime;
   };
 
 };

@@ -17,13 +17,22 @@ namespace app {
 
         virtual void onKeyUp(unsigned char key);
 
-        void use();
+        virtual void onKeyDown(unsigned char key);
+
+        virtual void tick(float delta);
+
+        virtual void use();
 
       private:
         const app::shaders::Register &shaders;
         glm::vec3 position;
         float rho;
         float theta;
+
+        bool forwards;
+        bool backwards;
+        bool left;
+        bool right;
     };
   };
 };

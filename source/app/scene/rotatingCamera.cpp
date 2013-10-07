@@ -5,6 +5,7 @@
 #include <cmath>
 
 #define PI 3.1415f
+#define STEP 10.0f
 
 app::scene::RotatingCamera::RotatingCamera(
     const glm::vec3 &center,
@@ -43,11 +44,32 @@ void app::scene::RotatingCamera::onMouseMove(int deltaX, int deltaY) {
 
 void app::scene::RotatingCamera::onKeyUp(unsigned char key) {
   if (key == 'w' || key == 'W') {
-    distance -= 0.5f;
+    forwards = false;
   }
-  
+
   if(key == 's' || key == 'S') {
-    distance += 0.5f;
+    backwards = false;
+  }
+}
+
+void app::scene::RotatingCamera::onKeyDown(unsigned char key) {
+  if (key == 'w' || key == 'W') {
+    forwards = true;
+  }
+
+  if(key == 's' || key == 'S') {
+    backwards = true;
+  }
+
+}
+
+void app::scene::RotatingCamera::tick(float delta) {
+  if (forwards) {
+    distance -= STEP * delta;
+  }
+
+  if (backwards) {
+    distance += STEP * delta;
   }
 }
 

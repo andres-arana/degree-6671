@@ -5,7 +5,7 @@
 #include <cmath>
 
 #define PI 3.1415f
-#define STEP 0.2f
+#define STEP 10.0f
 
 app::scene::FPSCamera::FPSCamera(
     const glm::vec3 &position,
@@ -41,26 +41,45 @@ void app::scene::FPSCamera::onMouseMove(int deltaX, int deltaY) {
 
 
 void app::scene::FPSCamera::onKeyUp(unsigned char key) {
-  if (key == 'w' || key == 'W' ||
-      key == 's' || key == 'S' ||
-      key == 'a' || key == 'A' ||
-      key == 'd' || key == 'D') {
+  if (key == 'w' || key == 'W') {
+    forwards = false;
+  } else if (key == 's' || key == 'S') {
+    backwards = false;
+  } else if (key == 'a' || key == 'A') {
+    left = false;
+  } else if (key == 'd' || key == 'D') {
+    right = false;
+  }
+}
 
+void app::scene::FPSCamera::onKeyDown(unsigned char key) {
+  if (key == 'w' || key == 'W') {
+    forwards = true;
+  } else if (key == 's' || key == 'S') {
+    backwards = true;
+  } else if (key == 'a' || key == 'A') {
+    left = true;
+  } else if (key == 'd' || key == 'D') {
+    right = true;
+  }
+}
+
+void app::scene::FPSCamera::tick(float delta) {
+  if (forwards || backwards || left || right) {
     glm::vec3 displacement(
         sin(rho) * cos(theta),
         cos(rho) * cos(theta),
         sin(theta));
 
-    if (key == 'w' || key == 'W') {
+    if (forwards) {
 
-      position += STEP * displacement;
+      position += STEP * displacement * delta;
 
-    } else if (key == 's' || key == 'S') {
+    } else if (backwards) {
 
-      position -= STEP * displacement;
+      position -= STEP * displacement * delta;
 
-    } else if (key == 'a' || key == 'A' ||
-               key == 'd' || key == 'D') {
+    } else if (left || right) {
 
       // The cross product between the displacement vector (forward facing) and
       // the up vector is the lateral stepping vector, which should be
@@ -70,17 +89,15 @@ void app::scene::FPSCamera::onKeyUp(unsigned char key) {
             -displacement.x,
             0));
 
-      if (key == 'a' || key == 'A') {
-        position -= STEP * lateral;
-      } else if (key == 'd' || key == 'D') {
-        position += STEP * lateral;
+      if (left) {
+
+        position -= STEP * lateral * delta;
+
+      } else if (right) {
+
+        position += STEP * lateral * delta;
+
       }
-
-
-    }
-
-    if (key == 'd' || key == 'D') {
-
     }
   }
 }

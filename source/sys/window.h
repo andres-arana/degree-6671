@@ -16,6 +16,8 @@ namespace sys {
 
       void showCursor();
 
+      void disableKeyRepeatEvents();
+
       void swapBuffers();
 
       float getAspectRatio() const;

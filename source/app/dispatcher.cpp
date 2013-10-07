@@ -19,6 +19,10 @@ void app::Dispatcher::onKeyUp(const sys::input::KeyUpEvent &event) {
   application.getCamera().onKeyUp(event.key);
 }
 
+void app::Dispatcher::onKeyDown(const sys::input::KeyDownEvent &event) {
+  application.getCamera().onKeyDown(event.key);
+}
+
 void app::Dispatcher::onMouseMotion(const sys::input::MouseMotionEvent &event) {
   sys::Window &window = event.context.getWindow();
 
@@ -41,5 +45,20 @@ void app::Dispatcher::onMouseMotion(const sys::input::MouseMotionEvent &event) {
     window.setCursorPosition(middleX, middleY);
   }
 
+}
+
+void app::Dispatcher::onIdle(const sys::input::IdleEvent &event) {
+  if (!previousTime) {
+    previousTime = event.context.getInput().getTime();
+    return;
+  }
+
+  unsigned int currentTime = event.context.getInput().getTime();
+
+  float delta = (float)(currentTime - previousTime) / 1000.0f;
+
+  application.tick(delta);
+
+  previousTime = currentTime;
 }
 

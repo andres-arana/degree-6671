@@ -12,6 +12,8 @@ namespace sys {
 
         Application &getApplication();
 
+        unsigned int getTime();
+
       private:
         friend class sys::Context;
 

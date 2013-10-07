@@ -30,6 +30,8 @@ namespace sys {
 
       virtual void configureWindow(Window& window) = 0;
 
+      virtual void tick(float delta) = 0;
+
       virtual Renderer &getRenderer() = 0;
 
       virtual sys::input::Dispatcher &getDispatcher() = 0;

@@ -17,6 +17,8 @@ namespace app {
     public:
       Renderer();
 
+      void tick(float delta);
+
       virtual void render(sys::Context &context);
 
       virtual void resize(int width, int height);

@@ -36,6 +36,10 @@ void sys::Window::showCursor() {
   glutSetCursor(GLUT_CURSOR_INHERIT);
 }
 
+void sys::Window::disableKeyRepeatEvents() {
+  glutSetKeyRepeat(GLUT_KEY_REPEAT_OFF);
+}
+
 void sys::Window::swapBuffers() {
   glutSwapBuffers();
 }

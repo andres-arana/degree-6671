@@ -24,6 +24,8 @@ namespace app {
 
       virtual void configureWindow(sys::Window& window);
 
+      virtual void tick(float delta);
+
       virtual sys::Renderer &getRenderer();
 
       virtual sys::input::Dispatcher &getDispatcher();

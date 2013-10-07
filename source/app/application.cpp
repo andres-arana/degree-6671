@@ -27,6 +27,11 @@ const char* app::Application::getTitle(){
 
 void app::Application::configureWindow(sys::Window &window) {
   window.hideCursor();
+  window.disableKeyRepeatEvents();
+}
+
+void app::Application::tick(float delta) {
+  renderer->tick(delta);
 }
 
 sys::Renderer &app::Application::getRenderer(){

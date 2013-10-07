@@ -26,6 +26,10 @@ sys::Application &sys::input::Input::getApplication() {
   return context.getApplication();
 }
 
+unsigned int sys::input::Input::getTime() {
+  return glutGet(GLUT_ELAPSED_TIME);
+}
+
 void sys::input::Input::onDisplay() {
   instance->getApplication().getRenderer().render(instance->context);
 }
