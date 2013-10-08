@@ -22,7 +22,7 @@ void app::scene::FPSCamera::onMouseMove(int deltaX, int deltaY) {
   }
 
   if (deltaX) {
-    rho += deltaX * 0.005f;
+    rho += deltaX * 0.001f;
     if (rho > 2 * PI) {
       rho -= 2 * PI;
     } else if (rho < 0) {
@@ -31,7 +31,7 @@ void app::scene::FPSCamera::onMouseMove(int deltaX, int deltaY) {
   }
 
   if (deltaY) {
-    theta -= deltaY * 0.005f;
+    theta -= deltaY * 0.001f;
     if (theta >= PI / 2) {
       theta = PI / 2;
     } else if (theta <= -PI / 2) {
