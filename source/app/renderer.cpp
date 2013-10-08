@@ -8,7 +8,7 @@
 app::Renderer::Renderer() :
   scene(geometries, shaders),
   rotatingCamera(glm::vec3(0, 0, 1.0f), 12.0f, shaders),
-  fpsCamera(glm::vec3(10.0f, 0, 2.0f), shaders) {
+  fpsCamera(glm::vec3(12.0f, 0, 1.0f), shaders) {
     glClearColor(0.1f, 0.1f, 0.2f, 0.0f);
     glShadeModel(GL_SMOOTH);
     glEnable(GL_DEPTH_TEST);

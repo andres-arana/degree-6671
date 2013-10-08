@@ -13,7 +13,8 @@ app::scene::RotatingCamera::RotatingCamera(
     const app::shaders::Register &shaders) :
   shaders(shaders),
   center(center),
-  distance(distance) {
+  distance(distance),
+  rho(PI / 2){
 
   }
 

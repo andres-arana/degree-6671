@@ -11,7 +11,8 @@ app::scene::FPSCamera::FPSCamera(
     const glm::vec3 &position,
     const app::shaders::Register &shaders) :
   shaders(shaders),
-  position(position) {
+  position(position),
+  rho(-PI / 2){
 
   }
 
@@ -49,6 +50,10 @@ void app::scene::FPSCamera::onKeyUp(unsigned char key) {
     left = false;
   } else if (key == 'd' || key == 'D') {
     right = false;
+  } else if (key == 'q' || key == 'Q') {
+    up = false;
+  } else if (key == 'e' || key == 'E') {
+    down = false;
   }
 }
 
@@ -61,6 +66,10 @@ void app::scene::FPSCamera::onKeyDown(unsigned char key) {
     left = true;
   } else if (key == 'd' || key == 'D') {
     right = true;
+  } else if (key == 'q' || key == 'Q') {
+    up = true;
+  } else if (key == 'e' || key == 'E') {
+    down = true;
   }
 }
 
@@ -78,7 +87,7 @@ void app::scene::FPSCamera::tick(float delta) {
       -forwardVector.x,
       0);
 
-  if (forwards || backwards || left || right) {
+  if (forwards || backwards || left || right || up || down) {
     glm::vec3 displacement;
 
     if (forwards) {
@@ -91,6 +100,12 @@ void app::scene::FPSCamera::tick(float delta) {
       displacement -= lateralVector;
     } else if (right) {
       displacement += lateralVector;
+    }
+
+    if (up) {
+      displacement += glm::vec3(0, 0, 1.0f);
+    } else if (down) {
+      displacement -= glm::vec3(0, 0, 1.0f);
     }
 
     position += STEP * delta * glm::normalize(displacement);

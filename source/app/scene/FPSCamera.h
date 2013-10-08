@@ -33,6 +33,8 @@ namespace app {
         bool backwards;
         bool left;
         bool right;
+        bool up;
+        bool down;
     };
   };
 };
