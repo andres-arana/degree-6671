@@ -10,18 +10,16 @@ namespace app {
     class RotatingCamera : public Camera {
       public:
         RotatingCamera(
+            sys::Window &window,
+            sys::Input &input,
             const glm::vec3 &center,
             float distance,
             const app::shaders::Register &shaders);
 
-        virtual void onMouseMove(int deltaX, int deltaY);
-
-        virtual void onKeyUp(unsigned char key);
-
-        virtual void onKeyDown(unsigned char key);
-
+        virtual void doMouseMove(int deltaX, int deltaY);
+        virtual void doKeyUp(unsigned char key);
+        virtual void doKeyDown(unsigned char key);
         virtual void tick(float delta);
-
         virtual void use();
 
       private:
@@ -30,7 +28,6 @@ namespace app {
         float distance;
         float rho;
         float theta;
-
 
         bool forwards;
         bool backwards;

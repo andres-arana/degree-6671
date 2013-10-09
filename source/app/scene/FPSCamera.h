@@ -10,14 +10,16 @@ namespace app {
     class FPSCamera : public Camera {
       public:
         FPSCamera(
+            sys::Window &window,
+            sys::Input &input,
             const glm::vec3 &position,
             const app::shaders::Register &shaders);
 
-        virtual void onMouseMove(int deltaX, int deltaY);
+        virtual void doMouseMove(int deltaX, int deltaY);
 
-        virtual void onKeyUp(unsigned char key);
+        virtual void doKeyUp(unsigned char key);
 
-        virtual void onKeyDown(unsigned char key);
+        virtual void doKeyDown(unsigned char key);
 
         virtual void tick(float delta);
 

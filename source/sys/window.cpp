@@ -1,27 +1,19 @@
 #include "sys/window.h"
-#include "sys/context.h"
-#include <GL/glew.h>
 #include <GL/freeglut.h>
 #include <iostream>
 
-sys::Window::Window(Context &context) {
-  sys::Application &application = context.getApplication();
+sys::Window::Window(const sys::init::Glut &glut, const sys::Params &params) {
+  (void)glut;
 
-  std::cout 
-    << "Creating application window " 
-    << application.getTitle() 
-    << " (" << application.getWidth() << "x" << application.getHeight() << ")" 
+  std::cout
+    << "Creating application window "
+    << params.title
+    << " (" << params.width << "x" << params.height << ")"
     << std::endl;
 
-  glutInitWindowSize(application.getWidth(), application.getHeight());
-  glutInitWindowPosition(application.getPositionX(), application.getPositionY());
+  glutInitWindowSize(params.width, params.height);
   glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
-  id = glutCreateWindow(application.getTitle());
-  application.configureWindow(*this);
-}
-
-bool sys::Window::isIdentifiedBy(unsigned int windowId) const {
-  return windowId == id;
+  id = glutCreateWindow(params.title.c_str());
 }
 
 void sys::Window::toggleFullScreen() {
@@ -34,10 +26,6 @@ void sys::Window::hideCursor() {
 
 void sys::Window::showCursor() {
   glutSetCursor(GLUT_CURSOR_INHERIT);
-}
-
-void sys::Window::disableKeyRepeatEvents() {
-  glutSetKeyRepeat(GLUT_KEY_REPEAT_OFF);
 }
 
 void sys::Window::swapBuffers() {

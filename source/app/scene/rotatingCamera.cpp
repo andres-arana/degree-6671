@@ -8,17 +8,22 @@
 #define STEP 10.0f
 
 app::scene::RotatingCamera::RotatingCamera(
+    sys::Window &window,
+    sys::Input &input,
     const glm::vec3 &center,
     float distance,
     const app::shaders::Register &shaders) :
+  Camera(window, input),
   shaders(shaders),
   center(center),
   distance(distance),
-  rho(PI / 2){
+  rho(PI / 2),
+  forwards(false),
+  backwards(false) {
 
   }
 
-void app::scene::RotatingCamera::onMouseMove(int deltaX, int deltaY) {
+void app::scene::RotatingCamera::doMouseMove(int deltaX, int deltaY) {
   if (deltaX == 0 && deltaY == 0) {
     return;
   }
@@ -43,7 +48,7 @@ void app::scene::RotatingCamera::onMouseMove(int deltaX, int deltaY) {
 }
 
 
-void app::scene::RotatingCamera::onKeyUp(unsigned char key) {
+void app::scene::RotatingCamera::doKeyUp(unsigned char key) {
   if (key == 'w' || key == 'W') {
     forwards = false;
   }
@@ -53,7 +58,7 @@ void app::scene::RotatingCamera::onKeyUp(unsigned char key) {
   }
 }
 
-void app::scene::RotatingCamera::onKeyDown(unsigned char key) {
+void app::scene::RotatingCamera::doKeyDown(unsigned char key) {
   if (key == 'w' || key == 'W') {
     forwards = true;
   }
@@ -85,4 +90,7 @@ void app::scene::RotatingCamera::use() {
         position,
         center,
         glm::vec3(0.0, 0.0, 1.0)));
+
+  shaders.getDiffuseShader().bindProjectionMatrix(glm::infinitePerspective(
+        52.0f, window.getAspectRatio(), 0.1f));
 }

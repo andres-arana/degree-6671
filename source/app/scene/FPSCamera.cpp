@@ -8,15 +8,24 @@
 #define STEP 10.0f
 
 app::scene::FPSCamera::FPSCamera(
+    sys::Window &window,
+    sys::Input &input,
     const glm::vec3 &position,
     const app::shaders::Register &shaders) :
+  Camera(window, input),
   shaders(shaders),
   position(position),
-  rho(-PI / 2){
+  rho(-PI / 2),
+  forwards(false),
+  backwards(false),
+  left(false),
+  right(false),
+  up(false),
+  down(false) {
 
   }
 
-void app::scene::FPSCamera::onMouseMove(int deltaX, int deltaY) {
+void app::scene::FPSCamera::doMouseMove(int deltaX, int deltaY) {
   if (deltaX == 0 && deltaY == 0) {
     return;
   }
@@ -41,7 +50,7 @@ void app::scene::FPSCamera::onMouseMove(int deltaX, int deltaY) {
 }
 
 
-void app::scene::FPSCamera::onKeyUp(unsigned char key) {
+void app::scene::FPSCamera::doKeyUp(unsigned char key) {
   if (key == 'w' || key == 'W') {
     forwards = false;
   } else if (key == 's' || key == 'S') {
@@ -57,7 +66,7 @@ void app::scene::FPSCamera::onKeyUp(unsigned char key) {
   }
 }
 
-void app::scene::FPSCamera::onKeyDown(unsigned char key) {
+void app::scene::FPSCamera::doKeyDown(unsigned char key) {
   if (key == 'w' || key == 'W') {
     forwards = true;
   } else if (key == 's' || key == 'S') {
@@ -123,4 +132,7 @@ void app::scene::FPSCamera::use() {
         position,
         target,
         glm::vec3(0.0, 0.0, 1.0)));
+
+  shaders.getDiffuseShader().bindProjectionMatrix(glm::infinitePerspective(
+        52.0f, window.getAspectRatio(), 0.1f));
 }

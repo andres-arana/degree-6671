@@ -1,59 +1,55 @@
 #include "app/application.h"
-#include "sys/window.h"
 
-app::Application::Application() {
+app::Application::Application(sys::System<app::Application> &system, sys::Window &window, sys::Input &input) :
+  system(system),
+  window(window),
+  input(input),
+  scene(window, input, geometries, shaders) {
+    window.hideCursor();
+    input.disableKeyRepeatEvents();
 
-}
-
-unsigned int app::Application::getWidth(){
-  return 800;
-}
-
-unsigned int app::Application::getHeight(){
-  return 600;
-}
-
-unsigned int app::Application::getPositionX(){
-  return 0;
-}
-
-unsigned int app::Application::getPositionY(){
-  return 0;
-}
-
-const char* app::Application::getTitle(){
-  return "66.71 - Sistemas Graficos - FIUBA";
-}
-
-void app::Application::configureWindow(sys::Window &window) {
-  window.hideCursor();
-  window.disableKeyRepeatEvents();
-}
-
-void app::Application::tick(float delta) {
-  renderer->tick(delta);
-}
-
-sys::Renderer &app::Application::getRenderer(){
-  if (!renderer.get()) {
-    std::auto_ptr<app::Renderer> newRenderer(new app::Renderer());
-    renderer = newRenderer;
+    input.setRenderListener(*this);
+    input.addReshapeListener(*this);
+    input.addKeyUpListener(*this);
+    input.addIdleListener(*this);
   }
-  return *renderer;
+
+void app::Application::onRender() {
+  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+  scene.render();
+
+  window.swapBuffers();
 }
 
-sys::input::Dispatcher &app::Application::getDispatcher(){
-  if (!dispatcher.get()) {
-    std::auto_ptr<app::Dispatcher> newDispatcher(new app::Dispatcher(*this));
-    dispatcher = newDispatcher;
+void app::Application::onReshape(const sys::ReshapeEvent &event) {
+  glViewport(0, 0, (GLsizei) event.width, (GLsizei) event.height);
+}
+
+void app::Application::onKeyUp(const sys::KeyUpEvent &event) {
+  if (event.key == 'f') {
+    window.toggleFullScreen();
+  } else if (event.key == 'c') {
+    scene.toggleCamera();
+  } else if (event.key == 0x1b) {
+    system.exitEventLoop();
   }
-  return *dispatcher;
 }
 
-app::scene::Camera &app::Application::getCamera() {
-  return renderer->getCamera();
+void app::Application::onIdle(const sys::IdleEvent &event) {
+  (void)event;
+
+  if (!previousTime) {
+    previousTime = system.getTime();
+    return;
+  }
+
+  unsigned int currentTime = system.getTime();
+
+  float delta = (currentTime - previousTime) / 1000.0f;
+
+  scene.tick(delta);
+
+  previousTime = currentTime;
 }
 
-void app::Application::toggleCamera() {
-  renderer->toggleCamera();
-}

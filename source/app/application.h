@@ -1,45 +1,41 @@
 #ifndef __APPLICATION_H_INCLUDED__
 #define __APPLICATION_H_INCLUDED__
 
-#include "sys/application.h"
-#include "app/renderer.h"
-#include "app/dispatcher.h"
-#include <memory>
+#include "sys/window.h"
+#include "sys/input.h"
+#include "sys/system.h"
+#include "app/scene/scene.h"
 
 namespace app {
 
-  class Application : public sys::Application {
+  class Application :
+    public sys::RenderListener,
+    public sys::ReshapeListener,
+    public sys::KeyUpListener,
+    public sys::IdleListener {
+
     public:
-      Application();
+      Application(sys::System<Application> &system, sys::Window &window, sys::Input &input);
 
-      virtual unsigned int getWidth();
-
-      virtual unsigned int getHeight();
-
-      virtual unsigned int getPositionX();
-
-      virtual unsigned int getPositionY();
-
-      virtual const char* getTitle();
-
-      virtual void configureWindow(sys::Window& window);
-
-      virtual void tick(float delta);
-
-      virtual sys::Renderer &getRenderer();
-
-      virtual sys::input::Dispatcher &getDispatcher();
-
-      app::scene::Camera &getCamera();
-
-      void toggleCamera();
+      virtual void onRender();
+      virtual void onReshape(const sys::ReshapeEvent &event);
+      virtual void onKeyUp(const sys::KeyUpEvent &event);
+      virtual void onIdle(const sys::IdleEvent &event);
 
     private:
-      std::auto_ptr<Renderer>   renderer;
-      std::auto_ptr<Dispatcher> dispatcher;
-
       Application(const Application &other);
       Application &operator=(const Application &other);
+
+      sys::System<Application> &system;
+      sys::Window &window;
+      sys::Input &input;
+
+      app::shaders::Register shaders;
+      app::geometries::Register geometries;
+
+      app::scene::Scene scene;
+
+      unsigned int previousTime;
   };
 
 };
