@@ -2,19 +2,20 @@
 #include <glm/gtc/matrix_transform.hpp> 
 #include <glm/gtx/transform2.hpp> 
 #include <glm/gtx/projection.hpp>
+#include <glm/gtx/constants.hpp> 
 #include <cmath>
 
-#define PI 3.1415f
 #define STEP 10.0f
 
-app::scene::FPSCamera::FPSCamera(
-    sys::Window &window,
-    sys::Input &input,
-    const glm::vec3 &position,
-    const app::shaders::Register &shaders) :
+using namespace app;
+using namespace app::scene;
+using namespace sys;
+
+FPSCamera::FPSCamera( Window &window, Input &input, const glm::vec3 &position,
+    const shaders::Register &shaders) :
   Camera(window, input, shaders),
   position(position),
-  rho(-PI / 2),
+  rho(-glm::half_pi<float>()),
   forwards(false),
   backwards(false),
   left(false),
@@ -24,32 +25,32 @@ app::scene::FPSCamera::FPSCamera(
 
   }
 
-void app::scene::FPSCamera::doMouseMove(int deltaX, int deltaY) {
+void FPSCamera::doMouseMove(int deltaX, int deltaY) {
   if (deltaX == 0 && deltaY == 0) {
     return;
   }
 
   if (deltaX) {
     rho += deltaX * 0.001f;
-    if (rho > 2 * PI) {
-      rho -= 2 * PI;
+    if (rho > 2 * glm::pi<float>()) {
+      rho -= 2 * glm::pi<float>();
     } else if (rho < 0) {
-      rho += 2 * PI;
+      rho += 2 * glm::pi<float>();
     }
   }
 
   if (deltaY) {
     theta -= deltaY * 0.001f;
-    if (theta >= PI / 2) {
-      theta = PI / 2;
-    } else if (theta <= -PI / 2) {
-      theta = -PI / 2;
+    if (theta >= glm::half_pi<float>()) {
+      theta = glm::half_pi<float>();
+    } else if (theta <= -glm::half_pi<float>()) {
+      theta = -glm::half_pi<float>();
     }
   }
 }
 
 
-void app::scene::FPSCamera::doKeyUp(unsigned char key) {
+void FPSCamera::doKeyUp(unsigned char key) {
   if (key == 'w' || key == 'W') {
     forwards = false;
   } else if (key == 's' || key == 'S') {
@@ -65,7 +66,7 @@ void app::scene::FPSCamera::doKeyUp(unsigned char key) {
   }
 }
 
-void app::scene::FPSCamera::doKeyDown(unsigned char key) {
+void FPSCamera::doKeyDown(unsigned char key) {
   if (key == 'w' || key == 'W') {
     forwards = true;
   } else if (key == 's' || key == 'S') {
@@ -81,7 +82,7 @@ void app::scene::FPSCamera::doKeyDown(unsigned char key) {
   }
 }
 
-void app::scene::FPSCamera::tick(float delta) {
+void FPSCamera::tick(float delta) {
   glm::vec3 forwardVector(
       sin(rho) * cos(theta),
       cos(rho) * cos(theta),
@@ -90,7 +91,7 @@ void app::scene::FPSCamera::tick(float delta) {
   // The cross product between the displacement vector (forward facing) and
   // the up vector is the lateral stepping vector, which should be
   // normalized to ensure proper scaling later
-  glm::vec3 lateralVector = glm::vec3(
+  glm::vec3 lateralVector(
       forwardVector.y,
       -forwardVector.x,
       0);
@@ -120,16 +121,16 @@ void app::scene::FPSCamera::tick(float delta) {
   }
 }
 
-glm::mat4 app::scene::FPSCamera::getViewMatrix() {
+glm::mat4 FPSCamera::getViewMatrix() {
   glm::vec3 target(
       sin(rho) * cos(theta) + position.x,
       cos(rho) * cos(theta) + position.y,
       sin(theta) + position.z);
 
   return glm::lookAt(
-        position,
-        target,
-        glm::vec3(0.0, 0.0, 1.0));
+      position,
+      target,
+      glm::vec3(0.0, 0.0, 1.0));
 }
 
 

@@ -2,9 +2,11 @@
 #include <GL/freeglut.h>
 #include <stdexcept>
 
-sys::Input* sys::Input::instance(0);
+using namespace sys;
 
-sys::Input::Input(const sys::init::Glut &glut, const sys::Params &params) {
+Input* Input::instance(0);
+
+Input::Input(const init::Glut &glut, const Params &params) {
   if (instance) {
     throw std::runtime_error("sys::Input can only be initialized once");
   }
@@ -21,120 +23,99 @@ sys::Input::Input(const sys::init::Glut &glut, const sys::Params &params) {
   glutIdleFunc(onIdle);
 }
 
-void sys::Input::disableKeyRepeatEvents() {
+void Input::disableKeyRepeatEvents() {
   glutSetKeyRepeat(GLUT_KEY_REPEAT_OFF);
 }
 
-void sys::Input::addCloseListener(sys::CloseListener &listener) {
+void Input::addCloseListener(CloseListener &listener) {
   closeListeners.push_back(&listener);
 }
 
-void sys::Input::addReshapeListener(sys::ReshapeListener &listener) {
+void Input::addReshapeListener(ReshapeListener &listener) {
   reshapeListeners.push_back(&listener);
 }
 
-void sys::Input::addMouseListener(sys::MouseListener &listener) {
+void Input::addMouseListener(MouseListener &listener) {
   mouseListeners.push_back(&listener);
 }
 
-void sys::Input::addMouseMotionListener(sys::MouseMotionListener &listener) {
+void Input::addMouseMotionListener(MouseMotionListener &listener) {
   mouseMotionListeners.push_back(&listener);
 }
 
-void sys::Input::addKeyUpListener(sys::KeyUpListener &listener) {
+void Input::addKeyUpListener(KeyUpListener &listener) {
   keyUpListeners.push_back(&listener);
 }
 
-void sys::Input::addKeyDownListener(sys::KeyDownListener &listener) {
+void Input::addKeyDownListener(KeyDownListener &listener) {
   keyDownListeners.push_back(&listener);
 }
 
-void sys::Input::addIdleListener(sys::IdleListener &listener) {
+void Input::addIdleListener(IdleListener &listener) {
   idleListeners.push_back(&listener);
 }
 
-void sys::Input::setRenderListener(sys::RenderListener &listener) {
+void Input::setRenderListener(RenderListener &listener) {
   renderListener = &listener;
 }
 
-void sys::Input::onDisplay() {
+void Input::onDisplay() {
   instance->renderListener->onRender();
 }
 
-void sys::Input::onClose() {
-  sys::CloseEvent event;
+void Input::onClose() {
+  CloseEvent event;
 
-  typedef std::vector<CloseListener *> Vector;
-  Vector &listeners = instance->closeListeners;
-
-  for (Vector::iterator it = listeners.begin(); it != listeners.end(); it++) {
-    (*it)->onClose(event);
+  for (auto &it : instance->closeListeners) {
+    it->onClose(event);
   }
 }
 
-void sys::Input::onReshape(int width, int height) {
-  sys::ReshapeEvent event = { width, height };
+void Input::onReshape(int width, int height) {
+  ReshapeEvent event = { width, height };
 
-  typedef std::vector<ReshapeListener *> Vector;
-  Vector &listeners = instance->reshapeListeners;
-
-  for (Vector::iterator it = listeners.begin(); it != listeners.end(); it++) {
-    (*it)->onReshape(event);
+  for (auto &it : instance->reshapeListeners) {
+    it->onReshape(event);
   }
 }
 
-void sys::Input::onMouse(int button, int updown, int x, int y) {
-  sys::MouseEvent event = { button, updown, x, y };
+void Input::onMouse(int button, int updown, int x, int y) {
+  MouseEvent event = { button, updown, x, y };
 
-  typedef std::vector<MouseListener *> Vector;
-  Vector &listeners = instance->mouseListeners;
-
-  for (Vector::iterator it = listeners.begin(); it != listeners.end(); it++) {
-    (*it)->onMouse(event);
+  for (auto &it : instance->mouseListeners) {
+    it->onMouse(event);
   }
 }
 
-void sys::Input::onMouseMotion(int x, int y) {
-  sys::MouseMotionEvent event = { x, y };
+void Input::onMouseMotion(int x, int y) {
+  MouseMotionEvent event = { x, y };
 
-  typedef std::vector<MouseMotionListener *> Vector;
-  Vector &listeners = instance->mouseMotionListeners;
-
-  for (Vector::iterator it = listeners.begin(); it != listeners.end(); it++) {
-    (*it)->onMouseMotion(event);
+  for (auto &it : instance->mouseMotionListeners) {
+    it->onMouseMotion(event);
   }
 }
 
-void sys::Input::onKeyUp(unsigned char key, int x, int y) {
-  sys::KeyUpEvent event = { key, x, y };
+void Input::onKeyUp(unsigned char key, int x, int y) {
+  KeyUpEvent event = { key, x, y };
 
-  typedef std::vector<KeyUpListener *> Vector;
-  Vector &listeners = instance->keyUpListeners;
-
-  for (Vector::iterator it = listeners.begin(); it != listeners.end(); it++) {
-    (*it)->onKeyUp(event);
+  for (auto &it : instance->keyUpListeners) {
+    it->onKeyUp(event);
   }
 }
 
-void sys::Input::onKeyDown(unsigned char key, int x, int y) {
-  sys::KeyDownEvent event = { key, x, y };
+void Input::onKeyDown(unsigned char key, int x, int y) {
+  KeyDownEvent event = { key, x, y };
 
-  typedef std::vector<KeyDownListener *> Vector;
-  Vector &listeners = instance->keyDownListeners;
-
-  for (Vector::iterator it = listeners.begin(); it != listeners.end(); it++) {
-    (*it)->onKeyDown(event);
+  for (auto &it : instance->keyDownListeners) {
+    it->onKeyDown(event);
   }
 }
 
-void sys::Input::onIdle() {
-  sys::IdleEvent event;
+void Input::onIdle() {
+  IdleEvent event;
 
-  typedef std::vector<IdleListener *> Vector;
-  Vector &listeners = instance->idleListeners;
-
-  for (Vector::iterator it = listeners.begin(); it != listeners.end(); it++) {
-    (*it)->onIdle(event);
+  for (auto &it : instance->idleListeners) {
+    it->onIdle(event);
   }
 
   glutPostRedisplay();

@@ -3,7 +3,11 @@
 #include <glm/gtx/transform2.hpp> 
 #include <glm/gtx/projection.hpp>
 
-app::scene::Camera::Camera(sys::Window &window, sys::Input &input, const app::shaders::Register &shaders) :
+using namespace app;
+using namespace app::scene;
+using namespace sys;
+
+Camera::Camera(Window &window, Input &input, const shaders::Register &shaders) :
   window(window),
   shaders(shaders) {
     input.addMouseMotionListener(*this);
@@ -11,7 +15,7 @@ app::scene::Camera::Camera(sys::Window &window, sys::Input &input, const app::sh
     input.addKeyDownListener(*this);
   }
 
-void app::scene::Camera::onMouseMotion(const sys::MouseMotionEvent &event) {
+void Camera::onMouseMotion(const MouseMotionEvent &event) {
   int middleX = window.getWidth() / 2;
   int middleY = window.getHeight() / 2;
 
@@ -32,16 +36,16 @@ void app::scene::Camera::onMouseMotion(const sys::MouseMotionEvent &event) {
   }
 }
 
-void app::scene::Camera::onKeyUp(const sys::KeyUpEvent &event) {
+void Camera::onKeyUp(const KeyUpEvent &event) {
   doKeyUp(event.key);
 }
 
-void app::scene::Camera::onKeyDown(const sys::KeyDownEvent &event) {
+void Camera::onKeyDown(const KeyDownEvent &event) {
   doKeyDown(event.key);
 }
 
-glm::mat4 app::scene::Camera::use() {
-  glm::mat4 viewMatrix = getViewMatrix();
+glm::mat4 Camera::use() {
+  auto viewMatrix = getViewMatrix();
   shaders.getDiffuseShader().bindViewMatrix(viewMatrix);
   shaders.getDiffuseShader().bindProjectionMatrix(glm::infinitePerspective(
         52.0f, window.getAspectRatio(), 0.1f));

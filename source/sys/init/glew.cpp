@@ -3,7 +3,10 @@
 #include <stdexcept>
 #include <GL/glew.h>
 
-sys::init::Glew::Glew(const sys::Window &window, const sys::Params &params) {
+using namespace sys;
+using namespace sys::init;
+
+Glew::Glew(const Window &window, const Params &params) {
   (void)window;
   (void)params;
 

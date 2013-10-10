@@ -2,7 +2,9 @@
 #include <GL/freeglut.h>
 #include <iostream>
 
-sys::Window::Window(const sys::init::Glut &glut, const sys::Params &params) {
+using namespace sys;
+
+Window::Window(const init::Glut &glut, const Params &params) {
   (void)glut;
 
   std::cout
@@ -16,37 +18,37 @@ sys::Window::Window(const sys::init::Glut &glut, const sys::Params &params) {
   id = glutCreateWindow(params.title.c_str());
 }
 
-void sys::Window::toggleFullScreen() {
+void Window::toggleFullScreen() {
   glutFullScreenToggle();
 }
 
-void sys::Window::hideCursor() {
+void Window::hideCursor() {
   glutSetCursor(GLUT_CURSOR_NONE);
 }
 
-void sys::Window::showCursor() {
+void Window::showCursor() {
   glutSetCursor(GLUT_CURSOR_INHERIT);
 }
 
-void sys::Window::swapBuffers() {
+void Window::swapBuffers() {
   glutSwapBuffers();
 }
 
-float sys::Window::getAspectRatio() const {
+float Window::getAspectRatio() const {
   float width = getWidth();
   float height = getHeight();
 
   return width / height;
 }
 
-int sys::Window::getWidth() const {
+int Window::getWidth() const {
   return glutGet(GLUT_WINDOW_WIDTH);
 }
 
-int sys::Window::getHeight() const {
+int Window::getHeight() const {
   return glutGet(GLUT_WINDOW_HEIGHT);
 }
 
-void sys::Window::setCursorPosition(int x, int y) {
+void Window::setCursorPosition(int x, int y) {
   glutWarpPointer(x, y);
 }

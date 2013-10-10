@@ -1,14 +1,16 @@
 #include "sys/shaders/shaderParam.h"
 
-sys::shaders::ShaderParam::ShaderParam(GLint handle) :
+using namespace sys::shaders;
+
+ShaderParam::ShaderParam(GLint handle) :
   handle(handle) {
 
 }
 
-bool sys::shaders::ShaderParam::isAvailable() const {
+bool ShaderParam::isAvailable() const {
   return handle >= 0;
 }
 
-GLuint sys::shaders::ShaderParam::getHandle() const {
+GLuint ShaderParam::getHandle() const {
   return handle;
 }

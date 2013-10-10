@@ -1,10 +1,12 @@
 #include "app/shaders/register.h"
 
+using namespace app::shaders;
 
-app::shaders::Register::Register() {
+
+Register::Register() {
 
 }
 
-const app::shaders::DiffuseShader &app::shaders::Register::getDiffuseShader() const {
+const DiffuseShader &Register::getDiffuseShader() const {
   return diffuseShader;
 }

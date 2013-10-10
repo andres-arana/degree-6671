@@ -3,12 +3,13 @@
 #include <iostream>
 #include <stdexcept>
 
-sys::shaders::ShaderProgram::ShaderProgram(
-    sys::shaders::VertexShader *vertexShader,
-    sys::shaders::FragmentShader *fragmentShader) :
+using namespace sys::shaders;
+
+ShaderProgram::ShaderProgram(
+    VertexShader *vertexShader,
+    FragmentShader *fragmentShader) :
   vertexShader(vertexShader),
-  fragmentShader(fragmentShader)
-{
+  fragmentShader(fragmentShader) {
 
   handle = glCreateProgram();
   if (0 == handle) 
@@ -37,15 +38,15 @@ sys::shaders::ShaderProgram::ShaderProgram(
   }
 }
 
-void sys::shaders::ShaderProgram::use() const {
+void ShaderProgram::use() const {
   glUseProgram(handle);
 }
 
-sys::shaders::ShaderParam sys::shaders::ShaderProgram::getUniformParam(const char* name) const {
+ShaderParam ShaderProgram::getUniformParam(const char* name) const {
   GLint paramHandle = glGetUniformLocation(handle, name);
-  return sys::shaders::ShaderParam(paramHandle);
+  return ShaderParam(paramHandle);
 }
 
-sys::shaders::ShaderProgram::~ShaderProgram() {
+ShaderProgram::~ShaderProgram() {
 
 }

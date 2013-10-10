@@ -3,14 +3,17 @@
 #include <string>
 #include <iostream>
 
-sys::init::Info::Info(const sys::Params &params) {
+using namespace sys;
+using namespace sys::init;
+
+Info::Info(const Params &params) {
   (void) params;
 
-  const GLubyte* rawGLVersion = glGetString(GL_VERSION);
+  auto rawGLVersion = glGetString(GL_VERSION);
   std::string glVersion((char*)rawGLVersion);
   std::cout << "Using OpenGL version " << glVersion.c_str() << std::endl;
 
-  const GLubyte* rawShaderVersion = glGetString(GL_SHADING_LANGUAGE_VERSION_ARB);
+  auto rawShaderVersion = glGetString(GL_SHADING_LANGUAGE_VERSION_ARB);
   std::string shaderVersion((char*)rawShaderVersion);
   std::cout << "Using shading language version " << shaderVersion.c_str() << std::endl;
 }

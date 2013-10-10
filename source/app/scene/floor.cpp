@@ -1,14 +1,17 @@
 #include "app/scene/floor.h"
 
-app::scene::Floor::Floor(
-    const app::geometries::Register &geometries, 
-    const app::shaders::Register &shaders) :
+using namespace app;
+using namespace app::scene;
+
+Floor::Floor(
+    const geometries::Register &geometries, 
+    const shaders::Register &shaders) :
   geometries(geometries),
   shader(shaders.getDiffuseShader()) {
 
   }
 
-void app::scene::Floor::render(const glm::mat4 &modelMatrix) {
+void Floor::render(const glm::mat4 &modelMatrix) {
   shader.bindDiffuseReflectivity(glm::vec3(0.2f, 0.2f, 0.2f));
   shader.bindAmbientReflectivity(glm::vec3(1, 1, 1));
   geometries.getGrid().render(modelMatrix, shader);

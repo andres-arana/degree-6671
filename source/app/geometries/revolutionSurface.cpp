@@ -3,6 +3,7 @@
 #include <glm/gtx/rotate_vector.hpp>
 
 using namespace app::geometries;
+using namespace sys::shaders;
 
 RevolutionSurface::RevolutionSurface(int angularSections, int
     longitudinalSections, const Function &f) {
@@ -47,7 +48,7 @@ RevolutionSurface::RevolutionSurface(int angularSections, int
 
 void RevolutionSurface::render(
     const glm::mat4 &modelMatrix,
-    const sys::shaders::ShaderProgram &shader) const {
+    const ShaderProgram &shader) const {
 
   shader.use();
   shader.bindModelMatrix(modelMatrix);

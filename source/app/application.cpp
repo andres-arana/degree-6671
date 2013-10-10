@@ -1,6 +1,9 @@
 #include "app/application.h"
 
-app::Application::Application(sys::System<app::Application> &system, sys::Window &window, sys::Input &input) :
+using namespace app;
+using namespace sys;
+
+Application::Application(System<Application> &system, Window &window, Input &input) :
   system(system),
   window(window),
   input(input),
@@ -14,7 +17,7 @@ app::Application::Application(sys::System<app::Application> &system, sys::Window
     input.addIdleListener(*this);
   }
 
-void app::Application::onRender() {
+void Application::onRender() {
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
   scene.render();
@@ -22,11 +25,11 @@ void app::Application::onRender() {
   window.swapBuffers();
 }
 
-void app::Application::onReshape(const sys::ReshapeEvent &event) {
+void Application::onReshape(const ReshapeEvent &event) {
   glViewport(0, 0, (GLsizei) event.width, (GLsizei) event.height);
 }
 
-void app::Application::onKeyUp(const sys::KeyUpEvent &event) {
+void Application::onKeyUp(const KeyUpEvent &event) {
   if (event.key == 'f') {
     window.toggleFullScreen();
   } else if (event.key == 'c') {
@@ -36,7 +39,7 @@ void app::Application::onKeyUp(const sys::KeyUpEvent &event) {
   }
 }
 
-void app::Application::onIdle(const sys::IdleEvent &event) {
+void Application::onIdle(const IdleEvent &event) {
   (void)event;
 
   if (!previousTime) {
@@ -44,7 +47,7 @@ void app::Application::onIdle(const sys::IdleEvent &event) {
     return;
   }
 
-  unsigned int currentTime = system.getTime();
+  auto currentTime = system.getTime();
 
   float delta = (currentTime - previousTime) / 1000.0f;
 

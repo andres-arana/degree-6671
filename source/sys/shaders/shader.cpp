@@ -4,7 +4,9 @@
 #include <fstream>
 #include <vector>
 
-sys::shaders::Shader::Shader(GLuint type, const std::string &file) {
+using namespace sys::shaders;
+
+Shader::Shader(GLuint type, const std::string &file) {
   // Create shader handle
   handle = glCreateShader(type);
   if (0 == handle) throw std::runtime_error("Unable to create shader handle");
@@ -39,10 +41,10 @@ sys::shaders::Shader::Shader(GLuint type, const std::string &file) {
   }
 }
 
-GLuint sys::shaders::Shader::getHandle() const {
+GLuint Shader::getHandle() const {
   return handle;
 }
 
-sys::shaders::Shader::~Shader() {
+Shader::~Shader() {
 
 }

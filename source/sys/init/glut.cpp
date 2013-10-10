@@ -1,19 +1,22 @@
 #include "sys/init/glut.h"
 #include <GL/freeglut.h>
 
-sys::init::Glut::Glut(const sys::Params &params) {
+using namespace sys;
+using namespace sys::init;
+
+Glut::Glut(const Params &params) {
   glutInit(params.argc, params.argv);
 }
 
-void sys::init::Glut::mainLoop() {
+void Glut::mainLoop() {
   glutMainLoop();
 }
 
-void sys::init::Glut::leaveMainLoop() {
+void Glut::leaveMainLoop() {
   glutLeaveMainLoop();
 }
 
-unsigned int sys::init::Glut::getTime() const {
+unsigned int Glut::getTime() const {
   return glutGet(GLUT_ELAPSED_TIME);
 }
 

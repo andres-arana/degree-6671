@@ -1,6 +1,0 @@
-#ifndef __APP_MATH_CONSTANTS_H_INCLUDED__
-#define __APP_MATH_CONSTANTS_H_INCLUDED__
-
-#define PI 3.14159f
-
-#endif
