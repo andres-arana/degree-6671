@@ -25,15 +25,16 @@ Scene::Scene(
   }
 
 void Scene::render() {
+  auto modelMatrix = glm::mat4(1.0f);
   auto viewMatrix = currentCamera->use();
 
-  auto position = viewMatrix * glm::vec4(5, 2, 0, 1);
+  auto lightMatrix = glm::rotate(modelMatrix, rotation, glm::vec3(0, 0, 1));
+  lightMatrix = glm::translate(lightMatrix, glm::vec3(5, 0, 1));
 
-  shaders.getDiffuseShader().bindLightPosition(position);
+  shaders.getDiffuseShader().bindLightPosition(viewMatrix * lightMatrix * glm::vec4(0, 0, 0, 1));
   shaders.getDiffuseShader().bindDiffuseIntensity(glm::vec3(1.0f, 1.0f, 1.0f));
   shaders.getDiffuseShader().bindAmbientIntensity(glm::vec3(0.5f, 0.5f, 0.5f));
 
-  auto modelMatrix = glm::mat4(1.0f);
   floor.render(modelMatrix);
 
   shaders.getDiffuseShader().bindDiffuseReflectivity(glm::vec3(0.2f, 0.2f, 0.0f));
@@ -43,14 +44,12 @@ void Scene::render() {
 
   shaders.getDiffuseShader().bindDiffuseReflectivity(glm::vec3(0, 0, 0));
   shaders.getDiffuseShader().bindAmbientReflectivity(glm::vec3(10, 10, 10));
-  m = glm::translate(modelMatrix, glm::vec3(5, 2, 0));
-  m = glm::rotate(m, 90.0f, glm::vec3(0, 1, 0));
-  m = glm::translate(m, glm::vec3(-0.5f, 0, 0));
-  geometries.getLightBulb().render(m, shaders.getDiffuseShader());
+  geometries.getLightBulb().render(lightMatrix, shaders.getDiffuseShader());
 }
 
 void Scene::tick(float delta) {
   currentCamera->tick(delta);
+  rotation += 50 * delta;
 }
 
 void app::scene::Scene::toggleCamera() {
