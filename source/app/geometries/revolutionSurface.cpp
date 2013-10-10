@@ -14,7 +14,8 @@ RevolutionSurface::RevolutionSurface(int angularSections, int
   for (int i = 0; i < longitudinalSections; i++) {
     float x = i * longitudinalIncrement;
     glm::vec3 original = f.apply(x);
-    glm::vec3 originalNormal = f.applyDerivate(x);
+    glm::vec3 originalTangent = f.applyDerivate(x);
+    glm::vec3 originalNormal = glm::normalize(glm::vec3(-originalTangent.y, originalTangent.x, 0));
 
     for (int j = 0; j < angularSections; j++) {
       float angle = j * angularIncrement;
@@ -44,13 +45,16 @@ RevolutionSurface::RevolutionSurface(int angularSections, int
   }
 }
 
-void RevolutionSurface::render(const glm::mat4 &modelMatrix, const
-    sys::shaders::ShaderProgram &shader) const {
+void RevolutionSurface::render(
+    const glm::mat4 &viewMatrix, 
+    const glm::mat4 &modelMatrix, 
+    const sys::shaders::ShaderProgram &shader) const {
 
-  glm::mat3 normalMatrix = glm::mat3 ( 1.0f );
-  shader.bindNormalMatrix(normalMatrix);
-
+  shader.use();
   shader.bindModelMatrix(modelMatrix);
+
+  glm::mat3 normalMatrix(viewMatrix * modelMatrix);
+  shader.bindNormalMatrix(normalMatrix);
 
   glEnableClientState(GL_VERTEX_ARRAY);
   glEnableClientState(GL_NORMAL_ARRAY);

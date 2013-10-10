@@ -15,9 +15,13 @@ namespace app {
 
         void bindLightPosition(const glm::vec4 &lightPos) const;
 
-        void bindLightColor(const glm::vec3 &lightInt) const;
+        void bindDiffuseIntensity(const glm::vec3 &lightInt) const;
 
-        void bindLightReflectivity(const glm::vec3 &lightInt) const;
+        void bindDiffuseReflectivity(const glm::vec3 &lightInt) const;
+
+        void bindAmbientIntensity(const glm::vec3 &lightInt) const;
+
+        void bindAmbientReflectivity(const glm::vec3 &lightInt) const;
 
         virtual void bindNormalMatrix(const glm::mat3 &normalMatrix) const;
 

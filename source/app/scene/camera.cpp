@@ -1,7 +1,11 @@
 #include "app/scene/camera.h"
+#include <glm/gtc/matrix_transform.hpp> 
+#include <glm/gtx/transform2.hpp> 
+#include <glm/gtx/projection.hpp>
 
-app::scene::Camera::Camera(sys::Window &window, sys::Input &input) :
-  window(window) {
+app::scene::Camera::Camera(sys::Window &window, sys::Input &input, const app::shaders::Register &shaders) :
+  window(window),
+  shaders(shaders) {
     input.addMouseMotionListener(*this);
     input.addKeyUpListener(*this);
     input.addKeyDownListener(*this);
@@ -34,4 +38,13 @@ void app::scene::Camera::onKeyUp(const sys::KeyUpEvent &event) {
 
 void app::scene::Camera::onKeyDown(const sys::KeyDownEvent &event) {
   doKeyDown(event.key);
+}
+
+glm::mat4 app::scene::Camera::use() {
+  glm::mat4 viewMatrix = getViewMatrix();
+  shaders.getDiffuseShader().bindViewMatrix(viewMatrix);
+  shaders.getDiffuseShader().bindProjectionMatrix(glm::infinitePerspective(
+        52.0f, window.getAspectRatio(), 0.1f));
+
+  return viewMatrix;
 }

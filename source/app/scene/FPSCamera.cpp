@@ -12,8 +12,7 @@ app::scene::FPSCamera::FPSCamera(
     sys::Input &input,
     const glm::vec3 &position,
     const app::shaders::Register &shaders) :
-  Camera(window, input),
-  shaders(shaders),
+  Camera(window, input, shaders),
   position(position),
   rho(-PI / 2),
   forwards(false),
@@ -121,18 +120,16 @@ void app::scene::FPSCamera::tick(float delta) {
   }
 }
 
-void app::scene::FPSCamera::use() {
+glm::mat4 app::scene::FPSCamera::getViewMatrix() {
   glm::vec3 target(
       sin(rho) * cos(theta) + position.x,
       cos(rho) * cos(theta) + position.y,
       sin(theta) + position.z);
 
-  shaders.getDiffuseShader().bindViewMatrix(
-      glm::lookAt(
+  return glm::lookAt(
         position,
         target,
-        glm::vec3(0.0, 0.0, 1.0)));
-
-  shaders.getDiffuseShader().bindProjectionMatrix(glm::infinitePerspective(
-        52.0f, window.getAspectRatio(), 0.1f));
+        glm::vec3(0.0, 0.0, 1.0));
 }
+
+

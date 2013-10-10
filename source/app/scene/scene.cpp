@@ -11,8 +11,8 @@ app::scene::Scene::Scene(
   fpsCamera(window, input, glm::vec3(12.0f, 0, 1.0f), shaders),
   rotatingCamera(window, input, glm::vec3(0, 0, 1.0f), 12.0f, shaders),
   floor(geometries, shaders),
-  arm(geometries, shaders),
-  currentCamera(&rotatingCamera) {
+  currentCamera(&rotatingCamera),
+  rotation(0) {
 
     glClearColor(0.1f, 0.1f, 0.2f, 0.0f);
     glShadeModel(GL_SMOOTH);
@@ -21,30 +21,23 @@ app::scene::Scene::Scene(
   }
 
 void app::scene::Scene::render() {
-  currentCamera->use();
+  glm::mat4 viewMatrix = currentCamera->use();
 
-  shaders.getDiffuseShader().bindLightPosition(glm::vec4(8.0f, 0.0f, 3.0f, 1.0f));
-  shaders.getDiffuseShader().bindLightColor(glm::vec3(2.0f, 2.0f, 2.0f));
+  shaders.getDiffuseShader().bindLightPosition(glm::vec4(0.0f, 0.0f, 0.0f, 0.0f));
+  shaders.getDiffuseShader().bindDiffuseIntensity(glm::vec3(1.0f, 1.0f, 1.0f));
+  shaders.getDiffuseShader().bindAmbientIntensity(glm::vec3(0.5f, 0.5f, 0.5f));
 
   glm::mat4 modelMatrix = glm::mat4(1.0f);
   floor.render(modelMatrix);
 
-
-  glm::mat4 m = glm::translate(modelMatrix, glm::vec3(0.0f, 0.0f, 5.0f));
-  m = glm::scale(m, glm::vec3(2.0f, 2.0f, 2.0f));
-  geometries.getRevolutionSurface().render(m, shaders.getDiffuseShader());
-
-  m = glm::translate(modelMatrix, glm::vec3(0.0f, 5.0f, 2.0f));
-  m = glm::scale(m, glm::vec3(2.0f, 2.0f, 2.0f));
-  geometries.getRevolutionSurface().render(m, shaders.getDiffuseShader());
-
-  m = glm::translate(modelMatrix, glm::vec3(0.0f, -5.0f, 2.0f));
-  m = glm::scale(m, glm::vec3(2.0f, 2.0f, 2.0f));
-  geometries.getRevolutionSurface().render(m, shaders.getDiffuseShader());
+  shaders.getDiffuseShader().bindDiffuseReflectivity(glm::vec3(1.0f, 1.0f, 1.0f));
+  shaders.getDiffuseShader().bindAmbientReflectivity(glm::vec3(1.0f, 1.0f, 1.0f));
+  geometries.getRevolutionSurface().render(viewMatrix, modelMatrix, shaders.getDiffuseShader());
 }
 
 void app::scene::Scene::tick(float delta) {
   currentCamera->tick(delta);
+  rotation += 30 * delta;
 }
 
 void app::scene::Scene::toggleCamera() {

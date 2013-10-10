@@ -9,7 +9,7 @@ int main(int argc, char** argv) {
   params.argv = argv;
   params.width = 800;
   params.height = 600;
-  params.title = "66.71 - Sistemas Gráficos - FIUBA";
+  params.title = "66.71 - Sistemas Graficos - FIUBA";
 
   sys::System<app::Application> system(params);
 

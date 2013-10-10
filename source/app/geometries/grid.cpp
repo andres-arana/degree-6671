@@ -32,9 +32,6 @@ void app::geometries::Grid::render(
     const glm::mat4 &modelMatrix, 
     const sys::shaders::ShaderProgram &shader) const {
 
-  glm::mat3 normalMatrix = glm::mat3(1.0f);
-  shader.bindNormalMatrix(normalMatrix);
-
   shader.bindModelMatrix(modelMatrix);
 
   glEnableClientState(GL_VERTEX_ARRAY);

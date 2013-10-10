@@ -6,7 +6,6 @@
 #include "app/geometries/register.h"
 #include "app/shaders/register.h"
 #include "app/scene/floor.h"
-#include "app/scene/arm.h"
 #include "app/scene/FPSCamera.h"
 #include "app/scene/rotatingCamera.h"
 
@@ -33,9 +32,10 @@ namespace app {
         FPSCamera fpsCamera;
         RotatingCamera rotatingCamera;
         Floor floor;
-        Arm arm;
 
         Camera *currentCamera;
+
+        float rotation;
     };
   };
 };

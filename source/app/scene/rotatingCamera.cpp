@@ -13,8 +13,7 @@ app::scene::RotatingCamera::RotatingCamera(
     const glm::vec3 &center,
     float distance,
     const app::shaders::Register &shaders) :
-  Camera(window, input),
-  shaders(shaders),
+  Camera(window, input, shaders),
   center(center),
   distance(distance),
   rho(PI / 2),
@@ -79,18 +78,14 @@ void app::scene::RotatingCamera::tick(float delta) {
   }
 }
 
-void app::scene::RotatingCamera::use() {
+glm::mat4 app::scene::RotatingCamera::getViewMatrix() {
   glm::vec3 position(
       distance * sin(rho) * cos(theta) + center.x,
       distance * cos(rho) * cos(theta) + center.y,
       distance * sin(theta) + center.z);
 
-  shaders.getDiffuseShader().bindViewMatrix(
-      glm::lookAt(
+  return glm::lookAt(
         position,
         center,
-        glm::vec3(0.0, 0.0, 1.0)));
-
-  shaders.getDiffuseShader().bindProjectionMatrix(glm::infinitePerspective(
-        52.0f, window.getAspectRatio(), 0.1f));
+        glm::vec3(0.0, 0.0, 1.0));
 }

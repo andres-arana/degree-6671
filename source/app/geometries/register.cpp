@@ -6,16 +6,16 @@ class Slope : public app::geometries::Function {
     virtual glm::vec3 apply(float x) const {
       return
         (x * x - 2 * x + 1) * glm::vec3(0, 0, 0) +
-        (-2 * x * x + 2 * x) * glm::vec3(0.5f, 3.0f, 0) +
-        (x * x) * glm::vec3(4.0f, 0, 0);
+        (-2 * x * x + 2 * x) * glm::vec3(0.5f, 3, 0) +
+        (x * x) * glm::vec3(4, 0.5f, 0);
 
     };
 
     virtual glm::vec3 applyDerivate(float x) const {
       return
         (2 * x - 2) * glm::vec3(0, 0, 0) +
-        (-4 * x + 2) * glm::vec3(0.5f, 3.0f, 0) +
-        (2 * x) * glm::vec3(4.0f, 0, 0);
+        (-4 * x + 2) * glm::vec3(0.5f, 3, 0) +
+        (2 * x) * glm::vec3(4, 0.5f, 0);
     };
 };
 

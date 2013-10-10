@@ -1,10 +1,12 @@
-#version 110
+#version 130
 
 varying vec3 LightIntensity;
 
 uniform vec4 LightPosition; // Light position in eye coords.
 uniform vec3 Kd; // Diffuse reflectivity
 uniform vec3 Ld; // Light source intensity
+uniform vec3 La; // Ambient intensity
+uniform vec3 Ka; // Ambient reflectivity
 
 uniform mat4 ModelMatrix;
 uniform mat4 ViewMatrix;
@@ -19,7 +21,7 @@ void main()
   vec3 s = normalize(vec3(LightPosition - eyeCoords));
 
   // The diffuse shading equation
-  LightIntensity =  Ld * Kd * max( dot( s, tnorm ), 0.0 );
+  LightIntensity =  Ld * Kd * max( dot( s, tnorm ), 0.0 ) + La * Ka;
 
   // Convert position to clip coordinates and pass along
   gl_Position = ProjectionMatrix * ViewMatrix * ModelMatrix * gl_Vertex;

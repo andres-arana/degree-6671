@@ -10,6 +10,6 @@ app::scene::Floor::Floor(
 
 void app::scene::Floor::render(const glm::mat4 &modelMatrix) {
   shader.use();
-  shader.bindLightReflectivity(glm::vec3(0.2f, 0.2f, 0.2f));
+  shader.bindDiffuseReflectivity(glm::vec3(0.2f, 0.2f, 0.2f));
   geometries.getGrid().render(modelMatrix, shader);
 }
