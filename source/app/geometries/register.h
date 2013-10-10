@@ -4,6 +4,7 @@
 #include "app/geometries/grid.h"
 #include "app/geometries/cube.h"
 #include "app/geometries/sphere.h"
+#include "app/geometries/revolutionSurface.h"
 
 namespace app {
   namespace geometries {
@@ -17,10 +18,13 @@ namespace app {
 
         const Sphere &getSphere() const;
 
+        const RevolutionSurface &getRevolutionSurface() const;
+
       private:
         Cube cube;
         Grid grid;
         Sphere sphere;
+        RevolutionSurface revolutionSurface;
     };
   };
 };

@@ -1,4 +1,5 @@
 #include "app/scene/scene.h"
+#include <glm/gtc/matrix_transform.hpp> 
 
 app::scene::Scene::Scene(
     sys::Window &window,
@@ -27,7 +28,19 @@ void app::scene::Scene::render() {
 
   glm::mat4 modelMatrix = glm::mat4(1.0f);
   floor.render(modelMatrix);
-  arm.render(modelMatrix);
+
+
+  glm::mat4 m = glm::translate(modelMatrix, glm::vec3(0.0f, 0.0f, 5.0f));
+  m = glm::scale(m, glm::vec3(2.0f, 2.0f, 2.0f));
+  geometries.getRevolutionSurface().render(m, shaders.getDiffuseShader());
+
+  m = glm::translate(modelMatrix, glm::vec3(0.0f, 5.0f, 2.0f));
+  m = glm::scale(m, glm::vec3(2.0f, 2.0f, 2.0f));
+  geometries.getRevolutionSurface().render(m, shaders.getDiffuseShader());
+
+  m = glm::translate(modelMatrix, glm::vec3(0.0f, -5.0f, 2.0f));
+  m = glm::scale(m, glm::vec3(2.0f, 2.0f, 2.0f));
+  geometries.getRevolutionSurface().render(m, shaders.getDiffuseShader());
 }
 
 void app::scene::Scene::tick(float delta) {
