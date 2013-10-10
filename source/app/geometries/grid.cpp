@@ -32,6 +32,7 @@ void app::geometries::Grid::render(
     const glm::mat4 &modelMatrix, 
     const sys::shaders::ShaderProgram &shader) const {
 
+  shader.use();
   shader.bindModelMatrix(modelMatrix);
 
   glEnableClientState(GL_VERTEX_ARRAY);

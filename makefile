@@ -24,7 +24,7 @@ clean:
 
 build/obj/%.o : source/%.cpp
 	mkdir -p $(dir $@)
-	g++ -O3 -g3 -Wall -Wextra -c -fmessage-length=0 -Isource -MD -MP -o"$@" "$<" 
+	g++ -std=c++11 -O3 -g3 -Wall -Wextra -c -fmessage-length=0 -Isource -MD -MP -o"$@" "$<" 
 
 -include $(ALL_DEPS)
 

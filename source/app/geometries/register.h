@@ -2,8 +2,6 @@
 #define __APP_GEOMETRIES_REGISTER_H_INCLUDED__
 
 #include "app/geometries/grid.h"
-#include "app/geometries/cube.h"
-#include "app/geometries/sphere.h"
 #include "app/geometries/revolutionSurface.h"
 
 namespace app {
@@ -12,19 +10,16 @@ namespace app {
       public:
         Register();
 
-        const Cube &getCube() const;
-
         const Grid &getGrid() const;
-
-        const Sphere &getSphere() const;
 
         const RevolutionSurface &getRevolutionSurface() const;
 
+        const RevolutionSurface &getLightBulb() const;
+
       private:
-        Cube cube;
         Grid grid;
-        Sphere sphere;
         RevolutionSurface revolutionSurface;
+        RevolutionSurface lightBulb;
     };
   };
 };

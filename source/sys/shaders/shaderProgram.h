@@ -15,8 +15,6 @@ namespace sys {
       public:
         void use() const;
 
-        virtual void bindNormalMatrix(const glm::mat3 &normalMatrix) const = 0;
-
         virtual void bindModelMatrix(const glm::mat4 &modelMatrix) const = 0;
 
         virtual ~ShaderProgram();

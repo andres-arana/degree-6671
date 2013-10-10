@@ -59,13 +59,6 @@ void app::shaders::DiffuseShader::bindAmbientReflectivity(const glm::vec3 &light
   }
 }
 
-void app::shaders::DiffuseShader::bindNormalMatrix(const glm::mat3 &normalMatrix) const {
-  sys::shaders::ShaderParam param = getUniformParam("NormalMatrix");
-  if (param.isAvailable()) {
-    glUniformMatrix3fv(param.getHandle(), 1, GL_FALSE, &normalMatrix[0][0]);
-  }
-}
-
 void app::shaders::DiffuseShader::bindModelMatrix(const glm::mat4 &modelMatrix) const {
   sys::shaders::ShaderParam param = getUniformParam("ModelMatrix");
   if (param.isAvailable()) {

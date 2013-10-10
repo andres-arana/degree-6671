@@ -21,7 +21,6 @@ namespace app {
         RevolutionSurface(int angularSections, int longitudinalSections, const Function &f);
 
         void render(
-            const glm::mat4 &viewMatrix,
             const glm::mat4 &modelMatrix,
             const sys::shaders::ShaderProgram &shader) const;
 

@@ -23,21 +23,30 @@ app::scene::Scene::Scene(
 void app::scene::Scene::render() {
   glm::mat4 viewMatrix = currentCamera->use();
 
-  shaders.getDiffuseShader().bindLightPosition(glm::vec4(0.0f, 0.0f, 0.0f, 0.0f));
+  glm::vec4 position = viewMatrix * glm::vec4(5, 2, 0, 1);
+
+  shaders.getDiffuseShader().bindLightPosition(position);
   shaders.getDiffuseShader().bindDiffuseIntensity(glm::vec3(1.0f, 1.0f, 1.0f));
   shaders.getDiffuseShader().bindAmbientIntensity(glm::vec3(0.5f, 0.5f, 0.5f));
 
   glm::mat4 modelMatrix = glm::mat4(1.0f);
   floor.render(modelMatrix);
 
-  shaders.getDiffuseShader().bindDiffuseReflectivity(glm::vec3(1.0f, 1.0f, 1.0f));
-  shaders.getDiffuseShader().bindAmbientReflectivity(glm::vec3(1.0f, 1.0f, 1.0f));
-  geometries.getRevolutionSurface().render(viewMatrix, modelMatrix, shaders.getDiffuseShader());
+  shaders.getDiffuseShader().bindDiffuseReflectivity(glm::vec3(0.2f, 0.2f, 0.0f));
+  shaders.getDiffuseShader().bindAmbientReflectivity(glm::vec3(0.0f, 0.5f, 0.0f));
+  glm::mat4 m = glm::translate(modelMatrix, glm::vec3(0, 0, 2));
+  geometries.getRevolutionSurface().render(m, shaders.getDiffuseShader());
+
+  shaders.getDiffuseShader().bindDiffuseReflectivity(glm::vec3(0, 0, 0));
+  shaders.getDiffuseShader().bindAmbientReflectivity(glm::vec3(10, 10, 10));
+  m = glm::translate(modelMatrix, glm::vec3(5, 2, 0));
+  m = glm::rotate(m, 90.0f, glm::vec3(0, 1, 0));
+  m = glm::translate(m, glm::vec3(-0.5f, 0, 0));
+  geometries.getLightBulb().render(m, shaders.getDiffuseShader());
 }
 
 void app::scene::Scene::tick(float delta) {
   currentCamera->tick(delta);
-  rotation += 30 * delta;
 }
 
 void app::scene::Scene::toggleCamera() {

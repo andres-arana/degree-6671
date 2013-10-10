@@ -23,8 +23,6 @@ namespace app {
 
         void bindAmbientReflectivity(const glm::vec3 &lightInt) const;
 
-        virtual void bindNormalMatrix(const glm::mat3 &normalMatrix) const;
-
         virtual void bindModelMatrix(const glm::mat4 &modelMatrix) const;
 
         ~DiffuseShader();

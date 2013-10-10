@@ -12,7 +12,8 @@ namespace app {
         Floor(const app::geometries::Register &geometries,
             const app::shaders::Register &shaders);
 
-        void render(const glm::mat4 &modelMatrix);
+        void render(
+            const glm::mat4 &modelMatrix);
 
       private:
         const app::geometries::Register &geometries;

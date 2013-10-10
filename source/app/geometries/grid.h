@@ -14,7 +14,7 @@ namespace app {
         Grid(int size);
 
         void render(
-            const glm::mat4 &modelMatrix, 
+            const glm::mat4 &modelMatrix,
             const sys::shaders::ShaderProgram &shader) const;
 
       private:

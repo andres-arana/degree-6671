@@ -9,7 +9,7 @@ app::scene::Floor::Floor(
   }
 
 void app::scene::Floor::render(const glm::mat4 &modelMatrix) {
-  shader.use();
   shader.bindDiffuseReflectivity(glm::vec3(0.2f, 0.2f, 0.2f));
+  shader.bindAmbientReflectivity(glm::vec3(1, 1, 1));
   geometries.getGrid().render(modelMatrix, shader);
 }
