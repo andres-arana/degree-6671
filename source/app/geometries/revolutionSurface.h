@@ -18,7 +18,10 @@ namespace app {
 
     class RevolutionSurface {
       public:
-        RevolutionSurface(int angularSections, int longitudinalSections, const Function &f);
+        RevolutionSurface(
+            int angularSections,
+            int longitudinalSections,
+            const Function &f);
 
         void render(
             const glm::mat4 &modelMatrix,

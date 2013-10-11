@@ -8,6 +8,8 @@ Application::Application(System<Application> &system, Window &window, Input &inp
   window(window),
   input(input),
   scene(window, input, geometries, shaders) {
+    previousTime = 0;
+
     window.hideCursor();
     input.disableKeyRepeatEvents();
 

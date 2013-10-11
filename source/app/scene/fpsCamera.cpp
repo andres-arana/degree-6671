@@ -1,4 +1,4 @@
-#include "app/scene/FPSCamera.h"
+#include "app/scene/fpsCamera.h"
 #include <glm/gtc/matrix_transform.hpp> 
 #include <glm/gtx/transform2.hpp> 
 #include <glm/gtx/projection.hpp>

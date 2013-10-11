@@ -5,8 +5,10 @@
 using namespace app::geometries;
 using namespace sys::shaders;
 
-RevolutionSurface::RevolutionSurface(int angularSections, int
-    longitudinalSections, const Function &f) {
+RevolutionSurface::RevolutionSurface(
+    int angularSections,
+    int longitudinalSections,
+    const Function &f) {
 
   glm::vec3 rotationAxis(1.0f, 0, 0);
   float angularIncrement = 360.0f / angularSections;

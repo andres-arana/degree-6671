@@ -12,7 +12,7 @@ Floor::Floor(
   }
 
 void Floor::render(const glm::mat4 &modelMatrix) {
-  shader.bindDiffuseReflectivity(glm::vec3(0.2f, 0.2f, 0.2f));
+  shader.bindDiffuseReflectivity(glm::vec3(0.4f, 0.4f, 0.6f));
   shader.bindAmbientReflectivity(glm::vec3(1, 1, 1));
   geometries.getGrid().render(modelMatrix, shader);
 }

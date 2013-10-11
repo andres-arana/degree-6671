@@ -1,5 +1,6 @@
 #include "app/scene/scene.h"
 #include <glm/gtc/matrix_transform.hpp> 
+#include <glm/gtx/constants.hpp> 
 
 using namespace app;
 using namespace app::scene;
@@ -8,19 +9,16 @@ using namespace sys;
 Scene::Scene(
     Window &window,
     Input &input,
-    const geometries::Register &geometries, 
+    const geometries::Register &geometries,
     const shaders::Register &shaders) :
-  geometries(geometries),
-  shaders(shaders),
+  options(0, 0, 0),
   fpsCamera(window, input, glm::vec3(12.0f, 0, 1.0f), shaders),
   rotatingCamera(window, input, glm::vec3(0, 0, 1.0f), 12.0f, shaders),
   floor(geometries, shaders),
+  light(geometries, shaders),
+  crab(geometries, shaders),
   currentCamera(&rotatingCamera),
   rotation(0) {
-
-    glClearColor(0.1f, 0.1f, 0.2f, 0.0f);
-    glShadeModel(GL_SMOOTH);
-    glEnable(GL_DEPTH_TEST);
 
   }
 
@@ -29,27 +27,21 @@ void Scene::render() {
   auto viewMatrix = currentCamera->use();
 
   auto lightMatrix = glm::rotate(modelMatrix, rotation, glm::vec3(0, 0, 1));
-  lightMatrix = glm::translate(lightMatrix, glm::vec3(5, 0, 1));
-
-  shaders.getDiffuseShader().bindLightPosition(viewMatrix * lightMatrix * glm::vec4(0, 0, 0, 1));
-  shaders.getDiffuseShader().bindDiffuseIntensity(glm::vec3(1.0f, 1.0f, 1.0f));
-  shaders.getDiffuseShader().bindAmbientIntensity(glm::vec3(0.5f, 0.5f, 0.5f));
+  lightMatrix = glm::translate(lightMatrix, glm::vec3(4, 0, 2));
+  light.use(viewMatrix, lightMatrix);
 
   floor.render(modelMatrix);
 
-  shaders.getDiffuseShader().bindDiffuseReflectivity(glm::vec3(0.2f, 0.2f, 0.0f));
-  shaders.getDiffuseShader().bindAmbientReflectivity(glm::vec3(0.0f, 0.5f, 0.0f));
-  auto m = glm::translate(modelMatrix, glm::vec3(0, 0, 2));
-  geometries.getRevolutionSurface().render(m, shaders.getDiffuseShader());
-
-  shaders.getDiffuseShader().bindDiffuseReflectivity(glm::vec3(0, 0, 0));
-  shaders.getDiffuseShader().bindAmbientReflectivity(glm::vec3(10, 10, 10));
-  geometries.getLightBulb().render(lightMatrix, shaders.getDiffuseShader());
+  auto crabMatrix = glm::translate(modelMatrix, glm::vec3(-2.0f, 0, 1.75f));
+  crab.render(crabMatrix);
 }
 
 void Scene::tick(float delta) {
   currentCamera->tick(delta);
-  rotation += 50 * delta;
+  rotation += (30 * delta);
+  if (rotation > 360) {
+    rotation -= 360;
+  }
 }
 
 void app::scene::Scene::toggleCamera() {
