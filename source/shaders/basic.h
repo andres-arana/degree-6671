@@ -25,6 +25,12 @@ namespace shaders {
 
       void bind_ambient_reflectivity(const glm::vec3 &light_int) const;
 
+      void bind_specular_intensity(const glm::vec3 &light) const;
+
+      void bind_specular_reflectivity(const glm::vec3 &light) const;
+
+      void bind_specular_shininess(float shininess) const;
+
       virtual void bind_model_matrix(const glm::mat4 &model_matrix) const;
   };
 };

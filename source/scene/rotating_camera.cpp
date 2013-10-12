@@ -19,6 +19,7 @@ rotating_camera::rotating_camera(
   center(center),
   distance(distance),
   rho(glm::half_pi<float>()),
+  theta(0),
   forwards(false),
   backwards(false) {
 

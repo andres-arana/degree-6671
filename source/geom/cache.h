@@ -14,6 +14,7 @@ namespace geom {
       geom::grid grid;
 
       geom::revolution_surface crab_body;
+      geom::revolution_surface crab_leg_section;
   };
 };
 

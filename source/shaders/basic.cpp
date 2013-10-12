@@ -47,7 +47,6 @@ void basic::bind_ambient_intensity(const glm::vec3 &light_int) const {
 
 }
 
-
 void basic::bind_diffuse_reflectivity(const glm::vec3 &light_int) const {
   auto param = get_uniform_param("kd");
   if (param.is_available()) {
@@ -61,6 +60,29 @@ void basic::bind_ambient_reflectivity(const glm::vec3 &light_int) const {
     glUniform3fv(param.get_handle(), 1, &light_int[0]); 
   }
 }
+
+void basic::bind_specular_intensity(const glm::vec3 &light) const {
+  auto param = get_uniform_param("ls");
+  if (param.is_available()) {
+    glUniform3fv(param.get_handle(), 1, &light[0]);
+
+  }
+}
+
+void basic::bind_specular_reflectivity(const glm::vec3 &light) const {
+  auto param = get_uniform_param("ks");
+  if (param.is_available()) {
+    glUniform3fv(param.get_handle(), 1, &light[0]);
+  }
+}
+
+void basic::bind_specular_shininess(float shininess) const {
+  auto param = get_uniform_param("shininess");
+  if (param.is_available()) {
+    glUniform1f(param.get_handle(), shininess);
+  }
+}
+
 
 void basic::bind_model_matrix(const glm::mat4 &model_matrix) const {
   auto param = get_uniform_param("model_matrix");

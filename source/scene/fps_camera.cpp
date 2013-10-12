@@ -17,6 +17,7 @@ fps_camera::fps_camera(
   camera(window, input, shaders),
   position(position),
   rho(-glm::half_pi<float>()),
+  theta(0),
   forwards(false),
   backwards(false),
   left(false),
