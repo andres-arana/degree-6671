@@ -4,7 +4,7 @@
 
 using namespace sys;
 
-Window::Window(const init::Glut &glut, const Params &params) {
+window::window(const init::glut &glut, const params &params) {
   (void)glut;
 
   std::cout
@@ -18,37 +18,37 @@ Window::Window(const init::Glut &glut, const Params &params) {
   id = glutCreateWindow(params.title.c_str());
 }
 
-void Window::toggleFullScreen() {
+void window::toggle_full_screen() {
   glutFullScreenToggle();
 }
 
-void Window::hideCursor() {
+void window::hide_cursor() {
   glutSetCursor(GLUT_CURSOR_NONE);
 }
 
-void Window::showCursor() {
+void window::show_cursor() {
   glutSetCursor(GLUT_CURSOR_INHERIT);
 }
 
-void Window::swapBuffers() {
+void window::swap_buffers() {
   glutSwapBuffers();
 }
 
-float Window::getAspectRatio() const {
-  float width = getWidth();
-  float height = getHeight();
+float window::get_aspect_ratio() const {
+  float width = get_width();
+  float height = get_height();
 
   return width / height;
 }
 
-int Window::getWidth() const {
+int window::get_width() const {
   return glutGet(GLUT_WINDOW_WIDTH);
 }
 
-int Window::getHeight() const {
+int window::get_height() const {
   return glutGet(GLUT_WINDOW_HEIGHT);
 }
 
-void Window::setCursorPosition(int x, int y) {
+void window::set_cursor_position(int x, int y) {
   glutWarpPointer(x, y);
 }

@@ -4,35 +4,35 @@
 #include "sys/window.h"
 #include "sys/input.h"
 #include "sys/system.h"
-#include "scene/scene.h"
+#include "scene/world.h"
 
-class Application :
-  public sys::RenderListener,
-  public sys::ReshapeListener,
-  public sys::KeyUpListener,
-  public sys::IdleListener {
+class application :
+  public sys::render_listener,
+  public sys::reshape_listener,
+  public sys::key_up_listener,
+  public sys::idle_listener {
 
     public:
-      Application(
-          sys::System<Application> &system,
-          sys::Window &window, sys::Input &input);
+      application(
+          sys::system<application> &system,
+          sys::window &window, sys::input &input);
 
-      Application(const Application &other) = delete;
-      Application &operator=(const Application &other) = delete;
+      application(const application &other) = delete;
+      application &operator=(const application &other) = delete;
 
-      virtual void onRender();
-      virtual void onReshape(const sys::ReshapeEvent &event);
-      virtual void onKeyUp(const sys::KeyUpEvent &event);
-      virtual void onIdle(const sys::IdleEvent &event);
+      virtual void on_render();
+      virtual void on_reshape(const sys::reshape_event &event);
+      virtual void on_key_up(const sys::key_up_event &event);
+      virtual void on_idle(const sys::idle_event &event);
 
     private:
-      sys::System<Application> &system;
-      sys::Window &window;
-      sys::Input &input;
+      sys::system<application> &system;
+      sys::window &window;
+      sys::input &input;
 
-      scene::Scene scene;
+      scene::world world;
 
-      unsigned int previousTime;
+      unsigned int previous_time;
   };
 
 #endif

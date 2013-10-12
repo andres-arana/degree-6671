@@ -1,31 +1,31 @@
 #ifndef __SHADERS_BASIC_H_INCLUDED__
 #define __SHADERS_BASIC_H_INCLUDED__
 
-#include "sys/shaderProgram.h"
+#include "sys/shader_program.h"
 
 namespace shaders {
-  class Basic : public sys::ShaderProgram {
+  class basic : public sys::shader_program {
     public:
-      Basic();
+      basic();
 
-      Basic(const Basic &other) = delete;
-      Basic &operator=(const Basic &other) = delete;
+      basic(const basic &other) = delete;
+      basic &operator=(const basic &other) = delete;
 
-      void bindViewMatrix(const glm::mat4 &viewMatrix) const;
+      void bind_view_matrix(const glm::mat4 &view_matrix) const;
 
-      void bindProjectionMatrix(const glm::mat4 &projMatrix) const;
+      void bind_projection_matrix(const glm::mat4 &proj_matrix) const;
 
-      void bindLightPosition(const glm::vec4 &lightPos) const;
+      void bind_light_position(const glm::vec4 &light_pos) const;
 
-      void bindDiffuseIntensity(const glm::vec3 &lightInt) const;
+      void bind_diffuse_intensity(const glm::vec3 &light_int) const;
 
-      void bindDiffuseReflectivity(const glm::vec3 &lightInt) const;
+      void bind_diffuse_reflectivity(const glm::vec3 &light_int) const;
 
-      void bindAmbientIntensity(const glm::vec3 &lightInt) const;
+      void bind_ambient_intensity(const glm::vec3 &light_int) const;
 
-      void bindAmbientReflectivity(const glm::vec3 &lightInt) const;
+      void bind_ambient_reflectivity(const glm::vec3 &light_int) const;
 
-      virtual void bindModelMatrix(const glm::mat4 &modelMatrix) const;
+      virtual void bind_model_matrix(const glm::mat4 &model_matrix) const;
   };
 };
 

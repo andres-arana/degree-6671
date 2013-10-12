@@ -4,21 +4,21 @@
 #include "scene/camera.h"
 
 namespace scene {
-  class RotatingCamera : public Camera {
+  class rotating_camera : public camera {
     public:
-      RotatingCamera(
-          sys::Window &window,
-          sys::Input &input,
+      rotating_camera(
+          sys::window &window,
+          sys::input &input,
           const glm::vec3 &center,
           float distance,
-          const shaders::Cache &shaders);
+          const shaders::cache &shaders);
 
-      virtual void doMouseMove(int deltaX, int deltaY);
-      virtual void doKeyUp(unsigned char key);
-      virtual void doKeyDown(unsigned char key);
+      virtual void do_mouse_move(int delta_x, int delta_y);
+      virtual void do_key_up(unsigned char key);
+      virtual void do_key_down(unsigned char key);
       virtual void tick(float delta);
 
-      glm::mat4 getViewMatrix();
+      glm::mat4 get_view_matrix();
 
     private:
       const glm::vec3 center;

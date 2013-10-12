@@ -6,7 +6,7 @@
 using namespace sys;
 using namespace sys::init;
 
-Glew::Glew(const Window &window) {
+glew::glew(const window &window) {
   (void)window;
 
   std::cout << "Using GLEW Version: " << glewGetString(GLEW_VERSION) << std::endl;

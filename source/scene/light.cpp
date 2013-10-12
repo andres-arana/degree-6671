@@ -2,16 +2,16 @@
 
 using namespace scene;
 
-Light::Light(const shaders::Cache &shaders) :
+light::light(const shaders::cache &shaders) :
   shaders(shaders) {
 
   }
 
-void Light::use(const glm::mat4 &viewMatrix, const glm::mat4 &modelMatrix) {
-  auto position = viewMatrix * modelMatrix * glm::vec4(0, 0, 0, 1);
-  shaders.basic.bindLightPosition(position);
+void light::use(const glm::mat4 &view_matrix, const glm::mat4 &model_matrix) {
+  auto position = view_matrix * model_matrix * glm::vec4(0, 0, 0, 1);
+  shaders.basic.bind_light_position(position);
 
-  shaders.basic.bindDiffuseIntensity(glm::vec3(1, 1, 1));
-  shaders.basic.bindAmbientIntensity(glm::vec3(0.5f, 0.5f, 0.5f));
+  shaders.basic.bind_diffuse_intensity(glm::vec3(1, 1, 1));
+  shaders.basic.bind_ambient_intensity(glm::vec3(0.5f, 0.5f, 0.5f));
 }
 

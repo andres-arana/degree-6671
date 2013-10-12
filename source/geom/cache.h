@@ -2,18 +2,18 @@
 #define __GEOM_CACHE_H_INCLUDED__
 
 #include "geom/grid.h"
-#include "geom/revolutionSurface.h"
+#include "geom/revolution_surface.h"
 
 namespace geom {
-  struct Cache {
-      Cache();
+  struct cache {
+      cache();
 
-      Cache(const Cache &other) = delete;
-      Cache &operator=(const Cache &other) = delete;
+      cache(const cache &other) = delete;
+      cache &operator=(const cache &other) = delete;
 
-      Grid grid;
+      geom::grid grid;
 
-      RevolutionSurface crabBody;
+      geom::revolution_surface crab_body;
   };
 };
 

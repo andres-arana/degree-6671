@@ -1,8 +1,8 @@
-#include "math/cuadraticBezier.h"
+#include "math/cuadratic_bezier.h"
 
 using namespace math;
 
-CuadraticBezier::CuadraticBezier(
+cuadratic_bezier::cuadratic_bezier(
     const glm::vec3 &p0,
     const glm::vec3 &p1,
     const glm::vec3 &p2) :
@@ -12,7 +12,7 @@ CuadraticBezier::CuadraticBezier(
 
   }
 
-glm::vec3 CuadraticBezier::apply(float x) const {
+glm::vec3 cuadratic_bezier::apply(float x) const {
   return
     (x * x - 2 * x + 1) * p0 +
     (-2 * x * x + 2 * x) * p1 +
@@ -20,7 +20,7 @@ glm::vec3 CuadraticBezier::apply(float x) const {
 
 };
 
-glm::vec3 CuadraticBezier::applyDerivate(float x) const {
+glm::vec3 cuadratic_bezier::apply_derivate(float x) const {
   return
     (2 * x - 2) * p0 +
     (-4 * x + 2) * p1 +

@@ -4,7 +4,7 @@
 #include <string>
 
 namespace sys {
-  struct Params {
+  struct params {
     int *argc;
     char **argv;
     int width;

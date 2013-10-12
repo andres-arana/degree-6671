@@ -6,18 +6,18 @@
 #include <glm/glm.hpp> 
 
 namespace scene {
-  class Floor {
+  class floor {
     public:
-      Floor(
-          const geom::Cache &geometries,
-          const shaders::Cache &shaders);
+      floor(
+          const geom::cache &geometries,
+          const shaders::cache &shaders);
 
       void render(
-          const glm::mat4 &modelMatrix);
+          const glm::mat4 &model_matrix);
 
     private:
-      const geom::Cache &geometries;
-      const shaders::Cache &shaders;
+      const geom::cache &geometries;
+      const shaders::cache &shaders;
   };
 };
 

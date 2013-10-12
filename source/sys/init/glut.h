@@ -5,18 +5,18 @@
 
 namespace sys {
   namespace init {
-    class Glut {
+    class glut {
       public:
-        Glut(const Params &params);
+        glut(const params &params);
 
-        Glut(const Glut &other) = delete;
-        Glut &operator=(const Glut &other) = delete;
+        glut(const glut &other) = delete;
+        glut &operator=(const glut &other) = delete;
 
-        void mainLoop();
+        void main_loop();
 
-        void leaveMainLoop();
+        void leave_main_loop();
 
-        unsigned int getTime() const;
+        unsigned int get_time() const;
     };
   };
 };

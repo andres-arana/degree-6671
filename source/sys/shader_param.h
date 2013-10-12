@@ -4,13 +4,13 @@
 #include <GL/glew.h>
 
 namespace sys {
-  class ShaderParam {
+  class shader_param {
     public:
-      ShaderParam(GLint handle);
+      shader_param(GLint handle);
 
-      bool isAvailable() const;
+      bool is_available() const;
 
-      GLuint getHandle() const;
+      GLuint get_handle() const;
 
     private:
       GLint handle;

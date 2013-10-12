@@ -7,45 +7,45 @@
 
 
 namespace sys {
-  class Input {
+  class input {
     public:
-      Input(const sys::init::Glut &glut);
+      input(const sys::init::glut &glut);
 
-      Input(const Input &other) = delete;
-      Input &operator=(const Input &other) = delete;
+      input(const input &other) = delete;
+      input &operator=(const input &other) = delete;
 
-      void disableKeyRepeatEvents();
+      void disable_key_repeat_events();
 
-      void addCloseListener(CloseListener &listener);
-      void addReshapeListener(ReshapeListener &listener);
-      void addMouseListener(MouseListener &listener);
-      void addMouseMotionListener(MouseMotionListener &listener);
-      void addKeyUpListener(KeyUpListener &listener);
-      void addKeyDownListener(KeyDownListener &listener);
-      void addIdleListener(IdleListener &listener);
-      void setRenderListener(RenderListener &listener);
+      void add_close_listener(close_listener &listener);
+      void add_reshape_listener(reshape_listener &listener);
+      void add_mouse_listener(mouse_listener &listener);
+      void add_mouse_motion_listener(mouse_motion_listener &listener);
+      void add_key_up_listener(key_up_listener &listener);
+      void add_key_down_listener(key_down_listener &listener);
+      void add_idle_listener(idle_listener &listener);
+      void set_render_listener(render_listener &listener);
 
     private:
 
-      RenderListener *renderListener;
-      std::vector<CloseListener *> closeListeners;
-      std::vector<ReshapeListener *> reshapeListeners;
-      std::vector<MouseListener *> mouseListeners;
-      std::vector<MouseMotionListener *> mouseMotionListeners;
-      std::vector<KeyUpListener *> keyUpListeners;
-      std::vector<KeyDownListener *> keyDownListeners;
-      std::vector<IdleListener *> idleListeners;
+      render_listener *current_render_listener;
+      std::vector<close_listener *> close_listeners;
+      std::vector<reshape_listener *> reshape_listeners;
+      std::vector<mouse_listener *> mouse_listeners;
+      std::vector<mouse_motion_listener *> mouse_motion_listeners;
+      std::vector<key_up_listener *> key_up_listeners;
+      std::vector<key_down_listener *> key_down_listeners;
+      std::vector<idle_listener *> idle_listeners;
 
-      static Input *instance;
+      static input *instance;
 
-      static void onDisplay();
-      static void onClose();
-      static void onReshape(int width, int height);
-      static void onMouse(int button, int updown, int x, int y);
-      static void onMouseMotion(int x, int y);
-      static void onKeyUp(unsigned char key, int x, int y);
-      static void onKeyDown(unsigned char key, int x, int y);
-      static void onIdle();
+      static void on_display();
+      static void on_close();
+      static void on_reshape(int width, int height);
+      static void on_mouse(int button, int updown, int x, int y);
+      static void on_mouse_motion(int x, int y);
+      static void on_key_up(unsigned char key, int x, int y);
+      static void on_key_down(unsigned char key, int x, int y);
+      static void on_idle();
   };
 };
 

@@ -3,7 +3,7 @@
 using namespace shaders;
 
 
-Cache::Cache() {
+cache::cache() {
 
 }
 

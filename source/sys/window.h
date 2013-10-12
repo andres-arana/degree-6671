@@ -5,28 +5,28 @@
 #include "sys/init/glut.h"
 
 namespace sys {
-  class Window {
+  class window {
     public:
-      Window(const init::Glut &glut, const Params &params);
+      window(const init::glut &glut, const params &params);
 
-      Window(const Window &other) = delete;
-      Window &operator=(const Window &other) = delete;
+      window(const window &other) = delete;
+      window &operator=(const window &other) = delete;
 
-      void toggleFullScreen();
+      void toggle_full_screen();
 
-      void hideCursor();
+      void hide_cursor();
 
-      void showCursor();
+      void show_cursor();
 
-      void swapBuffers();
+      void swap_buffers();
 
-      float getAspectRatio() const;
+      float get_aspect_ratio() const;
 
-      int getWidth() const;
+      int get_width() const;
 
-      int getHeight() const;
+      int get_height() const;
 
-      void setCursorPosition(int x, int y);
+      void set_cursor_position(int x, int y);
     private:
 
       unsigned int id;

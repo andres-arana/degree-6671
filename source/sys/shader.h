@@ -5,16 +5,16 @@
 #include <string>
 
 namespace sys {
-  class Shader {
+  class shader {
     public:
-      Shader(GLuint type, const std::string &file);
+      shader(GLuint type, const std::string &file);
 
-      Shader(const Shader &other) = delete;
-      Shader &operator=(const Shader &other) = delete;
+      shader(const shader &other) = delete;
+      shader &operator=(const shader &other) = delete;
 
-      GLuint getHandle() const;
+      GLuint get_handle() const;
 
-      virtual ~Shader();
+      virtual ~shader();
 
     private:
       GLuint handle;

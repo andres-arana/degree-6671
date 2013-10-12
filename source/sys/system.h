@@ -9,29 +9,29 @@
 #include "sys/init/glew.h"
 
 namespace sys {
-  template<typename A> class System {
+  template<typename A> class system {
     public:
-      System(const Params &params);
+      system(const params &params);
 
-      System(const System &other) = delete;
-      System &operator=(const System &other) = delete;
+      system(const system &other) = delete;
+      system &operator=(const system &other) = delete;
 
-      void runEventLoop();
+      void run_event_loop();
 
-      void exitEventLoop();
+      void exit_event_loop();
 
-      unsigned int getTime() const;
+      unsigned int get_time() const;
     private:
 
-      init::Glut glut;
-      Window window;
-      init::Glew glew;
-      init::Info info;
-      Input input;
+      init::glut glut;
+      sys::window window;
+      init::glew glew;
+      init::info info;
+      sys::input input;
       A application;
   };
 
-  template<typename A> System<A>::System(const Params &params) :
+  template<typename A> system<A>::system(const params &params) :
     glut(params),
     window(glut, params),
     glew(window),
@@ -41,16 +41,16 @@ namespace sys {
 
     }
 
-  template<typename A> void System<A>::runEventLoop() {
-    glut.mainLoop();
+  template<typename A> void system<A>::run_event_loop() {
+    glut.main_loop();
   }
 
-  template<typename A> void System<A>::exitEventLoop() {
-    glut.leaveMainLoop();
+  template<typename A> void system<A>::exit_event_loop() {
+    glut.leave_main_loop();
   }
 
-  template<typename A> unsigned int System<A>::getTime() const {
-    return glut.getTime();
+  template<typename A> unsigned int system<A>::get_time() const {
+    return glut.get_time();
   }
 };
 

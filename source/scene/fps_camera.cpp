@@ -1,4 +1,4 @@
-#include "scene/fpsCamera.h"
+#include "scene/fps_camera.h"
 #include <glm/gtc/matrix_transform.hpp> 
 #include <glm/gtx/transform2.hpp> 
 #include <glm/gtx/projection.hpp>
@@ -9,12 +9,12 @@
 
 using namespace scene;
 
-FPSCamera::FPSCamera(
-    sys::Window &window, 
-    sys::Input &input, 
+fps_camera::fps_camera(
+    sys::window &window, 
+    sys::input &input, 
     const glm::vec3 &position,
-    const shaders::Cache &shaders) :
-  Camera(window, input, shaders),
+    const shaders::cache &shaders) :
+  camera(window, input, shaders),
   position(position),
   rho(-glm::half_pi<float>()),
   forwards(false),
@@ -26,13 +26,13 @@ FPSCamera::FPSCamera(
 
   }
 
-void FPSCamera::doMouseMove(int deltaX, int deltaY) {
-  if (deltaX == 0 && deltaY == 0) {
+void fps_camera::do_mouse_move(int delta_x, int delta_y) {
+  if (delta_x == 0 && delta_y == 0) {
     return;
   }
 
-  if (deltaX) {
-    rho += deltaX * 0.001f;
+  if (delta_x) {
+    rho += delta_x * 0.001f;
     if (rho > 2 * glm::pi<float>()) {
       rho -= 2 * glm::pi<float>();
     } else if (rho < 0) {
@@ -40,8 +40,8 @@ void FPSCamera::doMouseMove(int deltaX, int deltaY) {
     }
   }
 
-  if (deltaY) {
-    theta -= deltaY * 0.001f;
+  if (delta_y) {
+    theta -= delta_y * 0.001f;
     if (theta >= glm::half_pi<float>()) {
       theta = glm::half_pi<float>();
     } else if (theta <= -glm::half_pi<float>()) {
@@ -51,7 +51,7 @@ void FPSCamera::doMouseMove(int deltaX, int deltaY) {
 }
 
 
-void FPSCamera::doKeyUp(unsigned char key) {
+void fps_camera::do_key_up(unsigned char key) {
   if (key == 'w' || key == 'W') {
     forwards = false;
   } else if (key == 's' || key == 'S') {
@@ -67,7 +67,7 @@ void FPSCamera::doKeyUp(unsigned char key) {
   }
 }
 
-void FPSCamera::doKeyDown(unsigned char key) {
+void fps_camera::do_key_down(unsigned char key) {
   if (key == 'w' || key == 'W') {
     forwards = true;
   } else if (key == 's' || key == 'S') {
@@ -83,8 +83,8 @@ void FPSCamera::doKeyDown(unsigned char key) {
   }
 }
 
-void FPSCamera::tick(float delta) {
-  glm::vec3 forwardVector(
+void fps_camera::tick(float delta) {
+  glm::vec3 forward_vector(
       sin(rho) * cos(theta),
       cos(rho) * cos(theta),
       sin(theta));
@@ -92,24 +92,24 @@ void FPSCamera::tick(float delta) {
   // The cross product between the displacement vector (forward facing) and
   // the up vector is the lateral stepping vector, which should be
   // normalized to ensure proper scaling later
-  glm::vec3 lateralVector(
-      forwardVector.y,
-      -forwardVector.x,
+  glm::vec3 lateral_vector(
+      forward_vector.y,
+      -forward_vector.x,
       0);
 
   if (forwards || backwards || left || right || up || down) {
     glm::vec3 displacement;
 
     if (forwards) {
-      displacement += forwardVector;
+      displacement += forward_vector;
     } else if (backwards) {
-      displacement -= forwardVector;
+      displacement -= forward_vector;
     }
 
     if (left) {
-      displacement -= lateralVector;
+      displacement -= lateral_vector;
     } else if (right) {
-      displacement += lateralVector;
+      displacement += lateral_vector;
     }
 
     if (up) {
@@ -122,7 +122,7 @@ void FPSCamera::tick(float delta) {
   }
 }
 
-glm::mat4 FPSCamera::getViewMatrix() {
+glm::mat4 fps_camera::get_view_matrix() {
   glm::vec3 target(
       sin(rho) * cos(theta) + position.x,
       cos(rho) * cos(theta) + position.y,

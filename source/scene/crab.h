@@ -6,18 +6,18 @@
 #include <glm/glm.hpp> 
 
 namespace scene {
-  class Crab {
+  class crab {
     public:
-      Crab(
-          const geom::Cache &geometries,
-          const shaders::Cache &shaders);
+      crab(
+          const geom::cache &geometries,
+          const shaders::cache &shaders);
 
       void render(
-          const glm::mat4 &modelMatrix);
+          const glm::mat4 &model_matrix);
 
     private:
-      const geom::Cache &geometries;
-      const shaders::Cache &shaders;
+      const geom::cache &geometries;
+      const shaders::cache &shaders;
   };
 };
 

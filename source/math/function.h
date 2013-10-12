@@ -4,12 +4,12 @@
 #include <glm/glm.hpp>
 
 namespace math {
-  class Function {
+  class function {
     public:
       virtual glm::vec3 apply(float x) const = 0;
-      virtual glm::vec3 applyDerivate(float x) const = 0;
+      virtual glm::vec3 apply_derivate(float x) const = 0;
 
-      virtual ~Function() {};
+      virtual ~function() {};
   };
 };
 

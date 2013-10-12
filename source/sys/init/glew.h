@@ -5,12 +5,12 @@
 
 namespace sys {
   namespace init {
-    class Glew {
+    class glew {
       public:
-        Glew(const Window &window);
+        glew(const window &window);
 
-        Glew(const Glew & other) = delete;
-        Glew &operator=(const Glew &other) = delete;
+        glew(const glew & other) = delete;
+        glew &operator=(const glew &other) = delete;
     };
   };
 };

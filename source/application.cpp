@@ -1,57 +1,55 @@
 #include "application.h"
 
-using namespace sys;
-
-Application::Application(System<Application> &system, Window &window, Input &input) :
+application::application(sys::system<application> &system, sys::window &window, sys::input &input) :
   system(system),
   window(window),
   input(input),
-  scene(window, input),
-  previousTime(0) {
-    window.hideCursor();
-    input.disableKeyRepeatEvents();
+  world(window, input),
+  previous_time(0) {
+    window.hide_cursor();
+    input.disable_key_repeat_events();
 
-    input.setRenderListener(*this);
-    input.addReshapeListener(*this);
-    input.addKeyUpListener(*this);
-    input.addIdleListener(*this);
+    input.set_render_listener(*this);
+    input.add_reshape_listener(*this);
+    input.add_key_up_listener(*this);
+    input.add_idle_listener(*this);
   }
 
-void Application::onRender() {
+void application::on_render() {
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-  scene.render();
+  world.render();
 
-  window.swapBuffers();
+  window.swap_buffers();
 }
 
-void Application::onReshape(const ReshapeEvent &event) {
+void application::on_reshape(const sys::reshape_event &event) {
   glViewport(0, 0, (GLsizei) event.width, (GLsizei) event.height);
 }
 
-void Application::onKeyUp(const KeyUpEvent &event) {
+void application::on_key_up(const sys::key_up_event &event) {
   if (event.key == 'f') {
-    window.toggleFullScreen();
+    window.toggle_full_screen();
   } else if (event.key == 'c') {
-    scene.toggleCamera();
+    world.toggle_camera();
   } else if (event.key == 0x1b) {
-    system.exitEventLoop();
+    system.exit_event_loop();
   }
 }
 
-void Application::onIdle(const IdleEvent &event) {
+void application::on_idle(const sys::idle_event &event) {
   (void)event;
 
-  if (!previousTime) {
-    previousTime = system.getTime();
+  if (!previous_time) {
+    previous_time = system.get_time();
     return;
   }
 
-  auto currentTime = system.getTime();
-  auto delta = (currentTime - previousTime) / 1000.0f;
+  auto current_time = system.get_time();
+  auto delta = (current_time - previous_time) / 1000.0f;
 
-  scene.tick(delta);
+  world.tick(delta);
 
-  previousTime = currentTime;
+  previous_time = current_time;
 }
 

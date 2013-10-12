@@ -4,117 +4,117 @@
 
 using namespace sys;
 
-Input* Input::instance(0);
+input* input::instance(0);
 
-Input::Input(const init::Glut &glut) {
+input::input(const init::glut &glut) {
   if (instance) {
     throw std::runtime_error("sys::Input can only be initialized once");
   }
   (void)glut;
   instance = this;
-  glutDisplayFunc(onDisplay);
-  glutReshapeFunc(onReshape);
-  glutMouseFunc(onMouse);
-  glutPassiveMotionFunc(onMouseMotion);
-  glutCloseFunc(onClose);
-  glutKeyboardFunc(onKeyDown);
-  glutKeyboardUpFunc(onKeyUp);
-  glutIdleFunc(onIdle);
+  glutDisplayFunc(on_display);
+  glutReshapeFunc(on_reshape);
+  glutMouseFunc(on_mouse);
+  glutPassiveMotionFunc(on_mouse_motion);
+  glutCloseFunc(on_close);
+  glutKeyboardFunc(on_key_down);
+  glutKeyboardUpFunc(on_key_up);
+  glutIdleFunc(on_idle);
 }
 
-void Input::disableKeyRepeatEvents() {
+void input::disable_key_repeat_events() {
   glutSetKeyRepeat(GLUT_KEY_REPEAT_OFF);
 }
 
-void Input::addCloseListener(CloseListener &listener) {
-  closeListeners.push_back(&listener);
+void input::add_close_listener(close_listener &listener) {
+  close_listeners.push_back(&listener);
 }
 
-void Input::addReshapeListener(ReshapeListener &listener) {
-  reshapeListeners.push_back(&listener);
+void input::add_reshape_listener(reshape_listener &listener) {
+  reshape_listeners.push_back(&listener);
 }
 
-void Input::addMouseListener(MouseListener &listener) {
-  mouseListeners.push_back(&listener);
+void input::add_mouse_listener(mouse_listener &listener) {
+  mouse_listeners.push_back(&listener);
 }
 
-void Input::addMouseMotionListener(MouseMotionListener &listener) {
-  mouseMotionListeners.push_back(&listener);
+void input::add_mouse_motion_listener(mouse_motion_listener &listener) {
+  mouse_motion_listeners.push_back(&listener);
 }
 
-void Input::addKeyUpListener(KeyUpListener &listener) {
-  keyUpListeners.push_back(&listener);
+void input::add_key_up_listener(key_up_listener &listener) {
+  key_up_listeners.push_back(&listener);
 }
 
-void Input::addKeyDownListener(KeyDownListener &listener) {
-  keyDownListeners.push_back(&listener);
+void input::add_key_down_listener(key_down_listener &listener) {
+  key_down_listeners.push_back(&listener);
 }
 
-void Input::addIdleListener(IdleListener &listener) {
-  idleListeners.push_back(&listener);
+void input::add_idle_listener(idle_listener &listener) {
+  idle_listeners.push_back(&listener);
 }
 
-void Input::setRenderListener(RenderListener &listener) {
-  renderListener = &listener;
+void input::set_render_listener(render_listener &listener) {
+  current_render_listener = &listener;
 }
 
-void Input::onDisplay() {
-  instance->renderListener->onRender();
+void input::on_display() {
+  instance->current_render_listener->on_render();
 }
 
-void Input::onClose() {
-  CloseEvent event;
+void input::on_close() {
+  close_event event;
 
-  for (auto &it : instance->closeListeners) {
-    it->onClose(event);
+  for (auto &it : instance->close_listeners) {
+    it->on_close(event);
   }
 }
 
-void Input::onReshape(int width, int height) {
-  ReshapeEvent event = { width, height };
+void input::on_reshape(int width, int height) {
+  reshape_event event = { width, height };
 
-  for (auto &it : instance->reshapeListeners) {
-    it->onReshape(event);
+  for (auto &it : instance->reshape_listeners) {
+    it->on_reshape(event);
   }
 }
 
-void Input::onMouse(int button, int updown, int x, int y) {
-  MouseEvent event = { button, updown, x, y };
+void input::on_mouse(int button, int updown, int x, int y) {
+  mouse_event event = { button, updown, x, y };
 
-  for (auto &it : instance->mouseListeners) {
-    it->onMouse(event);
+  for (auto &it : instance->mouse_listeners) {
+    it->on_mouse(event);
   }
 }
 
-void Input::onMouseMotion(int x, int y) {
-  MouseMotionEvent event = { x, y };
+void input::on_mouse_motion(int x, int y) {
+  mouse_motion_event event = { x, y };
 
-  for (auto &it : instance->mouseMotionListeners) {
-    it->onMouseMotion(event);
+  for (auto &it : instance->mouse_motion_listeners) {
+    it->on_mouse_motion(event);
   }
 }
 
-void Input::onKeyUp(unsigned char key, int x, int y) {
-  KeyUpEvent event = { key, x, y };
+void input::on_key_up(unsigned char key, int x, int y) {
+  key_up_event event = { key, x, y };
 
-  for (auto &it : instance->keyUpListeners) {
-    it->onKeyUp(event);
+  for (auto &it : instance->key_up_listeners) {
+    it->on_key_up(event);
   }
 }
 
-void Input::onKeyDown(unsigned char key, int x, int y) {
-  KeyDownEvent event = { key, x, y };
+void input::on_key_down(unsigned char key, int x, int y) {
+  key_down_event event = { key, x, y };
 
-  for (auto &it : instance->keyDownListeners) {
-    it->onKeyDown(event);
+  for (auto &it : instance->key_down_listeners) {
+    it->on_key_down(event);
   }
 }
 
-void Input::onIdle() {
-  IdleEvent event;
+void input::on_idle() {
+  idle_event event;
 
-  for (auto &it : instance->idleListeners) {
-    it->onIdle(event);
+  for (auto &it : instance->idle_listeners) {
+    it->on_idle(event);
   }
 
   glutPostRedisplay();

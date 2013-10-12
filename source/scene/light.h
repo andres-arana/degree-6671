@@ -5,16 +5,16 @@
 #include <glm/glm.hpp> 
 
 namespace scene {
-  class Light {
+  class light {
     public:
-      Light(const shaders::Cache &shaders);
+      light(const shaders::cache &shaders);
 
       void use(
-          const glm::mat4 &viewMatrix,
-          const glm::mat4 &modelMatrix);
+          const glm::mat4 &view_matrix,
+          const glm::mat4 &model_matrix);
 
     private:
-      const shaders::Cache &shaders;
+      const shaders::cache &shaders;
   };
 };
 

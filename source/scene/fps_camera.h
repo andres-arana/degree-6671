@@ -4,23 +4,23 @@
 #include "scene/camera.h"
 
 namespace scene {
-  class FPSCamera : public Camera {
+  class fps_camera : public camera {
     public:
-      FPSCamera(
-          sys::Window &window,
-          sys::Input &input,
+      fps_camera(
+          sys::window &window,
+          sys::input &input,
           const glm::vec3 &position,
-          const shaders::Cache &shaders);
+          const shaders::cache &shaders);
 
-      virtual void doMouseMove(int deltaX, int deltaY);
+      virtual void do_mouse_move(int delta_x, int delta_y);
 
-      virtual void doKeyUp(unsigned char key);
+      virtual void do_key_up(unsigned char key);
 
-      virtual void doKeyDown(unsigned char key);
+      virtual void do_key_down(unsigned char key);
 
       virtual void tick(float delta);
 
-      virtual glm::mat4 getViewMatrix();
+      virtual glm::mat4 get_view_matrix();
 
     private:
       glm::vec3 position;

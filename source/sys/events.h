@@ -2,89 +2,89 @@
 #define __SYS_EVENTS_H_INCLUDED__
 
 namespace sys {
-  struct CloseEvent {
+  struct close_event {
 
   };
 
-  class CloseListener {
+  class close_listener {
     public:
-      virtual void onClose(const CloseEvent &event) = 0;
-      virtual ~CloseListener() {};
+      virtual void on_close(const close_event &event) = 0;
+      virtual ~close_listener() {};
   };
 
-  struct ReshapeEvent {
+  struct reshape_event {
     int width;
     int height;
   };
 
-  class ReshapeListener {
+  class reshape_listener {
     public:
-      virtual void onReshape(const ReshapeEvent &event) = 0;
-      virtual ~ReshapeListener() {};
+      virtual void on_reshape(const reshape_event &event) = 0;
+      virtual ~reshape_listener() {};
   };
 
-  struct MouseEvent {
+  struct mouse_event {
     int button;
     int updown;
     int x;
     int y;
   };
 
-  class MouseListener {
+  class mouse_listener {
     public:
-      virtual void onMouse(const MouseEvent &event) = 0;
-      virtual ~MouseListener() {};
+      virtual void on_mouse(const mouse_event &event) = 0;
+      virtual ~mouse_listener() {};
   };
 
-  struct MouseMotionEvent {
+  struct mouse_motion_event {
     int x;
     int y;
   };
 
-  class MouseMotionListener {
+  class mouse_motion_listener {
     public:
-      virtual void onMouseMotion(const MouseMotionEvent &event) = 0;
-      virtual ~MouseMotionListener() {};
+      virtual void on_mouse_motion(const mouse_motion_event &event) = 0;
+      virtual ~mouse_motion_listener() {};
   };
 
-  struct KeyUpEvent {
+  struct key_up_event {
     unsigned char key;
     int x;
     int y;
   };
 
-  class KeyUpListener {
+  class key_up_listener {
     public:
-      virtual void onKeyUp(const KeyUpEvent &event) = 0;
-      virtual ~KeyUpListener() {};
+      virtual void on_key_up(const key_up_event &event) = 0;
+      virtual ~key_up_listener() {};
   };
 
-  struct KeyDownEvent {
+  struct key_down_event {
     unsigned char key;
     int x;
     int y;
   };
 
-  class KeyDownListener {
+  class key_down_listener {
     public:
-      virtual void onKeyDown(const KeyDownEvent &event) = 0;
-      virtual ~KeyDownListener() {};
+      virtual void on_key_down(const key_down_event &event) = 0;
+      virtual ~key_down_listener() {};
   };
 
-  struct IdleEvent {
+  struct idle_event {
 
   };
 
-  class IdleListener {
+  class idle_listener {
     public:
-      virtual void onIdle(const IdleEvent &event) = 0;
-      virtual ~IdleListener() {};
+      virtual void on_idle(const idle_event &event) = 0;
+      virtual ~idle_listener() {};
   };
 
-  class RenderListener {
+  class render_listener {
     public:
-      virtual void onRender() = 0;
-      virtual ~RenderListener() {};
+      virtual void on_render() = 0;
+      virtual ~render_listener() {};
   };
 };
 

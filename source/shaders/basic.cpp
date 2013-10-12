@@ -4,68 +4,68 @@
 using namespace shaders;
 using namespace sys;
 
-Basic::Basic() :
-  ShaderProgram(
-      new VertexShader("source/shaders/basic.vert"),
-      new FragmentShader("source/shaders/basic.frag")) {
+basic::basic() :
+  shader_program(
+      new vertex_shader("source/shaders/basic.vert"),
+      new fragment_shader("source/shaders/basic.frag")) {
 
   }
 
-void Basic::bindViewMatrix(const glm::mat4 &viewMatrix) const {
-  auto param = getUniformParam("ViewMatrix");
-  if (param.isAvailable()) {
-    glUniformMatrix4fv(param.getHandle(), 1, GL_FALSE, &viewMatrix[0][0]);
-  }
-}
-
-void Basic::bindProjectionMatrix(const glm::mat4 &projMatrix) const {
-  auto param = getUniformParam("ProjectionMatrix");
-  if (param.isAvailable()) {
-    glUniformMatrix4fv(param.getHandle(), 1, GL_FALSE, &projMatrix[0][0]); 
+void basic::bind_view_matrix(const glm::mat4 &view_matrix) const {
+  auto param = get_uniform_param("view_matrix");
+  if (param.is_available()) {
+    glUniformMatrix4fv(param.get_handle(), 1, GL_FALSE, &view_matrix[0][0]);
   }
 }
 
-void Basic::bindLightPosition(const glm::vec4 &lightPos) const {
-  auto param = getUniformParam("LightPosition");
-  if (param.isAvailable()) {
-    glUniform4fv(param.getHandle(), 1, &lightPos[0]); 
+void basic::bind_projection_matrix(const glm::mat4 &proj_matrix) const {
+  auto param = get_uniform_param("projection_matrix");
+  if (param.is_available()) {
+    glUniformMatrix4fv(param.get_handle(), 1, GL_FALSE, &proj_matrix[0][0]); 
   }
 }
 
-void Basic::bindDiffuseIntensity(const glm::vec3 &lightInt) const {
-  auto param = getUniformParam("Ld");
-  if (param.isAvailable()) {
-    glUniform3fv(param.getHandle(), 1, &lightInt[0]); 
+void basic::bind_light_position(const glm::vec4 &light_pos) const {
+  auto param = get_uniform_param("light_position");
+  if (param.is_available()) {
+    glUniform4fv(param.get_handle(), 1, &light_pos[0]); 
   }
 }
 
-void Basic::bindAmbientIntensity(const glm::vec3 &lightInt) const {
-  auto param = getUniformParam("La");
-  if (param.isAvailable()) {
-    glUniform3fv(param.getHandle(), 1, &lightInt[0]); 
+void basic::bind_diffuse_intensity(const glm::vec3 &light_int) const {
+  auto param = get_uniform_param("ld");
+  if (param.is_available()) {
+    glUniform3fv(param.get_handle(), 1, &light_int[0]); 
+  }
+}
+
+void basic::bind_ambient_intensity(const glm::vec3 &light_int) const {
+  auto param = get_uniform_param("la");
+  if (param.is_available()) {
+    glUniform3fv(param.get_handle(), 1, &light_int[0]); 
   }
 
 }
 
 
-void Basic::bindDiffuseReflectivity(const glm::vec3 &lightInt) const {
-  auto param = getUniformParam("Kd");
-  if (param.isAvailable()) {
-    glUniform3fv(param.getHandle(), 1, &lightInt[0]); 
+void basic::bind_diffuse_reflectivity(const glm::vec3 &light_int) const {
+  auto param = get_uniform_param("kd");
+  if (param.is_available()) {
+    glUniform3fv(param.get_handle(), 1, &light_int[0]); 
   }
 }
 
-void Basic::bindAmbientReflectivity(const glm::vec3 &lightInt) const {
-  auto param = getUniformParam("Ka");
-  if (param.isAvailable()) {
-    glUniform3fv(param.getHandle(), 1, &lightInt[0]); 
+void basic::bind_ambient_reflectivity(const glm::vec3 &light_int) const {
+  auto param = get_uniform_param("ka");
+  if (param.is_available()) {
+    glUniform3fv(param.get_handle(), 1, &light_int[0]); 
   }
 }
 
-void Basic::bindModelMatrix(const glm::mat4 &modelMatrix) const {
-  auto param = getUniformParam("ModelMatrix");
-  if (param.isAvailable()) {
-    glUniformMatrix4fv(param.getHandle(), 1, GL_FALSE, &modelMatrix[0][0]);
+void basic::bind_model_matrix(const glm::mat4 &model_matrix) const {
+  auto param = get_uniform_param("model_matrix");
+  if (param.is_available()) {
+    glUniformMatrix4fv(param.get_handle(), 1, GL_FALSE, &model_matrix[0][0]);
   }
 
 }

@@ -3,12 +3,12 @@
 
 namespace sys {
   namespace init {
-    class Info {
+    class info {
       public:
-        Info();
+        info();
 
-        Info(const Info &other) = delete;
-        Info &operator=(const Info &other) = delete;
+        info(const info &other) = delete;
+        info &operator=(const info &other) = delete;
     };
   };
 };

@@ -1,4 +1,4 @@
-#include "scene/rotatingCamera.h"
+#include "scene/rotating_camera.h"
 #include <glm/gtc/matrix_transform.hpp> 
 #include <glm/gtx/transform2.hpp> 
 #include <glm/gtx/projection.hpp>
@@ -9,13 +9,13 @@
 
 using namespace scene;
 
-RotatingCamera::RotatingCamera(
-    sys::Window &window,
-    sys::Input &input,
+rotating_camera::rotating_camera(
+    sys::window &window,
+    sys::input &input,
     const glm::vec3 &center,
     float distance,
-    const shaders::Cache &shaders) :
-  Camera(window, input, shaders),
+    const shaders::cache &shaders) :
+  camera(window, input, shaders),
   center(center),
   distance(distance),
   rho(glm::half_pi<float>()),
@@ -24,13 +24,13 @@ RotatingCamera::RotatingCamera(
 
   }
 
-void RotatingCamera::doMouseMove(int deltaX, int deltaY) {
-  if (deltaX == 0 && deltaY == 0) {
+void rotating_camera::do_mouse_move(int delta_x, int delta_y) {
+  if (delta_x == 0 && delta_y == 0) {
     return;
   }
 
-  if (deltaX) {
-    rho += deltaX * 0.005f;
+  if (delta_x) {
+    rho += delta_x * 0.005f;
     if (rho > 2 * glm::pi<float>()) {
       rho -= 2 * glm::pi<float>();
     } else if (rho < 0) {
@@ -38,8 +38,8 @@ void RotatingCamera::doMouseMove(int deltaX, int deltaY) {
     }
   }
 
-  if (deltaY) {
-    theta += deltaY * 0.005f;
+  if (delta_y) {
+    theta += delta_y * 0.005f;
     if (theta >= glm::half_pi<float>()) {
       theta = glm::half_pi<float>();
     } else if (theta <= -glm::half_pi<float>()) {
@@ -49,7 +49,7 @@ void RotatingCamera::doMouseMove(int deltaX, int deltaY) {
 }
 
 
-void RotatingCamera::doKeyUp(unsigned char key) {
+void rotating_camera::do_key_up(unsigned char key) {
   if (key == 'w' || key == 'W') {
     forwards = false;
   }
@@ -59,7 +59,7 @@ void RotatingCamera::doKeyUp(unsigned char key) {
   }
 }
 
-void RotatingCamera::doKeyDown(unsigned char key) {
+void rotating_camera::do_key_down(unsigned char key) {
   if (key == 'w' || key == 'W') {
     forwards = true;
   }
@@ -70,7 +70,7 @@ void RotatingCamera::doKeyDown(unsigned char key) {
 
 }
 
-void RotatingCamera::tick(float delta) {
+void rotating_camera::tick(float delta) {
   if (forwards) {
     distance -= STEP * delta;
   }
@@ -80,7 +80,7 @@ void RotatingCamera::tick(float delta) {
   }
 }
 
-glm::mat4 RotatingCamera::getViewMatrix() {
+glm::mat4 rotating_camera::get_view_matrix() {
   glm::vec3 position(
       distance * sin(rho) * cos(theta) + center.x,
       distance * cos(rho) * cos(theta) + center.y,

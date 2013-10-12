@@ -4,25 +4,25 @@
 #include <GL/glew.h>
 #include <glm/glm.hpp> 
 #include <vector>
-#include "sys/shaderProgram.h"
+#include "sys/shader_program.h"
 
 namespace geom {
-  class Grid {
+  class grid {
     public:
-      Grid(int size);
+      grid(int size);
 
-      Grid(const Grid &other) = delete;
-      Grid &operator=(const Grid &other) = delete;
+      grid(const grid &other) = delete;
+      grid &operator=(const grid &other) = delete;
 
       void render(
-          const glm::mat4 &modelMatrix,
-          const sys::ShaderProgram &shader) const;
+          const glm::mat4 &model_matrix,
+          const sys::shader_program &shader) const;
 
     private:
-      std::vector<GLfloat> vertexBuffer;
-      std::vector<GLuint> indexBuffer;
+      std::vector<GLfloat> vertex_buffer;
+      std::vector<GLuint> index_buffer;
 
-      unsigned int assignVertex(unsigned int offset, GLfloat x, GLfloat y, GLfloat z);
+      unsigned int assign_vertex(unsigned int offset, GLfloat x, GLfloat y, GLfloat z);
   };
 };
 

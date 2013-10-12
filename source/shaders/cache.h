@@ -4,13 +4,13 @@
 #include "shaders/basic.h"
 
 namespace shaders {
-  struct Cache {
-    Cache();
+  struct cache {
+    cache();
 
-    Cache(const Cache &other) = delete;
-    Cache &operator=(const Cache &other) = delete;
+    cache(const cache &other) = delete;
+    cache &operator=(const cache &other) = delete;
 
-    Basic basic;
+    shaders::basic basic;
   };
 };
 

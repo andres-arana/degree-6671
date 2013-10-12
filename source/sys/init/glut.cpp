@@ -4,19 +4,19 @@
 using namespace sys;
 using namespace sys::init;
 
-Glut::Glut(const Params &params) {
+glut::glut(const params &params) {
   glutInit(params.argc, params.argv);
 }
 
-void Glut::mainLoop() {
+void glut::main_loop() {
   glutMainLoop();
 }
 
-void Glut::leaveMainLoop() {
+void glut::leave_main_loop() {
   glutLeaveMainLoop();
 }
 
-unsigned int Glut::getTime() const {
+unsigned int glut::get_time() const {
   return glutGet(GLUT_ELAPSED_TIME);
 }
 

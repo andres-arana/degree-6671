@@ -5,50 +5,50 @@
 
 using namespace scene;
 
-Camera::Camera(
-    sys::Window &window,
-    sys::Input &input,
-    const shaders::Cache &shaders) :
+camera::camera(
+    sys::window &window,
+    sys::input &input,
+    const shaders::cache &shaders) :
   window(window),
   shaders(shaders) {
-    input.addMouseMotionListener(*this);
-    input.addKeyUpListener(*this);
-    input.addKeyDownListener(*this);
+    input.add_mouse_motion_listener(*this);
+    input.add_key_up_listener(*this);
+    input.add_key_down_listener(*this);
   }
 
-void Camera::onMouseMotion(const sys::MouseMotionEvent &event) {
-  int middleX = window.getWidth() / 2;
-  int middleY = window.getHeight() / 2;
+void camera::on_mouse_motion(const sys::mouse_motion_event &event) {
+  int middle_x = window.get_width() / 2;
+  int middle_y = window.get_height() / 2;
 
-  int deltaX = event.x - middleX;
-  int deltaY = event.y - middleY;
+  int delta_x = event.x - middle_x;
+  int delta_y = event.y - middle_y;
 
-  if (deltaX < 3 && deltaX > -3) {
-    deltaX = 0;
+  if (delta_x < 3 && delta_x > -3) {
+    delta_x = 0;
   }
 
-  if (deltaY < 3 && deltaY > -3) {
-    deltaY = 0;
+  if (delta_y < 3 && delta_y > -3) {
+    delta_y = 0;
   }
 
-  if (deltaX || deltaY) {
-    doMouseMove(deltaX, deltaY);
-    window.setCursorPosition(middleX, middleY);
+  if (delta_x || delta_y) {
+    do_mouse_move(delta_x, delta_y);
+    window.set_cursor_position(middle_x, middle_y);
   }
 }
 
-void Camera::onKeyUp(const sys::KeyUpEvent &event) {
-  doKeyUp(event.key);
+void camera::on_key_up(const sys::key_up_event &event) {
+  do_key_up(event.key);
 } 
-void Camera::onKeyDown(const sys::KeyDownEvent &event) {
-  doKeyDown(event.key);
+void camera::on_key_down(const sys::key_down_event &event) {
+  do_key_down(event.key);
 }
 
-glm::mat4 Camera::use() {
-  auto viewMatrix = getViewMatrix();
-  shaders.basic.bindViewMatrix(viewMatrix);
-  shaders.basic.bindProjectionMatrix(glm::infinitePerspective(
-        52.0f, window.getAspectRatio(), 0.1f));
+glm::mat4 camera::use() {
+  auto view_matrix = get_view_matrix();
+  shaders.basic.bind_view_matrix(view_matrix);
+  shaders.basic.bind_projection_matrix(glm::infinitePerspective(
+        52.0f, window.get_aspect_ratio(), 0.1f));
 
-  return viewMatrix;
+  return view_matrix;
 }
