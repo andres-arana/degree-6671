@@ -27,6 +27,10 @@ static cuadratic_bezier crab_eye_bezier(
     glm::vec3(0.25f, 0.5f, 0),
     glm::vec3(0.5f, 0, 0));
 
+static cubic_bezier crab_upper_pincer(
+    
+    );
+
 cache::cache() :
   grid(10),
   crab_body(48, 48, crab_body_bezier),

@@ -30,7 +30,7 @@ void main()
 
   // The diffuse shading equation
   float distance = length(light_vector);
-  float att = 1.0 / (0.5 + 0.05 * distance * distance + 0.01 * distance);
+  float att = 1.0 / (0.35 + 0.025 * distance * distance + 0.005 * distance);
   vec3 ambient = la * ka;
   vec3 diffuse = ld * kd * sn;
   vec3 specular = vec3(0.0);
