@@ -1,16 +1,14 @@
-#ifndef __SCENE_CRAB_H_INCLUDED__
-#define __SCENE_CRAB_H_INCLUDED__
+#ifndef __SCENE_CRAB_EYE_H_INCLUDED__
+#define __SCENE_CRAB_EYE_H_INCLUDED__
 
 #include "geom/cache.h"
 #include "shaders/cache.h"
-#include "scene/crab_leg.h"
-#include "scene/crab_eye.h"
 #include <glm/glm.hpp> 
 
 namespace scene {
-  class crab {
+  class crab_eye {
     public:
-      crab(
+      crab_eye(
           const geom::cache &geometries,
           const shaders::cache &shaders);
 
@@ -20,9 +18,6 @@ namespace scene {
     private:
       const geom::cache &geometries;
       const shaders::cache &shaders;
-
-      scene::crab_leg leg;
-      scene::crab_eye eye;
   };
 };
 

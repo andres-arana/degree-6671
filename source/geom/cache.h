@@ -15,6 +15,8 @@ namespace geom {
 
       geom::revolution_surface crab_body;
       geom::revolution_surface crab_leg_section;
+      geom::revolution_surface crab_eye_leader;
+      geom::revolution_surface crab_eye;
   };
 };
 

@@ -26,8 +26,9 @@ void world::render() {
   auto model_matrix = glm::mat4(1.0f);
   auto view_matrix = current_camera->use();
 
-  auto light_matrix = glm::rotate(model_matrix, rotation, glm::vec3(0, 0, 1));
-  light_matrix = glm::translate(light_matrix, glm::vec3(3.0f, 0, 2.0f));
+  auto light_matrix = glm::translate(model_matrix, glm::vec3(0, 0, 5));
+  light_matrix = glm::rotate(light_matrix, rotation, glm::vec3(0, 0, 1));
+  light_matrix = glm::translate(light_matrix, glm::vec3(4.0f, 0, 0));
   light.use(view_matrix, light_matrix);
 
   floor.render(model_matrix);
@@ -38,7 +39,7 @@ void world::render() {
 
 void world::tick(float delta) {
   current_camera->tick(delta);
-  rotation += (30 * delta);
+  rotation += (60 * delta);
   if (rotation > 360) {
     rotation -= 360;
   }

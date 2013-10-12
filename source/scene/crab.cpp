@@ -8,7 +8,8 @@ crab::crab(
     const shaders::cache &shaders) :
   geometries(geometries),
   shaders(shaders),
-  leg(geometries, shaders) {
+  leg(geometries, shaders),
+  eye(geometries, shaders) {
 
   }
 
@@ -58,4 +59,14 @@ void crab::render(const glm::mat4 &model_matrix) {
   m = glm::rotate(m, -100.0f, glm::vec3(0, 0, 1));
   m = glm::rotate(m, -120.0f, glm::vec3(1, 0, 0));
   leg.render(m);
+
+  m = glm::translate(model_matrix, glm::vec3(-1.2f, 0.35f, 1.30f));
+  m = glm::rotate(m, -15.0f, glm::vec3(1, 0, 0));
+  m = glm::rotate(m, -95.0f, glm::vec3(0, 1, 0));
+  eye.render(m);
+
+  m = glm::translate(model_matrix, glm::vec3(-1.2f, -0.35f, 1.30f));
+  m = glm::rotate(m, 15.0f, glm::vec3(1, 0, 0));
+  m = glm::rotate(m, -95.0f, glm::vec3(0, 1, 0));
+  eye.render(m);
 }
