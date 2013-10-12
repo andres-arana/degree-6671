@@ -9,10 +9,12 @@
 #include "sys/init/glew.h"
 
 namespace sys {
-  template<typename A>
-  class System {
+  template<typename A> class System {
     public:
       System(const Params &params);
+
+      System(const System &other) = delete;
+      System &operator=(const System &other) = delete;
 
       void runEventLoop();
 
@@ -20,8 +22,6 @@ namespace sys {
 
       unsigned int getTime() const;
     private:
-      System(const System &other);
-      System &operator=(const System &other);
 
       init::Glut glut;
       Window window;
@@ -34,12 +34,12 @@ namespace sys {
   template<typename A> System<A>::System(const Params &params) :
     glut(params),
     window(glut, params),
-    glew(window, params),
-    info(params),
-    input(glut, params),
+    glew(window),
+    info(),
+    input(glut),
     application(*this, window, input) {
 
-  }
+    }
 
   template<typename A> void System<A>::runEventLoop() {
     glut.mainLoop();

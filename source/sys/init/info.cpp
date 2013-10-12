@@ -6,9 +6,7 @@
 using namespace sys;
 using namespace sys::init;
 
-Info::Info(const Params &params) {
-  (void) params;
-
+Info::Info() {
   auto rawGLVersion = glGetString(GL_VERSION);
   std::string glVersion((char*)rawGLVersion);
   std::cout << "Using OpenGL version " << glVersion.c_str() << std::endl;

@@ -1,5 +1,5 @@
 #include <cstdlib>
-#include "app/application.h"
+#include "application.h"
 #include "sys/system.h"
 #include "sys/params.h"
 
@@ -11,7 +11,7 @@ int main(int argc, char** argv) {
   params.height = 600;
   params.title = "66.71 - Sistemas Graficos - FIUBA";
 
-  sys::System<app::Application> system(params);
+  sys::System<Application> system(params);
 
   system.runEventLoop();
 

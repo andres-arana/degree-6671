@@ -1,7 +1,6 @@
 #ifndef __SYS_INPUT_H_INCLUDED__
 #define __SYS_INPUT_H_INCLUDED__
 
-#include "sys/params.h"
 #include "sys/events.h"
 #include "sys/init/glut.h"
 #include <vector>
@@ -10,7 +9,10 @@
 namespace sys {
   class Input {
     public:
-      Input(const sys::init::Glut &glut, const sys::Params &params);
+      Input(const sys::init::Glut &glut);
+
+      Input(const Input &other) = delete;
+      Input &operator=(const Input &other) = delete;
 
       void disableKeyRepeatEvents();
 
@@ -24,8 +26,6 @@ namespace sys {
       void setRenderListener(RenderListener &listener);
 
     private:
-      Input(const Input &other);
-      Input &operator=(const Input &other);
 
       RenderListener *renderListener;
       std::vector<CloseListener *> closeListeners;

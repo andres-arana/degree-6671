@@ -9,6 +9,9 @@ namespace sys {
     public:
       Window(const init::Glut &glut, const Params &params);
 
+      Window(const Window &other) = delete;
+      Window &operator=(const Window &other) = delete;
+
       void toggleFullScreen();
 
       void hideCursor();
@@ -25,8 +28,6 @@ namespace sys {
 
       void setCursorPosition(int x, int y);
     private:
-      Window(const Window &other);
-      Window &operator=(const Window &other);
 
       unsigned int id;
   };

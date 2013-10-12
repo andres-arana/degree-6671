@@ -6,12 +6,11 @@ using namespace sys;
 
 Input* Input::instance(0);
 
-Input::Input(const init::Glut &glut, const Params &params) {
+Input::Input(const init::Glut &glut) {
   if (instance) {
     throw std::runtime_error("sys::Input can only be initialized once");
   }
   (void)glut;
-  (void)params;
   instance = this;
   glutDisplayFunc(onDisplay);
   glutReshapeFunc(onReshape);

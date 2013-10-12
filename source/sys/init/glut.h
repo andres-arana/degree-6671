@@ -9,15 +9,14 @@ namespace sys {
       public:
         Glut(const Params &params);
 
+        Glut(const Glut &other) = delete;
+        Glut &operator=(const Glut &other) = delete;
+
         void mainLoop();
 
         void leaveMainLoop();
 
         unsigned int getTime() const;
-
-      private:
-        Glut(const Glut &other);
-        Glut &operator=(const Glut &other);
     };
   };
 };
