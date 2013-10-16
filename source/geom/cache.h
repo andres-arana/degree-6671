@@ -20,6 +20,8 @@ namespace geom {
       geom::revolution_surface crab_leg_finisher;
       geom::revolution_surface crab_eye_leader;
       geom::revolution_surface crab_eye;
+      geom::surface_patch crab_pincer_top;
+      geom::surface_patch crab_pincer_bot;
   };
 };
 

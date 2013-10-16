@@ -6,21 +6,21 @@
 using namespace geom;
 using namespace math;
 
-static bezier_surface crab_body_bezier(
+static bezier_surface crab_body_surface(
     glm::vec3(0, 0, 0),
     glm::vec3(0, 0, 0),
     glm::vec3(0, 0, 0),
     glm::vec3(0, 0, 0),
 
-    glm::vec3(0.25f, 2.5f, 0),
-    glm::vec3(0.25f, 2.45f, 2.5f),
-    glm::vec3(0.25f, -2.45f, 2.5f),
-    glm::vec3(0.25f, -2.5f, 0),
+    glm::vec3(-0.1f, 2.5f, 0),
+    glm::vec3(-0.1f, 2.45f, 2.5f),
+    glm::vec3(-0.1f, -2.45f, 2.5f),
+    glm::vec3(-0.1f, -2.5f, 0),
 
-    glm::vec3(3.75f, 2, 0),
-    glm::vec3(3.75f, 1.95f, 2),
-    glm::vec3(3.75f, -1.95f, 2),
-    glm::vec3(3.75f, -2, 0),
+    glm::vec3(4.0f, 2, 0),
+    glm::vec3(4.0f, 1.95f, 2.0f),
+    glm::vec3(4.0f, -1.95f, 2.0f),
+    glm::vec3(4.0f, -2, 0),
 
     glm::vec3(4, 0, 0),
     glm::vec3(4, 0, 0),
@@ -55,14 +55,58 @@ static cuadratic_bezier crab_eye_bezier(
     glm::vec3(0.25f, 0.5f, 0),
     glm::vec3(0.5f, 0, 0));
 
+static bezier_surface crab_pincer_top_surface(
+    glm::vec3(0.0f, 0.0f, 0.0f),
+    glm::vec3(0.0f, 0.0f, 0.0f),
+    glm::vec3(0.0f, 0.0f, 0.0f),
+    glm::vec3(0.0f, 0.0f, 0.0f),
+
+    glm::vec3(0.25f, 0.75f, 0.0f),
+    glm::vec3(0.25f, 0.0f, 1.5f),
+    glm::vec3(0.25f, 0.0f, 1.5f),
+    glm::vec3(0.25f, -0.75f, 0.0f),
+
+    glm::vec3(1.5f, 0.35f, 0.0f),
+    glm::vec3(1.5f, 0.0f, 0.75f),
+    glm::vec3(1.5f, 0.0f, 0.75f),
+    glm::vec3(1.5f, -0.35f, 0.0f),
+
+    glm::vec3(2.0f, 0.0f, 0.0f),
+    glm::vec3(2.0f, 0.0f, 0.0f),
+    glm::vec3(2.0f, 0.0f, 0.0f),
+    glm::vec3(2.0f, 0.0f, 0.0f));
+
+static bezier_surface crab_pincer_bot_surface(
+    glm::vec3(0.0f, 0.0f, 0.0f),
+    glm::vec3(0.0f, 0.0f, 0.0f),
+    glm::vec3(0.0f, 0.0f, 0.0f),
+    glm::vec3(0.0f, 0.0f, 0.0f),
+
+    glm::vec3(0.25f, 0.55f, 0.0f),
+    glm::vec3(0.25f, 0.0f, -1.5f),
+    glm::vec3(0.25f, 0.0f, -1.5f),
+    glm::vec3(0.25f, -0.55f, 0.0f),
+
+    glm::vec3(1.25f, 0.25f, 0.0f),
+    glm::vec3(1.25f, 0.0f, -0.75f),
+    glm::vec3(1.25f, 0.0f, -0.75f),
+    glm::vec3(1.25f, -0.25f, 0.0f),
+
+    glm::vec3(1.5f, 0.0f, 0.0f),
+    glm::vec3(1.5f, 0.0f, 0.0f),
+    glm::vec3(1.5f, 0.0f, 0.0f),
+    glm::vec3(1.5f, 0.0f, 0.0f));
+
 cache::cache() :
   grid(10),
-  crab_body(32, 32, crab_body_bezier),
+  crab_body(32, 32, crab_body_surface),
   crab_leg_root(12, 12, crab_leg_root_bezier),
   crab_leg_section(8, 8, crab_leg_section_bezier),
   crab_leg_finisher(8, 8, crab_leg_finisher_bezier),
   crab_eye_leader(8, 8, crab_eye_leader_bezier),
-  crab_eye(16, 16, crab_eye_bezier) {
+  crab_eye(16, 16, crab_eye_bezier),
+  crab_pincer_top(16, 16, crab_pincer_top_surface),
+  crab_pincer_bot(16, 16, crab_pincer_bot_surface) {
 
   }
 

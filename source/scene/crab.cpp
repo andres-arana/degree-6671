@@ -9,7 +9,8 @@ crab::crab(
   geometries(geometries),
   shaders(shaders),
   leg(geometries, shaders),
-  eye(geometries, shaders) {
+  eye(geometries, shaders),
+  arm(geometries, shaders) {
 
   }
 
@@ -24,46 +25,50 @@ void crab::render(const glm::mat4 &model_matrix) {
   auto m = glm::rotate(model_matrix, 180.0f, glm::vec3(1, 0, 0));
   geometries.crab_body.render(m, shaders.basic);
 
-  m = glm::translate(model_matrix, glm::vec3(1.5f, 1.55f, 0.10f));
+  // Right legts
+  m = glm::translate(model_matrix, glm::vec3(1.65f, 1.60f, 0.10f));
   m = glm::rotate(m, 120.0f, glm::vec3(0, 0, 1));
   m = glm::rotate(m, -10.0f, glm::vec3(0, 1, 0));
   leg.render(m);
 
-  m = glm::translate(model_matrix, glm::vec3(2.0f, 1.65f, 0.10f));
+  m = glm::translate(model_matrix, glm::vec3(2.25f, 1.60f, 0.10f));
   m = glm::rotate(m, 90.0f, glm::vec3(0, 0, 1));
   m = glm::rotate(m, -10.0f, glm::vec3(0, 1, 0));
   leg.render(m);
 
-  m = glm::translate(model_matrix, glm::vec3(2.75f, 1.45f, 0.10f));
+  m = glm::translate(model_matrix, glm::vec3(2.85f, 1.40f, 0.10f));
   m = glm::rotate(m, 60.0f, glm::vec3(0, 0, 1));
   m = glm::rotate(m, -10.0f, glm::vec3(0, 1, 0));
   leg.render(m);
 
-  m = glm::translate(model_matrix, glm::vec3(1.5f, -1.55f, 0.10f));
+  // Left legs
+  m = glm::translate(model_matrix, glm::vec3(1.65f, -1.60f, 0.10f));
   m = glm::rotate(m, -120.0f, glm::vec3(0, 0, 1));
   m = glm::rotate(m, -10.0f, glm::vec3(0, 1, 0));
   leg.render(m);
 
-  m = glm::translate(model_matrix, glm::vec3(2.0f, -1.65f, 0.10f));
+  m = glm::translate(model_matrix, glm::vec3(2.25f, -1.60f, 0.10f));
   m = glm::rotate(m, -90.0f, glm::vec3(0, 0, 1));
   m = glm::rotate(m, -10.0f, glm::vec3(0, 1, 0));
   leg.render(m);
 
-  m = glm::translate(model_matrix, glm::vec3(2.75f, -1.45f, 0.10f));
+  m = glm::translate(model_matrix, glm::vec3(2.65f, -1.40f, 0.10f));
   m = glm::rotate(m, -60.0f, glm::vec3(0, 0, 1));
   m = glm::rotate(m, -10.0f, glm::vec3(0, 1, 0));
   leg.render(m);
 
-  m = glm::translate(model_matrix, glm::vec3(1.30f, 1.0f, 0.80f));
-  m = glm::rotate(m, 100.0f, glm::vec3(0, 0, 1));
+  // Arms
+  m = glm::translate(model_matrix, glm::vec3(0.60f, 1.2f, 0.40f));
+  m = glm::rotate(m, 90.0f, glm::vec3(0, 0, 1));
   m = glm::rotate(m, 120.0f, glm::vec3(1, 0, 0));
-  leg.render(m);
+  arm.render(m);
 
-  m = glm::translate(model_matrix, glm::vec3(1.30f, -1.0f, 0.80f));
-  m = glm::rotate(m, -100.0f, glm::vec3(0, 0, 1));
+  m = glm::translate(model_matrix, glm::vec3(0.60f, -1.2f, 0.40f));
+  m = glm::rotate(m, -90.0f, glm::vec3(0, 0, 1));
   m = glm::rotate(m, -120.0f, glm::vec3(1, 0, 0));
-  leg.render(m);
+  arm.render(m);
 
+  // Eyes
   m = glm::translate(model_matrix, glm::vec3(1.0f, 0.55f, 1.00f));
   m = glm::rotate(m, -15.0f, glm::vec3(1, 0, 0));
   m = glm::rotate(m, -100.0f, glm::vec3(0, 1, 0));

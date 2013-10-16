@@ -35,6 +35,8 @@ namespace scene {
       scene::crab crab;
 
       scene::camera *current_camera;
+
+      float rotation;
   };
 };
 
