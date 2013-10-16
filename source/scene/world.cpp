@@ -13,8 +13,7 @@ world::world(
   floor(geometries, shaders),
   light(shaders),
   crab(geometries, shaders),
-  current_camera(&rotating_camera),
-  rotation(0) {
+  current_camera(&rotating_camera) {
 
     glClearColor(0, 0, 0, 0);
     glShadeModel(GL_SMOOTH);
@@ -26,9 +25,7 @@ void world::render() {
   auto model_matrix = glm::mat4(1.0f);
   auto view_matrix = current_camera->use();
 
-  auto light_matrix = glm::translate(model_matrix, glm::vec3(0, 0, 5));
-  light_matrix = glm::rotate(light_matrix, rotation, glm::vec3(0, 0, 1));
-  light_matrix = glm::translate(light_matrix, glm::vec3(4.0f, 0, 0));
+  auto light_matrix = glm::translate(model_matrix, glm::vec3(1, 4, 6));
   light.use(view_matrix, light_matrix);
 
   floor.render(model_matrix);
@@ -39,10 +36,6 @@ void world::render() {
 
 void world::tick(float delta) {
   current_camera->tick(delta);
-  rotation += (60 * delta);
-  if (rotation > 360) {
-    rotation -= 360;
-  }
 }
 
 void world::toggle_camera() {

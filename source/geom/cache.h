@@ -3,6 +3,7 @@
 
 #include "geom/grid.h"
 #include "geom/revolution_surface.h"
+#include "geom/surface_patch.h"
 
 namespace geom {
   struct cache {
@@ -13,8 +14,10 @@ namespace geom {
 
       geom::grid grid;
 
-      geom::revolution_surface crab_body;
+      geom::surface_patch crab_body;
+      geom::revolution_surface crab_leg_root;
       geom::revolution_surface crab_leg_section;
+      geom::revolution_surface crab_leg_finisher;
       geom::revolution_surface crab_eye_leader;
       geom::revolution_surface crab_eye;
   };

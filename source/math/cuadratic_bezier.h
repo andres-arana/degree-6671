@@ -1,10 +1,10 @@
 #ifndef __MATH_CUADRATIC_BEZIER_H_INCLUDE__
 #define __MATH_CUADRATIC_BEZIER_H_INCLUDE__
 
-#include "math/function.h"
+#include "math/parametric_curve.h"
 
 namespace math {
-  class cuadratic_bezier : public math::function {
+  class cuadratic_bezier : public parametric_curve {
     public:
       cuadratic_bezier(
           const glm::vec3 &p0,
@@ -14,9 +14,9 @@ namespace math {
       cuadratic_bezier(const cuadratic_bezier &other) = delete;
       cuadratic_bezier &operator=(const cuadratic_bezier &other) = delete;
 
-      virtual glm::vec3 apply(float x) const;
+      virtual glm::vec3 operator()(const float &x) const;
 
-      virtual glm::vec3 apply_derivate(float x) const;
+      virtual glm::vec3 derivative(const float &x) const;
 
     private:
       glm::vec3 p0;

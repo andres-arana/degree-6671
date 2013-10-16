@@ -1,10 +1,10 @@
 #ifndef __MATH_CUBIC_BEZIER_H_INCLUDE__
 #define __MATH_CUBIC_BEZIER_H_INCLUDE__
 
-#include "math/function.h"
+#include "math/parametric_curve.h"
 
 namespace math {
-  class cubic_bezier : public math::function {
+  class cubic_bezier : public parametric_curve {
     public:
       cubic_bezier(
           const glm::vec3 &p0,
@@ -15,9 +15,9 @@ namespace math {
       cubic_bezier(const cubic_bezier &other) = delete;
       cubic_bezier &operator=(const cubic_bezier &other) = delete;
 
-      virtual glm::vec3 apply(float x) const;
+      virtual glm::vec3 operator()(const float &x) const;
 
-      virtual glm::vec3 apply_derivate(float x) const;
+      virtual glm::vec3 derivative(const float &x) const;
 
     private:
       glm::vec3 p0;

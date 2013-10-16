@@ -7,7 +7,7 @@ using namespace geom;
 revolution_surface::revolution_surface(
     int angular_sections,
     int longitudinal_sections,
-    const math::function &f) {
+    const math::parametric_curve &f) {
 
   glm::vec3 rotation_axis(1.0f, 0, 0);
   auto angular_increment = 360.0f / angular_sections;
@@ -15,8 +15,8 @@ revolution_surface::revolution_surface(
 
   for (int i = 0; i < longitudinal_sections; i++) {
     auto x = i * longitudinal_increment;
-    auto original = f.apply(x);
-    auto original_tangent = f.apply_derivate(x);
+    auto original = f(x);
+    auto original_tangent = f.derivative(x);
     auto original_normal = glm::normalize(glm::vec3(-original_tangent.y, original_tangent.x, 0));
 
     for (int j = 0; j < angular_sections; j++) {

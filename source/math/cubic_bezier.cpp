@@ -1,6 +1,12 @@
 #include "math/cubic_bezier.h"
+#include "math/cubic_bernstein_base.h"
 
 using namespace math;
+
+static cubic_bernstein_base_0 b0;
+static cubic_bernstein_base_1 b1;
+static cubic_bernstein_base_2 b2;
+static cubic_bernstein_base_3 b3;
 
 cubic_bezier::cubic_bezier(
     const glm::vec3 &p0,
@@ -14,19 +20,18 @@ cubic_bezier::cubic_bezier(
 
   }
 
-glm::vec3 cubic_bezier::apply(float x) const {
+glm::vec3 cubic_bezier::operator()(const float &x) const {
   return
-    (-x * x * x + 3 * x * x - 3 * x + 1) * p0 +
-    (3 * x * x * x - 6 * x * x + 3 * x) * p1 +
-    (-3 * x * x * x + 3 * x * x) * p2 +
-    (x * x * x) * p3;
-
+    b0(x) * p0 +
+    b1(x) * p1 +
+    b2(x) * p2 +
+    b3(x) * p3;
 };
 
-glm::vec3 cubic_bezier::apply_derivate(float x) const {
+glm::vec3 cubic_bezier::derivative(const float &x) const {
   return
-    (-3 * x * x + 6 * x - 3) * p0 +
-    (9 * x * x - 12 * x + 3) * p1 +
-    (-9 * x * x + 6 * x) * p2 +
-    (3 * x * x) * p3;
+    b0.derivative(x) * p0 +
+    b1.derivative(x) * p1 +
+    b2.derivative(x) * p2 +
+    b3.derivative(x) * p3;
 };

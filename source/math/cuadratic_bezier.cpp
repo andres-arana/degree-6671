@@ -1,6 +1,11 @@
 #include "math/cuadratic_bezier.h"
+#include "math/cuadratic_bernstein_base.h"
 
 using namespace math;
+
+static cuadratic_bernstein_base_0 b0;
+static cuadratic_bernstein_base_1 b1;
+static cuadratic_bernstein_base_2 b2;
 
 cuadratic_bezier::cuadratic_bezier(
     const glm::vec3 &p0,
@@ -12,17 +17,16 @@ cuadratic_bezier::cuadratic_bezier(
 
   }
 
-glm::vec3 cuadratic_bezier::apply(float x) const {
+glm::vec3 cuadratic_bezier::operator()(const float &x) const {
   return
-    (x * x - 2 * x + 1) * p0 +
-    (-2 * x * x + 2 * x) * p1 +
-    (x * x) * p2;
-
+    b0(x) * p0 +
+    b1(x) * p1 +
+    b2(x) * p2;
 };
 
-glm::vec3 cuadratic_bezier::apply_derivate(float x) const {
+glm::vec3 cuadratic_bezier::derivative(const float &x) const {
   return
-    (2 * x - 2) * p0 +
-    (-4 * x + 2) * p1 +
-    (2 * x) * p2;
+    b0.derivative(x) * p0 +
+    b1.derivative(x) * p1 +
+    b2.derivative(x) * p2;
 };

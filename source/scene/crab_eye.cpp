@@ -12,8 +12,8 @@ crab_eye::crab_eye(
   }
 
 void crab_eye::render(const glm::mat4 &model_matrix) {
-  shaders.basic.bind_diffuse_reflectivity(glm::vec3(0.4f, 0.1f, 0.3f));
-  shaders.basic.bind_ambient_reflectivity(glm::vec3(0.5f, 0.0f, 0.5f));
+  shaders.basic.bind_diffuse_reflectivity(glm::vec3(0.4f, 0.3f, 0.1f));
+  shaders.basic.bind_ambient_reflectivity(glm::vec3(0.5f, 0.5f, 0.0f));
   shaders.basic.bind_specular_reflectivity(glm::vec3(0.1f));
   shaders.basic.bind_specular_shininess(10);
 
