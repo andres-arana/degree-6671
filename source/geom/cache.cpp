@@ -66,10 +66,10 @@ static bezier_surface crab_pincer_top_surface(
     glm::vec3(0.25f, 0.0f, 1.5f),
     glm::vec3(0.25f, -0.75f, 0.0f),
 
-    glm::vec3(1.5f, 0.35f, 0.0f),
+    glm::vec3(1.5f, 0.15f, 0.0f),
     glm::vec3(1.5f, 0.0f, 0.75f),
     glm::vec3(1.5f, 0.0f, 0.75f),
-    glm::vec3(1.5f, -0.35f, 0.0f),
+    glm::vec3(1.5f, -0.15f, 0.0f),
 
     glm::vec3(2.0f, 0.0f, 0.0f),
     glm::vec3(2.0f, 0.0f, 0.0f),
@@ -87,10 +87,10 @@ static bezier_surface crab_pincer_bot_surface(
     glm::vec3(0.25f, 0.0f, -1.5f),
     glm::vec3(0.25f, -0.55f, 0.0f),
 
-    glm::vec3(1.25f, 0.25f, 0.0f),
+    glm::vec3(1.25f, 0.05f, 0.0f),
     glm::vec3(1.25f, 0.0f, -0.75f),
     glm::vec3(1.25f, 0.0f, -0.75f),
-    glm::vec3(1.25f, -0.25f, 0.0f),
+    glm::vec3(1.25f, -0.05f, 0.0f),
 
     glm::vec3(1.5f, 0.0f, 0.0f),
     glm::vec3(1.5f, 0.0f, 0.0f),

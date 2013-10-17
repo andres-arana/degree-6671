@@ -6,6 +6,7 @@
 #include "scene/crab_leg.h"
 #include "scene/crab_eye.h"
 #include "scene/crab_arm.h"
+#include "math/cyclic_interval.h"
 #include <glm/glm.hpp> 
 
 namespace scene {
@@ -18,7 +19,12 @@ namespace scene {
       void render(
           const glm::mat4 &model_matrix);
 
+      void tick(float delta);
+
     private:
+      math::cyclic_interval time;
+      float distance;
+      
       const geom::cache &geometries;
       const shaders::cache &shaders;
 
