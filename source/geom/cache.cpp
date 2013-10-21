@@ -99,14 +99,14 @@ static bezier_surface crab_pincer_bot_surface(
 
 cache::cache() :
   grid(10),
-  crab_body(32, 32, crab_body_surface),
-  crab_leg_root(12, 12, crab_leg_root_bezier),
-  crab_leg_section(8, 8, crab_leg_section_bezier),
-  crab_leg_finisher(8, 8, crab_leg_finisher_bezier),
-  crab_eye_leader(8, 8, crab_eye_leader_bezier),
-  crab_eye(16, 16, crab_eye_bezier),
-  crab_pincer_top(16, 16, crab_pincer_top_surface),
-  crab_pincer_bot(16, 16, crab_pincer_bot_surface) {
+  crab_body(64, 64, crab_body_surface),
+  crab_leg_root(16, 16, crab_leg_root_bezier),
+  crab_leg_section(16, 16, crab_leg_section_bezier),
+  crab_leg_finisher(16, 16, crab_leg_finisher_bezier),
+  crab_eye_leader(16, 16, crab_eye_leader_bezier),
+  crab_eye(32, 32, crab_eye_bezier),
+  crab_pincer_top(32, 32, crab_pincer_top_surface),
+  crab_pincer_bot(32, 32, crab_pincer_bot_surface) {
 
   }
 

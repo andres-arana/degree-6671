@@ -23,7 +23,11 @@ surface_patch::surface_patch(
 
       auto du = f.derivative_u(domain);
       auto dv = f.derivative_v(domain);
-      auto normal = glm::normalize(glm::cross(du, dv));
+
+      auto normal = glm::cross(du, dv);
+      if (normal.x != 0 && normal.y != 0 && normal.z != 0) {
+        normal == glm::normalize(normal);
+      }
       normal_buffer.push_back(normal.x);
       normal_buffer.push_back(normal.y);
       normal_buffer.push_back(normal.z);
