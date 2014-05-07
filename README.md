@@ -1,9 +1,9 @@
-# 66.71 - Sistemas Gráficos
+# 66.71 - Sistemas Gráficos - 2do cuatrimestre 2013
 
 Este repositorio contiene el proyecto realizado en la materia (66.71) Sistemas
-Gráficos en la FIUBA. El mismo consiste de una aplicación de escritorio que
-permite explorar una escena renderizada utilizando OpenGL, en su versión 3.0,
-GLSL 1.30.
+Gráficos durante el 2do cuatrimestre de 2014 en la FIUBA. El mismo consiste de
+una aplicación de escritorio que permite explorar una escena renderizada 
+utilizando OpenGL, en su versión 3.0, GLSL 1.30.
 
 ## Prerequisitos
 
